@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+					   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+					   x:Class="Lisa.Dobble.SettingsPage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0"
+               HorizontalOptions="Center"
+               Font="75"
+               VerticalOptions="Center"
+               Text="Dobble"/>
+        <Grid Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" x:Name="SettingsGrid" BackgroundColor="#E0E0E0" Padding="0, 0, 0, 50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1*"
+                                  />
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0"
+                   VerticalOptions="Center" HorizontalOptions="End" 
+                   Grid.Column="0"
+                   Text="Soort dobbelsteen"/>
+            <Label Grid.Row="0"
+                   VerticalOptions="Center" HorizontalOptions="Start" 
+                   Grid.Column="1"
+                   Text="Kleur"/>
+            <Button Grid.Row="0"
+                    VerticalOptions="Center" HorizontalOptions="Start" 
+                   Grid.Column="2"
+                   Text="Kies profiel"/>
+            
+
+            <Label Grid.Row="1"
+                   VerticalOptions="Center" HorizontalOptions="End" 
+                   Text="Wachttijd na dobbelen"/>
+            <Entry Grid.Row="1"
+                   VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
+                       Grid.Column="1"
+                       Text="5"/>
+            <Label Grid.Row="1"
+                   VerticalOptions="Center" HorizontalOptions="Start" 
+                   Grid.Column="2"
+                   Text="Wachttijd in seconden"/>
+          
+            <Label Grid.Row="2"
+                   VerticalOptions="Center" HorizontalOptions="End" 
+                   Text="Wachttijd donker scherm"/>
+            <Entry Grid.Row="2"
+                   VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
+                       Grid.Column="1"
+                       Text="5"/>
+            <Label Grid.Row="2"
+                   Grid.Column="2"
+                   VerticalOptions="Center" HorizontalOptions="Start" 
+                   Text="Wachttijd in seconden"/>
+          
+            
+            <Label Grid.Row="3"
+                   VerticalOptions="Center" HorizontalOptions="End" 
+                   Text="Raakvlak"/>
+            <Label Grid.Row="3"
+                   Grid.Column="1"
+          VerticalOptions="Center" HorizontalOptions="Start" 
+                   Text="Geheel Scherm"/>
+            <Label Grid.Row="3"
+                   Grid.Column="1"
+                   VerticalOptions="Center" HorizontalOptions="Start" 
+                   Text="Dobbelsteen"/>
+        </Grid>
+        <Button x:Name="StartButton"
+                Grid.Row="2"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Text="Beginnen met dobbelen"/>
+    </Grid>
+
+</ContentPage>
