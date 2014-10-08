@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 					   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-					   x:Class="Lisa.Dobble.DicePage">
-    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Red">
-        <Image x:Name="DiceImage" Source="dice.png" Aspect="Fill"/>
+					   x:Class="Lisa.Dobble.DicePage"
+                       BackgroundColor="#BFBFBF">
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="#BFBFBF">
+        <Image x:Name="DiceImage" Source="Dice/dice.png" Aspect="Fill"/>
     </StackLayout>
 </ContentPage>

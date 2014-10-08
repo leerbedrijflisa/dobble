@@ -15,5 +15,10 @@ namespace Lisa.Dobble
 
             NavigationPage.SetHasNavigationBar(this, false);
         }
+
+        private void Roll()
+        {
+
+        }
     }
 }

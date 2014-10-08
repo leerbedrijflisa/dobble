@@ -86,9 +86,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\dice.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -102,6 +99,24 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\..\packages\Xamarin.Forms.1.0.6186\lib\MonoTouch10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\dice2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\dice3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\dice4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\dice5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\dice6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\dice.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.1.0.6186\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.1.0.6186\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.targets')" />

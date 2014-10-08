@@ -83,6 +83,11 @@
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\Drawable\dice.png" />
+    <AndroidResource Include="Resources\Drawable\dice2.png" />
+    <AndroidResource Include="Resources\Drawable\dice3.png" />
+    <AndroidResource Include="Resources\Drawable\dice4.png" />
+    <AndroidResource Include="Resources\Drawable\dice5.png" />
+    <AndroidResource Include="Resources\Drawable\dice6.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lisa.Dobble\Lisa.Dobble.csproj">
