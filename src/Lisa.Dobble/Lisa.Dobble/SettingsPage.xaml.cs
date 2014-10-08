@@ -12,28 +12,32 @@ namespace Lisa.Dobble
         public SettingsPage()
         {
             InitializeComponent();
+            InitializeAdditionalComponent();
 
             NavigationPage.SetHasNavigationBar(this, false);
-           
-            var s = new SegmentControl();
-            s.TintColor = Color.Red;
-            s.AddSegment("Geheel scherm");
-            s.HeightRequest = 30;
-            s.AddSegment("Dobbelsteen");
-            s.SelectedSegmentChanged += (object sender, int segmentIndex) =>
-            {
-                s.TintColor = Color.Red;
-            };
-            s.SelectedSegment = 1;
-            SettingsGrid.Children.Add(s, 1, 3);
 
             StartButton.Clicked +=StartButton_Clicked;
         }
 
+        private void InitializeAdditionalComponent()
+        {
+            var dobbleTypeSegmentControl = new SegmentControl();
+            dobbleTypeSegmentControl.TintColor = Color.Red;
+            dobbleTypeSegmentControl.AddSegment("Geheel scherm");
+            dobbleTypeSegmentControl.HeightRequest = 30;
+            dobbleTypeSegmentControl.AddSegment("Dobbelsteen");
+            dobbleTypeSegmentControl.SelectedSegmentChanged += (object sender, int segmentIndex) =>
+            {
+                dobbleTypeSegmentControl.TintColor = Color.Red;
+            };
+            dobbleTypeSegmentControl.SelectedSegment = 1;
+
+            SettingsGrid.Children.Add(dobbleTypeSegmentControl, 1, 3);
+        }
+
         private void StartButton_Clicked(object sender, EventArgs e)
         {
-
-            Navigation.PushAsync(new Main());
+            Navigation.PushAsync(new DicePage());
         }
 
         protected override void OnAppearing()

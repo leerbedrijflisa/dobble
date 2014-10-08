@@ -86,6 +86,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\dice.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
