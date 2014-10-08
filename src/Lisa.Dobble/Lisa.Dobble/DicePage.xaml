@@ -2,8 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 					   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 					   x:Class="Lisa.Dobble.DicePage"
+                       x:Name="DiceView"
                        BackgroundColor="#BFBFBF">
-    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="#BFBFBF">
-        <Image x:Name="DiceImage" Source="Dice/dice.png" Aspect="Fill"/>
-    </StackLayout>
+    <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BackgroundColor="#BFBFBF"  x:Name="MainGrid">
+        <Grid VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Red">
+            <Image x:Name="DiceImage" VerticalOptions="Center" HorizontalOptions="Center"  Source="Dice/dice.png" Aspect="Fill"/>
+        </Grid>
+    </Grid>
 </ContentPage>
