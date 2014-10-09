@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lisa.Dobble.Models
+namespace Lisa.Dobble
 {
-    class Dice
+    public enum TouchMode
     {
-        public string Name { get; set; }
-        public List<Option> Options { get; set; }
+        Fullscreen,
+        Die
     }
 }

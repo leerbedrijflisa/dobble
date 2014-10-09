@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace Lisa.Dobble.Models
 {
-    public class Option
+    public class Die
     {
-        public string Image { get; set; }
-        public string Sound { get; set; }
+        public string Name { get; set; }
+        public List<Option> Options { get; set; }
     }
 }
