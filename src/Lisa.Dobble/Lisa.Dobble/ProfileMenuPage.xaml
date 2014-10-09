@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+					   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+					   x:Class="Lisa.Dobble.ProfileMenuPage">
+  
+	
+  
+  <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+    <Grid.RowDefinitions>
+    <RowDefinition Height="1*"></RowDefinition>
+    <RowDefinition Height="1*"></RowDefinition>
+    <RowDefinition Height="3*"></RowDefinition>
+    <RowDefinition Height="3*"></RowDefinition>
+    <RowDefinition Height="2*"></RowDefinition>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+    <ColumnDefinition Width="2*"></ColumnDefinition>
+    <ColumnDefinition Width="2*"></ColumnDefinition>
+    <ColumnDefinition Width="3*"></ColumnDefinition>
+    <ColumnDefinition Width="3*"></ColumnDefinition>
+    <ColumnDefinition Width="3*"></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+
+    <Button Text="add" Grid.Row="0" Grid.Column="0"></Button>
+      <Button Text="refresh" Grid.Row="0" Grid.Column="1"></Button>
+
+    <Label Text="Klassiek" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4"></Label>
+    
+    <Image x:Name="diceImage" Grid.Row="2" Grid.Column="2"/>
+    <Image  Grid.Row="2" Grid.Column="3" Source="Dice/dice2.png"/>
+    <Image  Grid.Row="2" Grid.Column="4" Source="Dice/dice3.png"/>
+    
+    <Image  Grid.Row="3" Grid.Column="2" Source="Dice/dice4.png"/>
+    <Image  Grid.Row="3" Grid.Column="3" Source="Dice/dice5.png"/>
+    <Image  Grid.Row="3" Grid.Column="4" Source="Dice/dice6.png"/>
+    
+    <Button Text="Profiel opslaan en dobbelsteen gebruiken" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4"></Button>
+  
+    <TableView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="4">
+        <TableView.Root>
+            <TableSection Title="Standaard Profielen">     
+                <TextCell Text="Profiel 1"></TextCell>
+            </TableSection>
+          <TableSection Title="Eigen Profielen">
+            <TextCell Text="Profiel 2"></TextCell>
+          </TableSection>
+        </TableView.Root>
+    </TableView>  
+
+   </Grid>
+
+</ContentPage>
