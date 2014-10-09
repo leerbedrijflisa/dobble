@@ -67,7 +67,7 @@ namespace Lisa.Dobble
                 {
                     option.Image = "dice.png";
                 }else{
-                    option.Image = String.Format("Dice/dice{0}.png", i + 1);
+                    option.Image = String.Format("dice{0}.png", i + 1);
                 }
 
                 SelectedDie.Options.Add(option);
@@ -80,8 +80,11 @@ namespace Lisa.Dobble
         {
             var random = new Random();
             int randomNumber = random.Next(0, SelectedDie.Options.Count());
-
-            DieView.Source = SelectedDie.Options[randomNumber].Image;
+            var imageName = SelectedDie.Options[randomNumber].Image;
+            DieView.Source = Device.OnPlatform(
+                iOS: ImageSource.FromFile("Dice/" + imageName),
+                Android: ImageSource.FromFile("Drawable/" + imageName),
+                WinPhone: ImageSource.FromFile(imageName));
             this.InvalidateMeasure();
         }
 

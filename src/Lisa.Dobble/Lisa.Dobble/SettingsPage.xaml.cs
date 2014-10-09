@@ -79,7 +79,7 @@ namespace Lisa.Dobble
                 }
                 else
                 {
-                    option.Image = String.Format("Dice/dice{0}.png", i + 1);
+                    option.Image = String.Format("dice{0}.png", i + 1);
                 }
 
                 generatedDie.Options.Add(option);
