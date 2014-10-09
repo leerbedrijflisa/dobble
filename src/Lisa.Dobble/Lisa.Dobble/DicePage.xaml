@@ -4,9 +4,9 @@
 					   x:Class="Lisa.Dobble.DicePage"
                        x:Name="DiceView"
                        BackgroundColor="#BFBFBF">
-    <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BackgroundColor="#BFBFBF"  x:Name="MainGrid">
-        <Grid VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Red">
-            <Image x:Name="DiceImage" VerticalOptions="Center" HorizontalOptions="Center"  Source="Dice/dice.png" Aspect="Fill"/>
-        </Grid>
-    </Grid>
+    <Frame x:Name="MainGrid" BackgroundColor="#BFBFBF">
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Center"  BackgroundColor="#BFBFBF">
+            <Image x:Name="DieView" Source="Dice/dice.png" Aspect="Fill"/>
+        </StackLayout>
+    </Frame>
 </ContentPage>

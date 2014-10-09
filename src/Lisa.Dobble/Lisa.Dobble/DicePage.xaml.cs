@@ -10,28 +10,54 @@ namespace Lisa.Dobble
 {
     public partial class DicePage
     {
-        private Dice dice;
+        public Die SelectedDie;
+        public TouchMode SelectedTouchMode;
         public DicePage()
         {
             InitializeComponent();
 
             NavigationPage.SetHasNavigationBar(this, false);
+        }
 
-            CreateSampleDice();
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            InitializeAdditionalComponent();
+            if (SelectedDie == null)
+            {
+                CreateSampleDice();
+            }
+            NavigationPage.SetHasNavigationBar(this, false);
+        }
 
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            NavigationPage.SetHasNavigationBar(this, false);
+        }
+
+        private void InitializeAdditionalComponent()
+        {
             var tapGestureRecognizer = new TapGestureRecognizer();
             tapGestureRecognizer.TappedCallback += (s, e) =>
             {
                 RollDice();
             };
 
-            MainGrid.GestureRecognizers.Add(tapGestureRecognizer);
+            if(SelectedTouchMode == TouchMode.Die)
+            {
+                DieView.GestureRecognizers.Add(tapGestureRecognizer);
+            }
+            else
+            {
+                MainGrid.GestureRecognizers.Add(tapGestureRecognizer);
+            }
         }
 
         private void CreateSampleDice()
         {
-            dice = new Dice();
-            dice.Options = new List<Option>();
+            SelectedDie = new Die();
+            SelectedDie.Options = new List<Option>();
 
             for(var i = 0; i < 6; i++)
             {
@@ -41,22 +67,24 @@ namespace Lisa.Dobble
                 {
                     option.Image = "dice.png";
                 }else{
-                    option.Image = String.Format("dice{0}.png", i + 1);
+                    option.Image = String.Format("Dice/dice{0}.png", i + 1);
                 }
 
-                dice.Options.Add(option);
+                SelectedDie.Options.Add(option);
             }
 
-            dice.Name = "Sample";
+            SelectedDie.Name = "Sample";
         }
 
         private void RollDice()
         {
             var random = new Random();
-            int randomNumber = random.Next(0, dice.Options.Count());
+            int randomNumber = random.Next(0, SelectedDie.Options.Count());
 
-            DiceImage.Source = dice.Options[randomNumber].Image;
+            DieView.Source = SelectedDie.Options[randomNumber].Image;
             this.InvalidateMeasure();
         }
+
+
     }
 }
