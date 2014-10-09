@@ -18,6 +18,12 @@ namespace Lisa.Dobble
             NavigationPage.SetHasNavigationBar(this, false);
 
             StartButton.Clicked +=StartButton_Clicked;
+            ChooseProfileButton.Clicked += ChooseProfileButton_Clicked;
+        }
+
+        void ChooseProfileButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ProfileMenuPage());
         }
 
         protected override void OnAppearing()

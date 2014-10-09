@@ -35,6 +35,7 @@
                    Grid.Column="1"
                    Text="Kleur"/>
             <Button Grid.Row="0"
+                    x:Name="ChooseProfileButton"
                     VerticalOptions="Center" HorizontalOptions="Start" 
                    Grid.Column="2"
                    Text="Kies profiel"/>
