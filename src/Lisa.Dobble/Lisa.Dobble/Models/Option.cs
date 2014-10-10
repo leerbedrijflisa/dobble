@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SQLite.Net.Attributes;
+using SQLiteNetExtensions.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +11,14 @@ namespace Lisa.Dobble.Models
 {
     public class Option
     {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+        [ForeignKey(typeof(Die))]     // Specify the foreign key
+        public int OptionId { get; set; }
         public string Image { get; set; }
         public string Sound { get; set; }
+        [ManyToOne]
+        public Die Die { get; set; }
     }
 }

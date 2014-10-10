@@ -1,4 +1,5 @@
-﻿using Lisa.Dobble.Models;
+﻿using Lisa.Dobble.Data;
+using Lisa.Dobble.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace Lisa.Dobble
     {
         public SettingsPage()
         {
+            var database = new DieDatabase();
+            var dice = database.GetDice();
             InitializeComponent();
             InitializeAdditionalComponent();
 
