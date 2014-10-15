@@ -22,11 +22,11 @@
     </Grid.ColumnDefinitions>
 
     <Button Text="add" Grid.Row="0" Grid.Column="0"></Button>
-      <Button Text="refresh" Grid.Row="0" Grid.Column="1"></Button>
+    <Button Text="refresh" Grid.Row="0" Grid.Column="1"></Button>
 
     <Label Text="Klassiek" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4"></Label>
-    
-    <Image Grid.Row="2" Grid.Column="2"/>
+
+    <Image Grid.Row="2" Grid.Column="2"/> 
     <Image Grid.Row="2" Grid.Column="3"/>
     <Image Grid.Row="2" Grid.Column="4"/>
     <Image Grid.Row="3" Grid.Column="2"/>
