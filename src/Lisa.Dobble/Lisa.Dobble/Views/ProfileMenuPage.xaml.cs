@@ -18,14 +18,7 @@ namespace Lisa.Dobble
             InitializeComponent();
             database = new DieDatabase();
             dice = database.GetDice();
-            foreach(Die die in dice)
-            {
-                TextCell dieCell = new TextCell();
-                dieCell.Text = die.Name;
-                dieCell.ClassId = die.Id.ToString();
-                dieCell.Tapped += dieCell_Tapped;
-                ProfileSection.Add(dieCell);
-            }
+            ProfileListView.ItemsSource = dice;
         }
 
         private void dieCell_Tapped(object sender, EventArgs e)
@@ -37,22 +30,22 @@ namespace Lisa.Dobble
         private void SetDie(int dieId)
         {
             var selectedDie = dice.Where(x => x.Id == dieId).FirstOrDefault();
-            SetImages(selectedDie);
+            //SetImages(selectedDie);
         }
 
         private void SetImages(Die die)
         {
             var count = 1;
-            foreach(var imageObject in ProfileGrid.Children.OfType<Image>())
-            {
-                var dieImage = (Image)imageObject;
-                dieImage.Source = Device.OnPlatform (
-                    iOS: ImageSource.FromFile("Dice/dice" + count + ".png"),
-                    Android: ImageSource.FromFile("Drawable/dice"  + count + ".png"),
-                    WinPhone: ImageSource.FromFile("dice" + count + ".png"));
+            //foreach (var imageObject in ProfileGrid.Children.OfType<Image>())
+            //{
+            //    var dieImage = (Image)imageObject;
+            //    dieImage.Source = Device.OnPlatform(
+            //        iOS: ImageSource.FromFile("Dice/dice" + count + ".png"),
+            //        Android: ImageSource.FromFile("Drawable/dice" + count + ".png"),
+            //        WinPhone: ImageSource.FromFile("dice" + count + ".png"));
 
-                count++;
-            }
+            //    count++;
+            //}
         }
     }
 }

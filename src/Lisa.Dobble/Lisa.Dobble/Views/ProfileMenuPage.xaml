@@ -1,48 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 					   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-					   x:Class="Lisa.Dobble.ProfileMenuPage">
-  
-	
-  
-  <Grid x:Name="ProfileGrid" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-    <Grid.RowDefinitions>
-    <RowDefinition Height="1*"></RowDefinition>
-    <RowDefinition Height="1*"></RowDefinition>
-    <RowDefinition Height="3*"></RowDefinition>
-    <RowDefinition Height="3*"></RowDefinition>
-    <RowDefinition Height="2*"></RowDefinition>
-    </Grid.RowDefinitions>
+					   x:Class="Lisa.Dobble.ProfileMenuPage"
+             BackgroundColor="White">
+  <Grid x:Name="ProfilePageGrid" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
     <Grid.ColumnDefinitions>
-    <ColumnDefinition Width="2*"></ColumnDefinition>
-    <ColumnDefinition Width="2*"></ColumnDefinition>
-    <ColumnDefinition Width="3*"></ColumnDefinition>
-    <ColumnDefinition Width="3*"></ColumnDefinition>
-    <ColumnDefinition Width="3*"></ColumnDefinition>
+      <ColumnDefinition Width="4*"/>
+      <ColumnDefinition Width="8*"/>
     </Grid.ColumnDefinitions>
 
-    <Button Text="add" Grid.Row="0" Grid.Column="0"></Button>
-    <Button Text="refresh" Grid.Row="0" Grid.Column="1"></Button>
+    <ListView Grid.Column="0" BackgroundColor="Red" x:Name="ProfileListView">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell Height="60">
+            <Grid Padding="5">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="40"></ColumnDefinition>
+              </Grid.ColumnDefinitions>
 
-    <Label Text="Klassiek" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4"></Label>
+              <Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}" LineBreakMode="TailTruncation"></Label>
+            </Grid>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+    <Grid Grid.Column="1">
 
-    <Image Grid.Row="2" Grid.Column="2"/> 
-    <Image Grid.Row="2" Grid.Column="3"/>
-    <Image Grid.Row="2" Grid.Column="4"/>
-    <Image Grid.Row="3" Grid.Column="2"/>
-    <Image Grid.Row="3" Grid.Column="3"/>
-    <Image Grid.Row="3" Grid.Column="4"/>
-    
-    <Button Text="Profiel opslaan en dobbelsteen gebruiken" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4"></Button>
-  
-    <TableView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="4">
-        <TableView.Root>
-            <TableSection x:Name="ProfileSection" Title="Uw profielen">     
-                
-            </TableSection>
-        </TableView.Root>
-    </TableView>  
-
-   </Grid>
+    </Grid>
+  </Grid>
 
 </ContentPage>
