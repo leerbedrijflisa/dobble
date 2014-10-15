@@ -57,7 +57,7 @@ namespace Lisa.Dobble
         private void CreateSampleDice()
         {
             SelectedDie = new Die();
-            SelectedDie.Options = new List<Option>();
+            //SelectedDie.Options = new List<Option>();
 
             for(var i = 0; i < 6; i++)
             {
@@ -70,7 +70,7 @@ namespace Lisa.Dobble
                     option.Image = String.Format("dice{0}.png", i + 1);
                 }
 
-                SelectedDie.Options.Add(option);
+                //SelectedDie.Options.Add(option);
             }
 
             SelectedDie.Name = "Sample";

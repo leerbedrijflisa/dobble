@@ -14,10 +14,11 @@ namespace Lisa.Dobble.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        [ForeignKey(typeof(Die))]     // Specify the foreign key
-        public int OptionId { get; set; }
+        [ForeignKey(typeof(Die))]
+        public int DieId { get; set; }
         public string Image { get; set; }
         public string Sound { get; set; }
+
         [ManyToOne]
         public Die Die { get; set; }
     }

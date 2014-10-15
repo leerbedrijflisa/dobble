@@ -14,7 +14,7 @@ namespace Lisa.Dobble.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        [OneToMany(CascadeOperations = CascadeOperation.All)] 
         public List<Option> Options { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Lisa.Dobble.Models;
 using SQLite.Net;
+using SQLiteNetExtensions.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +23,8 @@ namespace Lisa.Dobble.Data
 
         public IEnumerable<Die> GetDice()
         {
-            return (from i in database.Table<Die>() select i).ToList();
-        }
-
-        public Die GetDie(int id)
-        {
-            return database.Table<Die>().FirstOrDefault(x => x.Id == id);
+            return database.GetAllWithChildren<Die>();
+            //return (from i in database.Table<Die>() select i).ToList();
         }
 
         public int SaveDie(Die die)
@@ -46,6 +43,21 @@ namespace Lisa.Dobble.Data
         public int DeleteDie(int id)
         {
             return database.Delete<Die>(id);
+        }
+
+        public int InsertOption(Option option)
+        {
+            return database.Insert(option);
+        }
+
+        public void InsertDie(Die die)
+        {
+            database.InsertWithChildren(die);
+        }
+
+        public Die GetDie(int dieId)
+        {
+            return database.GetWithChildren<Die>(dieId);
         }
     }
 }
