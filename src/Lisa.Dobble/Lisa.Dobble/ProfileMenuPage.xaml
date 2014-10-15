@@ -5,7 +5,7 @@
   
 	
   
-  <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+  <Grid x:Name="ProfileGrid" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
     <Grid.RowDefinitions>
     <RowDefinition Height="1*"></RowDefinition>
     <RowDefinition Height="1*"></RowDefinition>
@@ -26,24 +26,20 @@
 
     <Label Text="Klassiek" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4"></Label>
     
-    <Image x:Name="diceImage" Grid.Row="2" Grid.Column="2"/>
-    <Image  Grid.Row="2" Grid.Column="3" Source="Dice/dice2.png"/>
-    <Image  Grid.Row="2" Grid.Column="4" Source="Dice/dice3.png"/>
-    
-    <Image  Grid.Row="3" Grid.Column="2" Source="Dice/dice4.png"/>
-    <Image  Grid.Row="3" Grid.Column="3" Source="Dice/dice5.png"/>
-    <Image  Grid.Row="3" Grid.Column="4" Source="Dice/dice6.png"/>
+    <Image Grid.Row="2" Grid.Column="2"/>
+    <Image Grid.Row="2" Grid.Column="3"/>
+    <Image Grid.Row="2" Grid.Column="4"/>
+    <Image Grid.Row="3" Grid.Column="2"/>
+    <Image Grid.Row="3" Grid.Column="3"/>
+    <Image Grid.Row="3" Grid.Column="4"/>
     
     <Button Text="Profiel opslaan en dobbelsteen gebruiken" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4"></Button>
   
     <TableView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="4">
         <TableView.Root>
-            <TableSection Title="Standaard Profielen">     
-                <TextCell Text="Profiel 1"></TextCell>
+            <TableSection x:Name="ProfileSection" Title="Uw profielen">     
+                
             </TableSection>
-          <TableSection Title="Eigen Profielen">
-            <TextCell Text="Profiel 2"></TextCell>
-          </TableSection>
         </TableView.Root>
     </TableView>  
 
