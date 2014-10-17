@@ -18,20 +18,14 @@ namespace Lisa.Dobble
             InitializeComponent();
             database = new DieDatabase();
             dice = database.GetDice();
-            foreach(Die die in dice)
-            {
-                TextCell dieCell = new TextCell();
-                dieCell.Text = die.Name;
-                dieCell.ClassId = die.Id.ToString();
-                dieCell.Tapped += dieCell_Tapped;
-                ProfileSection.Add(dieCell);
-            }
+            ProfileListView.ItemTapped += dieCell_Tapped;
+            ProfileListView.ItemsSource = dice;
         }
 
-        private void dieCell_Tapped(object sender, EventArgs e)
+        private void dieCell_Tapped(object sender, ItemTappedEventArgs args)
         {
-            var tappedDieCell = (TextCell)sender;
-            SetDie(int.Parse(tappedDieCell.ClassId));
+            var tappedDieCell = args.Item as Die;
+            SetDie(tappedDieCell.Id);
         }
 
         private void SetDie(int dieId)
@@ -43,12 +37,13 @@ namespace Lisa.Dobble
         private void SetImages(Die die)
         {
             var count = 1;
-            foreach(var imageObject in ProfileGrid.Children.OfType<Image>())
+            foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
             {
+                var imageObject = ((StackLayout)dieOptionLayout).Children.OfType<Image>().FirstOrDefault();
                 var dieImage = (Image)imageObject;
-                dieImage.Source = Device.OnPlatform (
+                dieImage.Source = Device.OnPlatform(
                     iOS: ImageSource.FromFile("Dice/dice" + count + ".png"),
-                    Android: ImageSource.FromFile("Drawable/dice"  + count + ".png"),
+                    Android: ImageSource.FromFile("Drawable/dice" + count + ".png"),
                     WinPhone: ImageSource.FromFile("dice" + count + ".png"));
 
                 count++;

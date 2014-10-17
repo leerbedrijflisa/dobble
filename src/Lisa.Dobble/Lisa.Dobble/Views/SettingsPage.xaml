@@ -2,22 +2,25 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 					   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 					   x:Class="Lisa.Dobble.SettingsPage">
-    <Grid>
+    <Grid HorizontalOptions="FillAndExpand" BackgroundColor="Red">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="5*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
         <Label Grid.Row="0"
+               Grid.Column="0"
                HorizontalOptions="Center"
                Font="75"
                VerticalOptions="Center"
                Text="Dobble"/>
-        <Grid Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" x:Name="SettingsGrid" BackgroundColor="#E0E0E0" Padding="0, 0, 0, 50">
+        <Grid Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="FillAndExpand" x:Name="SettingsGrid" BackgroundColor="#E0E0E0" Padding="0, 0, 0, 50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="1*"
-                                  />
+                <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
