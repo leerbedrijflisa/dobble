@@ -12,11 +12,12 @@ namespace Lisa.Dobble
     {
         public Die SelectedDie;
         public TouchMode SelectedTouchMode;
+        public bool enabled;
         public DicePage()
         {
             InitializeComponent();
-
             NavigationPage.SetHasNavigationBar(this, false);
+            enabled = true;
         }
 
         protected override void OnAppearing()
@@ -78,14 +79,23 @@ namespace Lisa.Dobble
 
         private void RollDice()
         {
-            var random = new Random();
-            int randomNumber = random.Next(0, SelectedDie.Options.Count());
-            var imageName = SelectedDie.Options[randomNumber].Image;
-            DieView.Source = Device.OnPlatform(
-                iOS: ImageSource.FromFile("Dice/" + imageName),
-                Android: ImageSource.FromFile("Drawable/" + imageName),
-                WinPhone: ImageSource.FromFile(imageName));
-            this.InvalidateMeasure();
+            if (enabled)
+            {
+                enabled = false;
+                var random = new Random();
+                int randomNumber = random.Next(0, SelectedDie.Options.Count());
+                var imageName = SelectedDie.Options[randomNumber].Image;
+                DieView.Source = Device.OnPlatform(
+                    iOS: ImageSource.FromFile("Dice/" + imageName),
+                    Android: ImageSource.FromFile("Drawable/" + imageName),
+                    WinPhone: ImageSource.FromFile(imageName));
+
+                Device.StartTimer(new TimeSpan(0, 0, 5), () =>
+                    {
+                        enabled = true;
+                        return false;
+                    });
+            }
         }
 
 
