@@ -33,16 +33,16 @@
             </ViewCell>
           </DataTemplate>
         </ListView.ItemTemplate>
-        - See more at: http://motzcod.es/post/93792500152/custom-listview-viewcells-in-xamarin-forms#sthash.FuI4i6M2.dpuf
       </ListView>
     </StackLayout>
-    <Grid Grid.Column="1" VerticalOptions="FillAndExpand" Grid.Row="0" x:Name="ProfileGrid">
+    <Grid Grid.Column="1" VerticalOptions="FillAndExpand" Grid.Row="0" Padding="20,0,0,0" x:Name="ProfileGrid">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>
         <ColumnDefinition Width="*"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
         <RowDefinition Height="*"/>
         <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
@@ -76,6 +76,7 @@
         <Button Text="Verander geluid"/>
         <Button Text="Verander plaatje"/>
       </StackLayout>
+      <Button Grid.Row="2" Grid.ColumnSpan="3" Text="Deze dobbelsteen gebruiken"/>
     </Grid> 
   </Grid>
 

@@ -116,22 +116,40 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Dice\dice2.png" />
+    <BundleResource Include="Resources\Dice\1\1.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Dice\dice3.png" />
+    <BundleResource Include="Resources\Dice\1\2.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Dice\dice4.png" />
+    <BundleResource Include="Resources\Dice\1\3.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Dice\dice5.png" />
+    <BundleResource Include="Resources\Dice\1\4.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Dice\dice6.png" />
+    <BundleResource Include="Resources\Dice\1\5.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Dice\dice1.png" />
+    <BundleResource Include="Resources\Dice\1\6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\2\1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\2\2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\2\3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\2\4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\2\5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\2\6.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.1.2.3.6257\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.1.2.3.6257\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.targets')" />

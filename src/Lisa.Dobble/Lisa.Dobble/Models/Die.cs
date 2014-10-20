@@ -16,5 +16,6 @@ namespace Lisa.Dobble.Models
 
         [OneToMany(CascadeOperations = CascadeOperation.All)] 
         public List<Option> Options { get; set; }
+        public bool IsDefault { get; set; }
     }
 }

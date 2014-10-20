@@ -21,6 +21,11 @@ namespace Lisa.Dobble.Data
             database.CreateTable<Option>();
         }
 
+        public void RemoveDice()
+        {
+            database.DeleteAll<Die>();
+        }
+
         public IEnumerable<Die> GetDice()
         {
             return database.GetAllWithChildren<Die>();

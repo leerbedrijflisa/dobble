@@ -36,15 +36,15 @@ namespace Lisa.Dobble
 
         private void SetImages(Die die)
         {
-            var count = 1;
+            var count = 0;
             foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
             {
                 var imageObject = ((StackLayout)dieOptionLayout).Children.OfType<Image>().FirstOrDefault();
                 var dieImage = (Image)imageObject;
                 dieImage.Source = Device.OnPlatform(
-                    iOS: ImageSource.FromFile("Dice/dice" + count + ".png"),
-                    Android: ImageSource.FromFile("Drawable/dice" + count + ".png"),
-                    WinPhone: ImageSource.FromFile("dice" + count + ".png"));
+                    iOS: ImageSource.FromFile("Dice/" + die.Options[count].Image),
+                    Android: ImageSource.FromFile("Drawable/dice/" + die.Options[count].Image),
+                    WinPhone: ImageSource.FromFile("dice/" + die.Options[count].Image));
 
                 count++;
             }

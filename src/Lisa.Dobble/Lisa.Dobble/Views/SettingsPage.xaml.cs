@@ -16,10 +16,10 @@ namespace Lisa.Dobble
         {
             database = new DieDatabase();
             var dice = database.GetDice();
-            if(dice.Count() == 0)
-            {
-                CreateSampleDie();
-            }
+            //if(dice.Count() == 0)
+            //{
+                CreateSampleDice();
+            //}
             InitializeComponent();
             InitializeAdditionalComponent();
 
@@ -50,9 +50,9 @@ namespace Lisa.Dobble
         {
             var dobbleTypeSegmentControl = new SegmentControl();
             dobbleTypeSegmentControl.TintColor = Color.Red;
-            //dobbleTypeSegmentControl.AddSegment("Geheel scherm");
+            dobbleTypeSegmentControl.AddSegment("Geheel scherm");
             dobbleTypeSegmentControl.HeightRequest = 30;
-            //dobbleTypeSegmentControl.AddSegment("Dobbelsteen");
+            dobbleTypeSegmentControl.AddSegment("Dobbelsteen");
             dobbleTypeSegmentControl.SelectedSegmentChanged += (object sender, int segmentIndex) =>
             {
                 dobbleTypeSegmentControl.TintColor = Color.Red;
@@ -74,35 +74,36 @@ namespace Lisa.Dobble
         private void StartButton_Clicked(object sender, EventArgs e)
         {
             var DicePage = new DicePage();
-            CreateSampleDie();
+            CreateSampleDice();
             DicePage.SelectedDie = database.GetDice().LastOrDefault();
             DicePage.SelectedTouchMode = touchMode;
             Navigation.PushAsync(DicePage);
         }
-        private void CreateSampleDie()
+        private void CreateSampleDice()
         {
-            var generatedDie = new Die();
-            generatedDie.Options = new List<Option>();
-
-            for (var i = 0; i < 6; i++)
+            database.RemoveDice();
+            var firstDie = new Die();
+            firstDie.Name = "Zwart / Wit";
+            firstDie.Options = new List<Option>();
+            for(var i = 0; i < 6; i++)
             {
                 var option = new Option();
-
-                if (i == 0)
-                {
-                    option.Image = "dice.png";
-                }
-                else
-                {
-                    option.Image = String.Format("dice{0}.png", i + 1);
-                }
-
-                generatedDie.Options.Add(option);
+                option.Image = String.Format("1/{0}.png", i + 1);
+                firstDie.Options.Add(option);
             }
 
-            generatedDie.Name = "Sample";
+            var secondDie = new Die();
+            secondDie.Name = "Geel / Blauw";
+            secondDie.Options = new List<Option>();
+            for(var i = 0; i < 6; i++)
+            {
+                var option = new Option();
+                option.Image = String.Format("2/{0}.png", i + 1);
+                secondDie.Options.Add(option);
+            }
 
-            database.InsertDie(generatedDie);
+            database.InsertDie(firstDie);
+            database.InsertDie(secondDie);
         }
 
         private TouchMode touchMode;
