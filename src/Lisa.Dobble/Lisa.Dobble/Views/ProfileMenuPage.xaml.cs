@@ -13,6 +13,7 @@ namespace Lisa.Dobble
     {
         DieDatabase database;
         IEnumerable<Die> dice;
+        Die selectedDie;
         public ProfileMenuPage()
         {
             InitializeComponent();
@@ -20,6 +21,15 @@ namespace Lisa.Dobble
             dice = database.GetDice();
             ProfileListView.ItemTapped += dieCell_Tapped;
             ProfileListView.ItemsSource = dice;
+
+            SelectDieButton.Clicked += SelectDieButton_Clicked;
+        }
+
+        void SelectDieButton_Clicked(object sender, EventArgs e)
+        {
+            var settingsPage = new SettingsPage();
+            settingsPage.SelectedDie = selectedDie;
+            Navigation.PushAsync(settingsPage);
         }
 
         private void dieCell_Tapped(object sender, ItemTappedEventArgs args)
@@ -30,7 +40,7 @@ namespace Lisa.Dobble
 
         private void SetDie(int dieId)
         {
-            var selectedDie = dice.Where(x => x.Id == dieId).FirstOrDefault();
+            selectedDie = dice.Where(x => x.Id == dieId).FirstOrDefault();
             SetImages(selectedDie);
         }
 

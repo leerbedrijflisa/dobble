@@ -11,21 +11,22 @@ namespace Lisa.Dobble
 {
     public partial class SettingsPage
     {
-        DieDatabase database;
+        private DieDatabase database;
+        public Die SelectedDie;
         public SettingsPage()
         {
             database = new DieDatabase();
             var dice = database.GetDice();
             //if(dice.Count() == 0)
             //{
-                CreateSampleDice();
+                CreateDefaultDice();
             //}
             InitializeComponent();
             InitializeAdditionalComponent();
 
             NavigationPage.SetHasNavigationBar(this, false);
 
-            StartButton.Clicked +=StartButton_Clicked;
+            StartButton.Clicked += StartButton_Clicked;
             ChooseProfileButton.Clicked += ChooseProfileButton_Clicked;
         }
 
@@ -74,16 +75,17 @@ namespace Lisa.Dobble
         private void StartButton_Clicked(object sender, EventArgs e)
         {
             var DicePage = new DicePage();
-            CreateSampleDice();
-            DicePage.SelectedDie = database.GetDice().LastOrDefault();
+            CreateDefaultDice();
+            DicePage.SelectedDie = SelectedDie;
             DicePage.SelectedTouchMode = touchMode;
             Navigation.PushAsync(DicePage);
         }
-        private void CreateSampleDice()
+        private void CreateDefaultDice()
         {
             database.RemoveDice();
             var firstDie = new Die();
             firstDie.Name = "Zwart / Wit";
+            firstDie.IsDefault = true;
             firstDie.Options = new List<Option>();
             for(var i = 0; i < 6; i++)
             {
@@ -94,6 +96,7 @@ namespace Lisa.Dobble
 
             var secondDie = new Die();
             secondDie.Name = "Geel / Blauw";
+            firstDie.IsDefault = true;
             secondDie.Options = new List<Option>();
             for(var i = 0; i < 6; i++)
             {

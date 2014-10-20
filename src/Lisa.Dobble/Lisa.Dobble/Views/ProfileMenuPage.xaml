@@ -76,7 +76,7 @@
         <Button Text="Verander geluid"/>
         <Button Text="Verander plaatje"/>
       </StackLayout>
-      <Button Grid.Row="2" Grid.ColumnSpan="3" Text="Deze dobbelsteen gebruiken"/>
+      <Button x:Name="SelectDieButton" Grid.Row="2" Grid.ColumnSpan="3" Text="Deze dobbelsteen gebruiken"/>
     </Grid> 
   </Grid>
 
