@@ -17,13 +17,9 @@ namespace Lisa.Dobble
         {
             database = new DieDatabase();
             var dice = database.GetDice();
-            //if(dice.Count() == 0)
-            //{
-                CreateDefaultDice();
-            //}
+            CreateDefaultDice();
             InitializeComponent();
             InitializeAdditionalComponent();
-
             NavigationPage.SetHasNavigationBar(this, false);
 
             StartButton.Clicked += StartButton_Clicked;
@@ -38,6 +34,10 @@ namespace Lisa.Dobble
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            if (SelectedDie != null)
+            {
+                DieNameLabel.Text = SelectedDie.Name;
+            }
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
