@@ -1,14 +1,13 @@
-using Lisa.Dobble;
 using Lisa.Dobble.iOS;
 using System;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Labs.Services.IO;
 
-[assembly: Dependency(typeof(FileManager))]
+[assembly: Dependency(typeof(Xamarin.Forms.Labs.Services.IO.FileManager))]
 namespace Lisa.Dobble.iOS
 {
-    public class FileManager : IFileManager
+    public class FileManager : Xamarin.Forms.Labs.Services.IO.IFileManager
     {
         public bool DirectoryExists(string path)
         {
@@ -23,6 +22,12 @@ namespace Lisa.Dobble.iOS
         }
 
         public Stream OpenFile(string path, Xamarin.Forms.Labs.Services.IO.FileMode mode, Xamarin.Forms.Labs.Services.IO.FileAccess access)
+        {
+            string fullPath = CreateFullPath(path);
+            return File.Open(fullPath, TranslateFileMode(mode), TranslateFileAccess(access));
+        }
+
+        public Stream OpenFile(string path, Xamarin.Forms.Labs.Services.IO.FileMode mode, Xamarin.Forms.Labs.Services.IO.FileAccess access, Xamarin.Forms.Labs.Services.IO.FileShare fileShare)
         {
             string fullPath = CreateFullPath(path);
             return File.Open(fullPath, TranslateFileMode(mode), TranslateFileAccess(access));

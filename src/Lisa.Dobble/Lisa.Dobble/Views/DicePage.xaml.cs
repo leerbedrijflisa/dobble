@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Labs;
+using Xamarin.Forms.Labs.Services;
 
 namespace Lisa.Dobble
 {
@@ -16,8 +18,15 @@ namespace Lisa.Dobble
         public DicePage()
         {
             InitializeComponent();
+            var device = Resolver.Resolve<IDevice>();
             NavigationPage.SetHasNavigationBar(this, false);
             enabled = true;
+            device.Accelerometer.Interval = AccelerometerInterval.Normal;
+            Device.StartTimer(new TimeSpan(0, 0, 0, 2), () =>
+            {
+                var ok = device.Accelerometer.LatestReading;
+                return true;
+            });
         }
 
         protected override void OnAppearing()
