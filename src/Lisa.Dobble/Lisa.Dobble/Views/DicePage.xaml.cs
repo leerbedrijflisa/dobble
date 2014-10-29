@@ -17,6 +17,9 @@ namespace Lisa.Dobble
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+            TimeOne.IsVisible = false;
+            TimeTwo.IsVisible = false;
+            TimeThree.IsVisible = false;
             enabled = true;
         }
 
@@ -89,9 +92,34 @@ namespace Lisa.Dobble
                     iOS: ImageSource.FromFile("Dice/" + imageName),
                     Android: ImageSource.FromFile("Drawable/" + imageName),
                     WinPhone: ImageSource.FromFile(imageName));
+                TimeOne.IsVisible = true;
+                TimeTwo.IsVisible = true;
+                TimeThree.IsVisible = true;
+                TimeOne.Opacity = 1;
+                TimeTwo.Opacity = 1;
+                TimeThree.Opacity = 1;
+
+                Device.StartTimer(new TimeSpan(0, 0, 0, 1, 600), () =>
+                {
+                    TimeOne.FadeTo(0, 250);
+                    return false;
+                });
+
+                Device.StartTimer(new TimeSpan(0, 0, 0, 3, 200), () =>
+                {
+                    TimeTwo.FadeTo(0, 250);
+                    return false;
+                });
+
+                Device.StartTimer(new TimeSpan(0, 0, 0, 5, 00), () =>
+                {
+                    TimeThree.FadeTo(0, 250);
+                    return false;
+                });
 
                 Device.StartTimer(new TimeSpan(0, 0, 5), () =>
                     {
+                        
                         enabled = true;
                         return false;
                     });
