@@ -15,6 +15,7 @@ namespace Lisa.Dobble
         public Die SelectedDie;
         public TouchMode SelectedTouchMode;
         public bool enabled;
+        private bool IsPopped = false;
         public DicePage()
         {
             InitializeComponent();
@@ -22,11 +23,22 @@ namespace Lisa.Dobble
             NavigationPage.SetHasNavigationBar(this, false);
             enabled = true;
             device.Accelerometer.Interval = AccelerometerInterval.Normal;
-            Device.StartTimer(new TimeSpan(0, 0, 0, 2), () =>
+            device.Accelerometer.ReadingAvailable += Accelerometer_ReadingAvailable;
+            //Device.StartTimer(new TimeSpan(0, 0, 0, 2), () =>
+            //{
+            //    var ok = device.Accelerometer;
+            //    var ok2 = device.Gyroscope;
+            //    return true;
+            //});
+        }
+
+        void Accelerometer_ReadingAvailable(object sender, EventArgs<Xamarin.Forms.Labs.Helpers.Vector3> e)
+        {
+            if(e.Value.Y < 0.3 && !IsPopped && e.Value.Z < 0)
             {
-                var ok = device.Accelerometer.LatestReading;
-                return true;
-            });
+                Navigation.PopAsync();
+                IsPopped = true;
+            }
         }
 
         protected override void OnAppearing()

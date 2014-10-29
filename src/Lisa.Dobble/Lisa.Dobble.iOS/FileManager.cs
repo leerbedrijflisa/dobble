@@ -75,5 +75,18 @@ namespace Lisa.Dobble.iOS
                 default: throw new NotImplementedException();
             }
         }
+        private System.IO.FileShare TranslateFileShare(Xamarin.Forms.Labs.Services.IO.FileShare share)
+        {
+            switch (share)
+            {
+                case Xamarin.Forms.Labs.Services.IO.FileShare.Delete: return System.IO.FileShare.Delete;
+                case Xamarin.Forms.Labs.Services.IO.FileShare.Inheritable: return System.IO.FileShare.Inheritable;
+                case Xamarin.Forms.Labs.Services.IO.FileShare.None: return System.IO.FileShare.None;
+                case Xamarin.Forms.Labs.Services.IO.FileShare.Read: return System.IO.FileShare.Read;
+                case Xamarin.Forms.Labs.Services.IO.FileShare.ReadWrite: return System.IO.FileShare.ReadWrite;
+                case Xamarin.Forms.Labs.Services.IO.FileShare.Write: return System.IO.FileShare.Write;
+                default: throw new NotImplementedException();
+            }
+        }
     }
 }

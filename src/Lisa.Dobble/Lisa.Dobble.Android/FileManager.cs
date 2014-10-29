@@ -4,7 +4,7 @@ using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Labs.Services.IO;
 
-[assembly: Dependency(typeof(FileManager))]
+[assembly: Dependency(typeof(Lisa.Dobble.Android.FileManager))]
 namespace Lisa.Dobble.Android
 {
     public class FileManager : IFileManager
@@ -25,6 +25,12 @@ namespace Lisa.Dobble.Android
         {
             string fullPath = CreateFullPath(path);
             return File.Open(fullPath, TranslateFileMode(mode), TranslateFileAccess(access));
+        }
+
+        public Stream OpenFile(string path, Xamarin.Forms.Labs.Services.IO.FileMode mode, Xamarin.Forms.Labs.Services.IO.FileAccess access, Xamarin.Forms.Labs.Services.IO.FileShare share)
+        {
+            string fullPath = CreateFullPath(path);
+            return File.Open(fullPath, TranslateFileMode(mode), TranslateFileAccess(access), TranslateFileShare(share));
         }
 
         public bool FileExists(string path)
@@ -66,6 +72,20 @@ namespace Lisa.Dobble.Android
                 case Xamarin.Forms.Labs.Services.IO.FileAccess.Read: return System.IO.FileAccess.Read;
                 case Xamarin.Forms.Labs.Services.IO.FileAccess.Write: return System.IO.FileAccess.Write;
                 case Xamarin.Forms.Labs.Services.IO.FileAccess.ReadWrite: return System.IO.FileAccess.ReadWrite;
+                default: throw new NotImplementedException();
+            }
+        }
+
+        private System.IO.FileShare TranslateFileShare(Xamarin.Forms.Labs.Services.IO.FileShare share)
+        {
+            switch (share)
+            {
+                case Xamarin.Forms.Labs.Services.IO.FileShare.Delete:  return System.IO.FileShare.Delete;
+                case Xamarin.Forms.Labs.Services.IO.FileShare.Inheritable: return System.IO.FileShare.Inheritable;
+                case Xamarin.Forms.Labs.Services.IO.FileShare.None: return System.IO.FileShare.None;
+                case Xamarin.Forms.Labs.Services.IO.FileShare.Read: return System.IO.FileShare.Read;
+                case Xamarin.Forms.Labs.Services.IO.FileShare.ReadWrite: return System.IO.FileShare.ReadWrite;
+                case Xamarin.Forms.Labs.Services.IO.FileShare.Write: return System.IO.FileShare.Write;
                 default: throw new NotImplementedException();
             }
         }
