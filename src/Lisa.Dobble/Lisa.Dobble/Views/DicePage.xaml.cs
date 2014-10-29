@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Labs;
+using Xamarin.Forms.Labs.Services;
 
 namespace Lisa.Dobble
 {
@@ -13,14 +15,33 @@ namespace Lisa.Dobble
         public Die SelectedDie;
         public TouchMode SelectedTouchMode;
         public bool enabled;
+        private bool IsPopped = false;
         public DicePage()
         {
             InitializeComponent();
+            var device = Resolver.Resolve<IDevice>();
             NavigationPage.SetHasNavigationBar(this, false);
             TimeOne.IsVisible = false;
             TimeTwo.IsVisible = false;
             TimeThree.IsVisible = false;
             enabled = true;
+            device.Accelerometer.Interval = AccelerometerInterval.Normal;
+            device.Accelerometer.ReadingAvailable += Accelerometer_ReadingAvailable;
+            //Device.StartTimer(new TimeSpan(0, 0, 0, 2), () =>
+            //{
+            //    var ok = device.Accelerometer;
+            //    var ok2 = device.Gyroscope;
+            //    return true;
+            //});
+        }
+
+        void Accelerometer_ReadingAvailable(object sender, EventArgs<Xamarin.Forms.Labs.Helpers.Vector3> e)
+        {
+            if(e.Value.Y < 0.3 && !IsPopped && e.Value.Z < 0)
+            {
+                Navigation.PopAsync();
+                IsPopped = true;
+            }
         }
 
         protected override void OnAppearing()

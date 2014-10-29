@@ -6,6 +6,9 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Labs.iOS;
+using Xamarin.Forms.Labs.Services;
+using Xamarin.Forms.Labs;
 
 namespace Lisa.Dobble.iOS
 {
@@ -13,7 +16,7 @@ namespace Lisa.Dobble.iOS
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.
     [Register("AppDelegate")]
-    public partial class AppDelegate : UIApplicationDelegate
+    public partial class AppDelegate : XFormsApplicationDelegate
     {
         // class-level declarations
         UIWindow window;
@@ -28,7 +31,10 @@ namespace Lisa.Dobble.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Forms.Init();
+            var container = new SimpleContainer();
+            container.Register<IDevice>(t => AppleDevice.CurrentDevice);
 
+            Resolver.SetResolver(container.GetResolver());
             window = new UIWindow(UIScreen.MainScreen.Bounds);
 
             window.RootViewController = App.GetMainPage().CreateViewController();
