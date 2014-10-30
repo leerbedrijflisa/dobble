@@ -78,7 +78,6 @@ namespace Lisa.Dobble
         private void StartButton_Clicked(object sender, EventArgs e)
         {
             var DicePage = new DicePage();
-            CreateDefaultDice();
             if(SelectedDie == null)
             {
                 SelectedDie = database.GetDice().FirstOrDefault();

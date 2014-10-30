@@ -46,10 +46,6 @@ namespace Lisa.Dobble
         {
             base.OnAppearing();
             InitializeAdditionalComponent();
-            if (SelectedDie == null)
-            {
-                
-            }
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
@@ -107,7 +103,6 @@ namespace Lisa.Dobble
                 {
                     imageSourceStream = fileManager.OpenFile(imageName, FileMode.Open, FileAccess.Read);
                     DieView.Source = ImageSource.FromStream(() => imageSourceStream);
-                    
                 }
 
                 TimeOne.IsVisible = true;

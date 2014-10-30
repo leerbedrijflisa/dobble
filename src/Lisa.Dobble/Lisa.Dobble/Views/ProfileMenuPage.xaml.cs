@@ -34,8 +34,6 @@ namespace Lisa.Dobble
             ProfileListView.SelectedItem = 0;
             selectedDie = database.GetDice().LastOrDefault();
 
-            
-
             SelectDieButton.Clicked += SelectDieButton_Clicked;
         }
 
@@ -49,9 +47,12 @@ namespace Lisa.Dobble
             var tapGestureRecognizer = new TapGestureRecognizer();
             tapGestureRecognizer.TappedCallback += (s, e) =>
             {
-                var imageCount = 0;
-                int.TryParse(s.ClassId, out imageCount);
-                SelectPicture(imageCount - 1);
+                if (!selectedDie.IsDefault)
+                {
+                    var imageCount = 0;
+                    int.TryParse(s.ClassId, out imageCount);
+                    SelectPicture(imageCount - 1);
+                }
             };
 
             foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
@@ -81,9 +82,12 @@ namespace Lisa.Dobble
                     DefaultCamera = CameraDevice.Front,
                     MaxPixelDimension = 400
                 });
+
                 imageSource = ImageSource.FromStream(() => mediaFile.Source);
+
                 var imageStream = mediaFile.Source;
                 fileManager.CreateDirectory(selectedDie.Id.ToString());
+
                 var imageFile = fileManager.OpenFile(String.Format("{0}/{1}.png", selectedDie.Id, option), FileMode.Create, FileAccess.ReadWrite);
                 imageStream.CopyTo(imageFile);
 
