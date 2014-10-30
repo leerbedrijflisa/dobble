@@ -102,7 +102,7 @@ namespace Lisa.Dobble
 
             var secondDie = new Die();
             secondDie.Name = "Geel / Blauw";
-            firstDie.IsDefault = true;
+            secondDie.IsDefault = true;
             secondDie.Options = new List<Option>();
             for(var i = 0; i < 6; i++)
             {

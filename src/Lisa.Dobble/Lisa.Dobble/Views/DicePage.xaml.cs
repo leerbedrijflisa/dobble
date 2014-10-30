@@ -1,12 +1,14 @@
 ﻿using Lisa.Dobble.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Labs;
 using Xamarin.Forms.Labs.Services;
+using Xamarin.Forms.Labs.Services.IO;
 
 namespace Lisa.Dobble
 {
@@ -16,10 +18,12 @@ namespace Lisa.Dobble
         public TouchMode SelectedTouchMode;
         public bool enabled;
         private bool IsPopped = false;
+        
         public DicePage()
         {
             InitializeComponent();
             var device = Resolver.Resolve<IDevice>();
+            fileManager = DependencyService.Get<IFileManager>();
             NavigationPage.SetHasNavigationBar(this, false);
             TimeOne.IsVisible = false;
             TimeTwo.IsVisible = false;
@@ -77,14 +81,35 @@ namespace Lisa.Dobble
         {
             if (enabled)
             {
+                if(imageSourceStream != null)
+                {
+                    imageSourceStream.Dispose();
+                }
                 enabled = false;
                 var random = new Random();
                 int randomNumber = random.Next(0, SelectedDie.Options.Count());
                 var imageName = SelectedDie.Options[randomNumber].Image;
-                DieView.Source = Device.OnPlatform(
-                    iOS: ImageSource.FromFile("Dice/" + imageName),
-                    Android: ImageSource.FromFile("Drawable/" + imageName),
-                    WinPhone: ImageSource.FromFile(imageName));
+                if (imageName == "notset.png")
+                {
+                    DieView.Source = Device.OnPlatform(
+                    iOS: ImageSource.FromFile("notset.png"),
+                    Android: ImageSource.FromFile("Drawable/notset.png"),
+                    WinPhone: ImageSource.FromFile("notset.png"));
+                }
+                else if (SelectedDie.IsDefault)
+                {
+                    DieView.Source = Device.OnPlatform(
+                        iOS: ImageSource.FromFile("Dice/" + imageName),
+                        Android: ImageSource.FromFile("Drawable/dice/" + imageName),
+                        WinPhone: ImageSource.FromFile("dice/" + imageName));
+                }
+                else
+                {
+                    imageSourceStream = fileManager.OpenFile(imageName, FileMode.Open, FileAccess.Read);
+                    DieView.Source = ImageSource.FromStream(() => imageSourceStream);
+                    
+                }
+
                 TimeOne.IsVisible = true;
                 TimeTwo.IsVisible = true;
                 TimeThree.IsVisible = true;
@@ -119,6 +144,8 @@ namespace Lisa.Dobble
             }
         }
 
+        private IFileManager fileManager;
+        private Stream imageSourceStream;
 
     }
 }

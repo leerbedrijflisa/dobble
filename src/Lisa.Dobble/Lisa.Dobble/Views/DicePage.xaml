@@ -6,7 +6,7 @@
                        BackgroundColor="#BFBFBF">
     <Frame x:Name="MainGrid" BackgroundColor="#BFBFBF">
         <StackLayout VerticalOptions="Center" HorizontalOptions="Center"  BackgroundColor="#BFBFBF">
-          <Image x:Name="DieView" Source="Dice/1/1.png" Aspect="Fill"/>
+          <Image x:Name="DieView" HeightRequest="367" Source="Dice/1/1.png" Aspect="Fill"/>
           <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="20,0,0,0">
             <Image x:Name="TimeOne" Source="tick.png"/>
             <Image x:Name="TimeTwo" Source="tick.png"/>

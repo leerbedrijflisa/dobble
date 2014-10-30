@@ -2,12 +2,14 @@
 using Lisa.Dobble.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Labs;
 using Xamarin.Forms.Labs.Services;
+using Xamarin.Forms.Labs.Services.IO;
 using Xamarin.Forms.Labs.Services.Media;
 
 namespace Lisa.Dobble
@@ -15,27 +17,59 @@ namespace Lisa.Dobble
     public partial class ProfileMenuPage
     {
         DieDatabase database;
-        IEnumerable<Die> dice;
+        List<Die> dice;
         Die selectedDie;
         IMediaPicker mediaPicker;
         ImageSource imageSource;
+        IFileManager fileManager;
 
         public ProfileMenuPage()
         {
             InitializeComponent();
+            InitializeAdditionalComponent();
             database = new DieDatabase();
             dice = database.GetDice();
             ProfileListView.ItemTapped += dieCell_Tapped;
             ProfileListView.ItemsSource = dice;
+            ProfileListView.SelectedItem = 0;
+            selectedDie = database.GetDice().LastOrDefault();
 
-            ToolbarItems.Add(new ToolbarItem("Add", "plus.png", () =>
+            
+
+            SelectDieButton.Clicked += SelectDieButton_Clicked;
+        }
+
+        private void InitializeAdditionalComponent()
+        {
+            ToolbarItems.Add(new ToolbarItem("Add", "plus.png", async () =>
             {
                 CreateNewDie();
             }));
 
-            SelectDieButton.Clicked += SelectDieButton_Clicked;
+            var tapGestureRecognizer = new TapGestureRecognizer();
+            tapGestureRecognizer.TappedCallback += (s, e) =>
+            {
+                var imageCount = 0;
+                int.TryParse(s.ClassId, out imageCount);
+                SelectPicture(imageCount - 1);
+            };
+
+            foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
+            {
+                var imageObject = ((StackLayout)dieOptionLayout).Children.OfType<Image>().FirstOrDefault();
+                imageObject.GestureRecognizers.Add(tapGestureRecognizer);
+            }
+
+            fileManager = DependencyService.Get<IFileManager>();
         }
-        private async Task SelectPicture()
+
+        protected override void OnDisappearing()
+        {
+            imageSourceStream.Dispose();
+            base.OnDisappearing();
+        }
+
+        private async Task SelectPicture(int option = 1)
         {
             Setup();
 
@@ -48,6 +82,17 @@ namespace Lisa.Dobble
                     MaxPixelDimension = 400
                 });
                 imageSource = ImageSource.FromStream(() => mediaFile.Source);
+                var imageStream = mediaFile.Source;
+                fileManager.CreateDirectory(selectedDie.Id.ToString());
+                var imageFile = fileManager.OpenFile(String.Format("{0}/{1}.png", selectedDie.Id, option), FileMode.Create, FileAccess.ReadWrite);
+                imageStream.CopyTo(imageFile);
+
+                selectedDie.Options[option].Image = String.Format("{0}/{1}.png", selectedDie.Id, option);
+
+                database.SaveDie(selectedDie);
+                var ok = database.GetDice();
+                dice = database.GetDice();
+                
             }
             catch (System.Exception ex)
             {
@@ -63,7 +108,6 @@ namespace Lisa.Dobble
             }
 
             var device = Resolver.Resolve<IDevice>();
-
             mediaPicker = DependencyService.Get<IMediaPicker>();
             ////RM: hack for working on windows phone? 
             if (mediaPicker == null)
@@ -106,6 +150,7 @@ namespace Lisa.Dobble
 
         private void SetDie(int dieId)
         {
+            
             selectedDie = dice.Where(x => x.Id == dieId).FirstOrDefault();
             SetImages(selectedDie);
         }
@@ -123,14 +168,23 @@ namespace Lisa.Dobble
                     iOS: ImageSource.FromFile("notset.png"),
                     Android: ImageSource.FromFile("Drawable/notset.png"),
                     WinPhone: ImageSource.FromFile("notset.png"));
-                }else{
+                }
+                else if(die.IsDefault)
+                {
                     dieImage.Source = Device.OnPlatform(
                         iOS: ImageSource.FromFile("Dice/" + die.Options[count].Image),
                         Android: ImageSource.FromFile("Drawable/dice/" + die.Options[count].Image),
                         WinPhone: ImageSource.FromFile("dice/" + die.Options[count].Image));
+                }else
+                {
+                    imageSourceStream = fileManager.OpenFile(die.Options[count].Image, FileMode.Open, FileAccess.Read);
+                    dieImage.Source = ImageSource.FromStream(() => imageSourceStream);
+                    imageSourceStream.Flush();
                 }
                 count++;
             }
         }
+
+        private Stream imageSourceStream;
     }
 }

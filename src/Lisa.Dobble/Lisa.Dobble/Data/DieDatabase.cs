@@ -26,7 +26,7 @@ namespace Lisa.Dobble.Data
             database.DeleteAll<Die>();
         }
 
-        public IEnumerable<Die> GetDice()
+        public List<Die> GetDice()
         {
             return database.GetAllWithChildren<Die>();
             //return (from i in database.Table<Die>() select i).ToList();
@@ -36,7 +36,7 @@ namespace Lisa.Dobble.Data
         {
             if(die.Id != 0)
             {
-                database.Update(die);
+                database.InsertOrReplaceWithChildren(die);
                 return die.Id;
             }
             else
