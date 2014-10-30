@@ -22,7 +22,31 @@ namespace Lisa.Dobble
             ProfileListView.ItemTapped += dieCell_Tapped;
             ProfileListView.ItemsSource = dice;
 
+            ToolbarItems.Add(new ToolbarItem("Add", "plus.png", () =>
+            {
+                CreateNewDie();
+            }));
+
             SelectDieButton.Clicked += SelectDieButton_Clicked;
+        }
+
+        private void CreateNewDie()
+        {
+            var firstDie = new Die();
+            firstDie.Name = String.Format("Dobbelsteen ({0})", database.GetDice().Count());
+            firstDie.IsDefault = false;
+            firstDie.Options = new List<Option>();
+            for (var i = 0; i < 6; i++)
+            {
+                var option = new Option();
+                option.Image = "notset.png";
+                firstDie.Options.Add(option);
+            }
+
+            database.InsertDie(firstDie);
+            dice = database.GetDice();
+
+            ProfileListView.ItemsSource = dice;
         }
 
         void SelectDieButton_Clicked(object sender, EventArgs e)
@@ -51,11 +75,18 @@ namespace Lisa.Dobble
             {
                 var imageObject = ((StackLayout)dieOptionLayout).Children.OfType<Image>().FirstOrDefault();
                 var dieImage = (Image)imageObject;
-                dieImage.Source = Device.OnPlatform(
-                    iOS: ImageSource.FromFile("Dice/" + die.Options[count].Image),
-                    Android: ImageSource.FromFile("Drawable/dice/" + die.Options[count].Image),
-                    WinPhone: ImageSource.FromFile("dice/" + die.Options[count].Image));
-
+                if (die.Options[count].Image == "notset.png")
+                {
+                    dieImage.Source = Device.OnPlatform(
+                    iOS: ImageSource.FromFile("notset.png"),
+                    Android: ImageSource.FromFile("Drawable/notset.png"),
+                    WinPhone: ImageSource.FromFile("notset.png"));
+                }else{
+                    dieImage.Source = Device.OnPlatform(
+                        iOS: ImageSource.FromFile("Dice/" + die.Options[count].Image),
+                        Android: ImageSource.FromFile("Drawable/dice/" + die.Options[count].Image),
+                        WinPhone: ImageSource.FromFile("dice/" + die.Options[count].Image));
+                }
                 count++;
             }
         }

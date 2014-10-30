@@ -27,12 +27,6 @@ namespace Lisa.Dobble
             enabled = true;
             device.Accelerometer.Interval = AccelerometerInterval.Normal;
             device.Accelerometer.ReadingAvailable += Accelerometer_ReadingAvailable;
-            //Device.StartTimer(new TimeSpan(0, 0, 0, 2), () =>
-            //{
-            //    var ok = device.Accelerometer;
-            //    var ok2 = device.Gyroscope;
-            //    return true;
-            //});
         }
 
         void Accelerometer_ReadingAvailable(object sender, EventArgs<Xamarin.Forms.Labs.Helpers.Vector3> e)
@@ -50,7 +44,7 @@ namespace Lisa.Dobble
             InitializeAdditionalComponent();
             if (SelectedDie == null)
             {
-                CreateSampleDice();
+                
             }
             NavigationPage.SetHasNavigationBar(this, false);
         }
@@ -77,28 +71,6 @@ namespace Lisa.Dobble
             {
                 MainGrid.GestureRecognizers.Add(tapGestureRecognizer);
             }
-        }
-
-        private void CreateSampleDice()
-        {
-            SelectedDie = new Die();
-            //SelectedDie.Options = new List<Option>();
-
-            for(var i = 0; i < 6; i++)
-            {
-                var option = new Option();
-
-                if(i == 0)
-                {
-                    option.Image = "dice.png";
-                }else{
-                    option.Image = String.Format("dice{0}.png", i + 1);
-                }
-
-                //SelectedDie.Options.Add(option);
-            }
-
-            SelectedDie.Name = "Sample";
         }
 
         private void RollDice()

@@ -17,7 +17,10 @@ namespace Lisa.Dobble
         {
             database = new DieDatabase();
             var dice = database.GetDice();
-            CreateDefaultDice();
+            if (dice.Count() == 0)
+            {
+                CreateDefaultDice();
+            }
             InitializeComponent();
             InitializeAdditionalComponent();
             NavigationPage.SetHasNavigationBar(this, false);
@@ -51,9 +54,9 @@ namespace Lisa.Dobble
         {
             var dobbleTypeSegmentControl = new SegmentControl();
             dobbleTypeSegmentControl.TintColor = Color.Red;
-            //dobbleTypeSegmentControl.AddSegment("Geheel scherm");
+            dobbleTypeSegmentControl.AddSegment("Geheel scherm");
             dobbleTypeSegmentControl.HeightRequest = 30;
-            //dobbleTypeSegmentControl.AddSegment("Dobbelsteen");
+            dobbleTypeSegmentControl.AddSegment("Dobbelsteen");
             dobbleTypeSegmentControl.SelectedSegmentChanged += (object sender, int segmentIndex) =>
             {
                 dobbleTypeSegmentControl.TintColor = Color.Red;
@@ -76,13 +79,16 @@ namespace Lisa.Dobble
         {
             var DicePage = new DicePage();
             CreateDefaultDice();
+            if(SelectedDie == null)
+            {
+                SelectedDie = database.GetDice().FirstOrDefault();
+            }
             DicePage.SelectedDie = SelectedDie;
             DicePage.SelectedTouchMode = touchMode;
             Navigation.PushAsync(DicePage);
         }
         private void CreateDefaultDice()
         {
-            database.RemoveDice();
             var firstDie = new Die();
             firstDie.Name = "Zwart / Wit";
             firstDie.IsDefault = true;

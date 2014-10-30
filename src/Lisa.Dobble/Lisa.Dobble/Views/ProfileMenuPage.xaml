@@ -16,7 +16,7 @@
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-              <Grid Padding="5">
+              <Grid Padding="10">
                 <Grid.RowDefinitions>
                   <RowDefinition Height="20"></RowDefinition>
                   <RowDefinition Height="20"></RowDefinition>
@@ -49,34 +49,28 @@
       <StackLayout Grid.Column="0" Grid.Row="0">
         <Image HeightRequest="100"/>
         <Button Text="Verander geluid"/>
-        <Button Text="Verander plaatje"/>
       </StackLayout>
       <StackLayout Grid.Column="1" Grid.Row="0">
         <Image HeightRequest="100"/>
         <Button Text="Verander geluid"/>
-        <Button Text="Verander plaatje"/>
       </StackLayout>
       <StackLayout Grid.Column="2" Grid.Row="0">
         <Image HeightRequest="100"/>
         <Button Text="Verander geluid"/>
-        <Button Text="Verander plaatje"/>
       </StackLayout>
       <StackLayout Grid.Column="0" Grid.Row="1">
         <Image HeightRequest="100"/>
         <Button Text="Verander geluid"/>
-        <Button Text="Verander plaatje"/>
       </StackLayout>
       <StackLayout Grid.Column="1" Grid.Row="1">
         <Image HeightRequest="100"/>
         <Button Text="Verander geluid"/>
-        <Button Text="Verander plaatje"/>
       </StackLayout>
       <StackLayout Grid.Column="2" Grid.Row="1">
         <Image HeightRequest="100"/>
         <Button Text="Verander geluid"/>
-        <Button Text="Verander plaatje"/>
       </StackLayout>
-      <Button x:Name="SelectDieButton" Grid.Row="2" Grid.ColumnSpan="3" Text="Deze dobbelsteen gebruiken"/>
+      <Button x:Name="SelectDieButton" Grid.Row="2" Grid.ColumnSpan="3" Text="Profiel opslaan en dobbelsteen gebruiken"/>
     </Grid> 
   </Grid>
 
