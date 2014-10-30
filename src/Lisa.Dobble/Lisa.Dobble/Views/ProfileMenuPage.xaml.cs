@@ -6,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Labs;
+using Xamarin.Forms.Labs.Services;
+using Xamarin.Forms.Labs.Services.Media;
 
 namespace Lisa.Dobble
 {
@@ -14,6 +17,9 @@ namespace Lisa.Dobble
         DieDatabase database;
         IEnumerable<Die> dice;
         Die selectedDie;
+        IMediaPicker mediaPicker;
+        ImageSource imageSource;
+
         public ProfileMenuPage()
         {
             InitializeComponent();
@@ -28,6 +34,42 @@ namespace Lisa.Dobble
             }));
 
             SelectDieButton.Clicked += SelectDieButton_Clicked;
+        }
+        private async Task SelectPicture()
+        {
+            Setup();
+
+            imageSource = null;
+            try
+            {
+                var mediaFile = await this.mediaPicker.SelectPhotoAsync(new CameraMediaStorageOptions
+                {
+                    DefaultCamera = CameraDevice.Front,
+                    MaxPixelDimension = 400
+                });
+                imageSource = ImageSource.FromStream(() => mediaFile.Source);
+            }
+            catch (System.Exception ex)
+            {
+                //this.Status = ex.Message;
+            }
+        }
+
+        private void Setup()
+        {
+            if (mediaPicker != null)
+            {
+                return;
+            }
+
+            var device = Resolver.Resolve<IDevice>();
+
+            mediaPicker = DependencyService.Get<IMediaPicker>();
+            ////RM: hack for working on windows phone? 
+            if (mediaPicker == null)
+            {
+                mediaPicker = device.MediaPicker;
+            }
         }
 
         private void CreateNewDie()
