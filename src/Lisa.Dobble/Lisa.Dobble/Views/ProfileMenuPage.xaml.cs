@@ -35,6 +35,7 @@ namespace Lisa.Dobble
             selectedDie = database.GetDice().LastOrDefault();
 
             SelectDieButton.Clicked += SelectDieButton_Clicked;
+            DeleteDieButton.Clicked += DeleteDieButton_Clicked;
         }
 
         private void InitializeAdditionalComponent()
@@ -135,7 +136,6 @@ namespace Lisa.Dobble
 
             database.InsertDie(firstDie);
             dice = database.GetDice();
-
             ProfileListView.ItemsSource = dice;
         }
 
@@ -187,6 +187,16 @@ namespace Lisa.Dobble
                 }
                 count++;
             }
+        }
+
+        private void DeleteDieButton_Clicked(object sender, EventArgs e)
+        {
+            if(!selectedDie.IsDefault)
+            {
+                database.DeleteDie(selectedDie.Id);
+            }
+            dice = database.GetDice();
+            ProfileListView.ItemsSource = dice;
         }
 
         private Stream imageSourceStream;

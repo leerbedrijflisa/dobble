@@ -71,6 +71,7 @@
         <Button Text="Verander geluid"/>
       </StackLayout>
       <Button x:Name="SelectDieButton" Grid.Row="2" Grid.ColumnSpan="3" Text="Profiel opslaan en dobbelsteen gebruiken"/>
+      <Button x:Name="DeleteDieButton" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Text="Profiel verwijderen"/>
     </Grid> 
   </Grid>
 
