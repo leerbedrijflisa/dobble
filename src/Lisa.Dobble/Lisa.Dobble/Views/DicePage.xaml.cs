@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Labs;
 using Xamarin.Forms.Labs.Services;
 using Xamarin.Forms.Labs.Services.IO;
+using Xamarin.Forms.Labs.Services.SoundService;
 
 namespace Lisa.Dobble
 {
@@ -81,6 +82,14 @@ namespace Lisa.Dobble
                 {
                     imageSourceStream.Dispose();
                 }
+
+                ISoundService soundService = DependencyService.Get<ISoundService>();
+                var fullpath = Device.OnPlatform(
+                    iOS: "dice.wav",
+                    Android: "dice.wav",
+                    WinPhone: "dice.wav");
+                soundService.PlayAsync(fullpath);
+
                 enabled = false;
                 var random = new Random();
                 int randomNumber = random.Next(0, SelectedDie.Options.Count());
