@@ -78,6 +78,8 @@
     <Compile Include="FileManager.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="MicrophoneService.cs" />
+    <Compile Include="PathService.cs" />
     <Compile Include="SQLite_iOS.cs" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
