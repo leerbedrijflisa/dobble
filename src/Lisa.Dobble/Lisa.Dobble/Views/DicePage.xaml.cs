@@ -18,6 +18,7 @@ namespace Lisa.Dobble
         public Die SelectedDie;
         public TouchMode SelectedTouchMode;
         public bool enabled;
+        public string DobbleDelay;
         private bool IsPopped = false;
         
         public DicePage()
@@ -120,26 +121,27 @@ namespace Lisa.Dobble
                 TimeOne.Opacity = 1;
                 TimeTwo.Opacity = 1;
                 TimeThree.Opacity = 1;
+                int Delay = int.Parse(DobbleDelay);
 
-                Device.StartTimer(new TimeSpan(0, 0, 0, 1, 600), () =>
+                Device.StartTimer(new TimeSpan(0, 0, 0, Delay/3, 600), () =>
                 {
                     TimeOne.FadeTo(0, 250);
                     return false;
                 });
 
-                Device.StartTimer(new TimeSpan(0, 0, 0, 3, 200), () =>
+                Device.StartTimer(new TimeSpan(0, 0, 0, (Delay/3)*2, 200), () =>
                 {
                     TimeTwo.FadeTo(0, 250);
                     return false;
                 });
 
-                Device.StartTimer(new TimeSpan(0, 0, 0, 5, 00), () =>
+                Device.StartTimer(new TimeSpan(0, 0, 0, Delay, 00), () =>
                 {
                     TimeThree.FadeTo(0, 250);
                     return false;
                 });
-
-                Device.StartTimer(new TimeSpan(0, 0, 5), () =>
+                
+                Device.StartTimer(new TimeSpan(0, 0, Delay), () =>
                     {
                         
                         enabled = true;

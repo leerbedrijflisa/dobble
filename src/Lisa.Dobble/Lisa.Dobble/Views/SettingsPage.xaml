@@ -49,6 +49,7 @@
                    VerticalOptions="Center" HorizontalOptions="End" 
                    Text="Wachttijd na dobbelen"/>
             <Entry Grid.Row="1"
+                   x:Name="DobbleDelay"
                    VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
                        Grid.Column="1"
                        Text="5"/>
