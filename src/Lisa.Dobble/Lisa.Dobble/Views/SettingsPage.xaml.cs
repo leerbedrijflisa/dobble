@@ -74,7 +74,7 @@ namespace Lisa.Dobble
 
             SettingsGrid.Children.Add(dobbleTypeSegmentControl, 1, 3);
         }
-
+        
         private void StartButton_Clicked(object sender, EventArgs e)
         {
             var DicePage = new DicePage();
@@ -82,6 +82,7 @@ namespace Lisa.Dobble
             {
                 SelectedDie = database.GetDice().FirstOrDefault();
             }
+            DicePage.DobbleDelay = DobbleDelay.Text;
             DicePage.SelectedDie = SelectedDie;
             DicePage.SelectedTouchMode = touchMode;
             Navigation.PushAsync(DicePage);

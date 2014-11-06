@@ -37,6 +37,7 @@ namespace Lisa.Dobble
             selectedDie = database.GetDice().LastOrDefault();
             _fileManager = DependencyService.Get<IFileManager>();
             SelectDieButton.Clicked += SelectDieButton_Clicked;
+            DeleteDieButton.Clicked += DeleteDieButton_Clicked;
         }
 
         private void InitializeAdditionalComponent()
@@ -191,6 +192,15 @@ namespace Lisa.Dobble
                 count++;
             }
         }
+        private void DeleteDieButton_Clicked(object sender, EventArgs e)
+        {
+            if (!selectedDie.IsDefault)
+            {
+                database.DeleteDie(selectedDie.Id);
+            }
+            dice = database.GetDice();
+            ProfileListView.ItemsSource = dice;
+        }
 
         private void RecordSound(object sender, EventArgs e)
         {
@@ -233,6 +243,7 @@ namespace Lisa.Dobble
         private Stream _tempFileStream;
         private string _fullPath;
         private IAudioStream _microphone;
+
         private Stream imageSourceStream;
     }
 }

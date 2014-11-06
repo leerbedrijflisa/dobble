@@ -18,6 +18,7 @@ namespace Lisa.Dobble
         public Die SelectedDie;
         public TouchMode SelectedTouchMode;
         public bool enabled;
+        public string DobbleDelay;
         private bool IsPopped = false;
         private ISoundService soundService;
         private IPathService pathService;
@@ -87,6 +88,14 @@ namespace Lisa.Dobble
                 {
                     imageSourceStream.Dispose();
                 }
+
+                soundService = DependencyService.Get<ISoundService>();
+                var fullpath = Device.OnPlatform(
+                    iOS: "dice.wav",
+                    Android: "dice.wav",
+                    WinPhone: "dice.wav");
+                soundService.PlayAsync(fullpath);
+
                 enabled = false;
                 var random = new Random();
                 int randomNumber = random.Next(0, SelectedDie.Options.Count());
@@ -128,26 +137,28 @@ namespace Lisa.Dobble
                 TimeOne.Opacity = 1;
                 TimeTwo.Opacity = 1;
                 TimeThree.Opacity = 1;
+                int delay = int.Parse(DobbleDelay);
+                delay = delay * 1000;
 
-                Device.StartTimer(new TimeSpan(0, 0, 0, 1, 600), () =>
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay / 3), () =>
                 {
                     TimeOne.FadeTo(0, 250);
                     return false;
                 });
 
-                Device.StartTimer(new TimeSpan(0, 0, 0, 3, 200), () =>
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, (delay / 3) * 2), () =>
                 {
                     TimeTwo.FadeTo(0, 250);
                     return false;
                 });
 
-                Device.StartTimer(new TimeSpan(0, 0, 0, 5, 00), () =>
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay), () =>
                 {
                     TimeThree.FadeTo(0, 250);
                     return false;
                 });
-
-                Device.StartTimer(new TimeSpan(0, 0, 5), () =>
+                
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay), () =>
                     {
                         
                         enabled = true;
