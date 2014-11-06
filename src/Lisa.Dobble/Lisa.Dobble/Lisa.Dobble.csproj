@@ -42,9 +42,6 @@
     <Compile Include="Views\DicePage.xaml.cs">
       <DependentUpon>DicePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main.xaml.cs">
-      <DependentUpon>Main.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Models\Die.cs" />
     <Compile Include="Models\Option.cs" />
     <Compile Include="Views\ProfileMenuPage.xaml.cs">
@@ -90,12 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\SettingsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\Main.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
