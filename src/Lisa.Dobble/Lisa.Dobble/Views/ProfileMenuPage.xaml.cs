@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Labs;
+using Xamarin.Forms.Labs.Mvvm;
 using Xamarin.Forms.Labs.Services;
 using Xamarin.Forms.Labs.Services.IO;
 using Xamarin.Forms.Labs.Services.Media;
@@ -33,7 +34,7 @@ namespace Lisa.Dobble
             ProfileListView.ItemsSource = dice;
             ProfileListView.SelectedItem = 0;
             selectedDie = database.GetDice().LastOrDefault();
-
+            _fileManager = DependencyService.Get<IFileManager>();
             SelectDieButton.Clicked += SelectDieButton_Clicked;
         }
 
@@ -189,6 +190,47 @@ namespace Lisa.Dobble
             }
         }
 
+        private void RecordSound(object sender, EventArgs e)
+        {
+            var recordSoundButton = (Button)sender;
+            
+            var imageCount = 0;
+            int.TryParse(recordSoundButton.ClassId, out imageCount);
+
+            _fileStream = _fileManager.OpenFile(String.Format("{0}/{1}.wav", selectedDie.Id, imageCount), FileMode.Create, FileAccess.ReadWrite);
+
+            var microphoneService = DependencyService.Get<IMicrophoneService>();
+            _microphone = microphoneService.GetMicrophone();
+            _microphone.Start(22050);
+            _recorder.StartRecorder(_microphone, _fileStream, 22050);
+            recordSoundButton.Text = "Opnemen stoppen";
+
+            selectedDie.Options[imageCount].Sound = String.Format("{0}/{1}.wav", selectedDie.Id, imageCount);
+            database.SaveDie(selectedDie);
+
+            recordSoundButton.Clicked -= RecordSound;
+            recordSoundButton.Clicked += StopRecording;
+            
+        }
+
+        private void StopRecording(object sender, EventArgs e)
+        {
+            var recordSoundButton = (Button)sender;
+
+            _microphone.Stop();
+            _recorder.StopRecorder();
+
+            recordSoundButton.Text = "Geluid opnemen";
+            recordSoundButton.Clicked -= StopRecording;
+            recordSoundButton.Clicked += RecordSound;   
+        }
+
+        private WaveRecorder _recorder = new WaveRecorder();
+        private IFileManager _fileManager;
+        private Stream _fileStream;
+        private Stream _tempFileStream;
+        private string _fullPath;
+        private IAudioStream _microphone;
         private Stream imageSourceStream;
     }
 }
