@@ -12,6 +12,7 @@ using Xamarin.Forms.Labs.Mvvm;
 using Xamarin.Forms.Labs.Services;
 using Xamarin.Forms.Labs.Services.IO;
 using Xamarin.Forms.Labs.Services.Media;
+using Xamarin.Forms.Labs.Services.SoundService;
 
 namespace Lisa.Dobble
 {
@@ -67,7 +68,8 @@ namespace Lisa.Dobble
 
         protected override void OnDisappearing()
         {
-            imageSourceStream.Dispose();
+            if(imageSource != null)
+                imageSourceStream.Dispose();
             base.OnDisappearing();
         }
 
@@ -205,7 +207,7 @@ namespace Lisa.Dobble
             _recorder.StartRecorder(_microphone, _fileStream, 22050);
             recordSoundButton.Text = "Opnemen stoppen";
 
-            selectedDie.Options[imageCount].Sound = String.Format("{0}/{1}.wav", selectedDie.Id, imageCount);
+            selectedDie.Options[imageCount].Sound = String.Format("{0}/{1}.wav", selectedDie.Id, imageCount + 1);
             database.SaveDie(selectedDie);
 
             recordSoundButton.Clicked -= RecordSound;

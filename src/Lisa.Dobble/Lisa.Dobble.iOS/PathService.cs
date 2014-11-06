@@ -9,7 +9,7 @@ namespace Lisa.Dobble.iOS
 
     public class PathService : IPathService
     {
-        public string CreatePersonalPath(string fileName)
+        public string CreateDocumentsPath(string fileName)
         {
             var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             var filePath = Path.Combine(documents, fileName);

@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Labs;
 using Xamarin.Forms.Labs.Services;
 using Xamarin.Forms.Labs.Services.IO;
+using Xamarin.Forms.Labs.Services.SoundService;
 
 namespace Lisa.Dobble
 {
@@ -18,12 +19,16 @@ namespace Lisa.Dobble
         public TouchMode SelectedTouchMode;
         public bool enabled;
         private bool IsPopped = false;
+        private ISoundService soundService;
+        private IPathService pathService;
         
         public DicePage()
         {
             InitializeComponent();
             var device = Resolver.Resolve<IDevice>();
             fileManager = DependencyService.Get<IFileManager>();
+            soundService = DependencyService.Get<ISoundService>();
+            pathService = DependencyService.Get<IPathService>();
             NavigationPage.SetHasNavigationBar(this, false);
             TimeOne.IsVisible = false;
             TimeTwo.IsVisible = false;
@@ -77,6 +82,7 @@ namespace Lisa.Dobble
         {
             if (enabled)
             {
+                soundService.Stop();
                 if(imageSourceStream != null)
                 {
                     imageSourceStream.Dispose();
@@ -85,6 +91,17 @@ namespace Lisa.Dobble
                 var random = new Random();
                 int randomNumber = random.Next(0, SelectedDie.Options.Count());
                 var imageName = SelectedDie.Options[randomNumber].Image;
+                var soundName = SelectedDie.Options[randomNumber].Sound;
+                if(soundName != null)
+                {
+                    var filePath = pathService.CreateDocumentsPath(soundName);
+                    if(SelectedDie.IsDefault)
+                    {
+                        filePath = "dice/" + SelectedDie.Options[randomNumber].Sound;
+                    }
+                    soundService.PlayAsync(filePath);
+                }
+
                 if (imageName == "notset.png")
                 {
                     DieView.Source = Device.OnPlatform(

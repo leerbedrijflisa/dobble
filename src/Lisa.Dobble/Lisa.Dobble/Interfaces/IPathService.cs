@@ -2,7 +2,7 @@
 {
     public interface IPathService
     {
-        string CreatePersonalPath(string fileName);
+        string CreateDocumentsPath(string fileName);
         string CreateResourcePath(string fileName);
     }
 }
