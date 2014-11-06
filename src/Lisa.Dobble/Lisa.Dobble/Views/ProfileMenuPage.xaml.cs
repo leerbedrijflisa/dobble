@@ -138,7 +138,7 @@ namespace Lisa.Dobble
 
             database.InsertDie(firstDie);
             dice = database.GetDice();
-
+            _fileManager.CreateDirectory(dice.LastOrDefault().Id.ToString());
             ProfileListView.ItemsSource = dice;
         }
 
