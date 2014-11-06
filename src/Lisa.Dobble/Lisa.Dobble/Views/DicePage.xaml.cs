@@ -121,27 +121,28 @@ namespace Lisa.Dobble
                 TimeOne.Opacity = 1;
                 TimeTwo.Opacity = 1;
                 TimeThree.Opacity = 1;
-                int Delay = int.Parse(DobbleDelay);
+                int delay = int.Parse(DobbleDelay);
+                delay = delay * 1000;
 
-                Device.StartTimer(new TimeSpan(0, 0, 0, Delay/3, 600), () =>
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay / 3), () =>
                 {
                     TimeOne.FadeTo(0, 250);
                     return false;
                 });
 
-                Device.StartTimer(new TimeSpan(0, 0, 0, (Delay/3)*2, 200), () =>
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, (delay / 3) * 2), () =>
                 {
                     TimeTwo.FadeTo(0, 250);
                     return false;
                 });
 
-                Device.StartTimer(new TimeSpan(0, 0, 0, Delay, 00), () =>
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay), () =>
                 {
                     TimeThree.FadeTo(0, 250);
                     return false;
                 });
                 
-                Device.StartTimer(new TimeSpan(0, 0, Delay), () =>
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay), () =>
                     {
                         
                         enabled = true;
