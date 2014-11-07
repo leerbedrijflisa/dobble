@@ -68,11 +68,24 @@ namespace Lisa.Dobble
             }
 
             fileManager = DependencyService.Get<IFileManager>();
+            DieName.Clicked += ChangeDieName;
+        }
+
+        private async void ChangeDieName(object sender, object args)
+        {
+            var _userDialogService = DependencyService.Get<IUserDialogService>();
+            var r = await _userDialogService.PromptAsync("Vul de naam in van deze dobbelsteen.", "Opslaan");
+            if(r.Ok)
+            {
+                DieName.Text = r.Text;
+                selectedDie.Name = r.Text;
+                database.SaveDie(selectedDie);
+            }
         }
 
         protected override void OnDisappearing()
         {
-            if (imageSourceStream != null)
+            if(imageSourceStream != null)
                 imageSourceStream.Dispose();
             base.OnDisappearing();
         }
@@ -161,8 +174,8 @@ namespace Lisa.Dobble
 
         private void SetDie(int dieId)
         {
-            
             selectedDie = dice.Where(x => x.Id == dieId).FirstOrDefault();
+            DieName.Text = selectedDie.Name;
             SetImages(selectedDie);
         }
 
@@ -241,6 +254,7 @@ namespace Lisa.Dobble
         }
 
         private WaveRecorder _recorder = new WaveRecorder();
+        private IUserDialogService _userDialogService;
         private IFileManager _fileManager;
         private Stream _fileStream;
         private Stream _tempFileStream;

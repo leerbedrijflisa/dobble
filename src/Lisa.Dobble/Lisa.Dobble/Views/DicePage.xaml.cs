@@ -106,7 +106,7 @@ namespace Lisa.Dobble
                     var filePath = pathService.CreateDocumentsPath(soundName);
                     if(SelectedDie.IsDefault)
                     {
-                        filePath = "dice/" + SelectedDie.Options[randomNumber].Sound;
+                        filePath = "Dice/" + SelectedDie.Options[randomNumber].Sound;
                     }
                     soundService.PlayAsync(filePath);
                 }
