@@ -27,6 +27,8 @@ namespace Lisa.Dobble
 
             StartButton.Clicked += StartButton_Clicked;
             ChooseProfileButton.Clicked += ChooseProfileButton_Clicked;
+
+            DobbleDelay.Keyboard = Keyboard.Numeric;
         }
 
         void ChooseProfileButton_Clicked(object sender, EventArgs e)
