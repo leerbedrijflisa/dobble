@@ -62,8 +62,11 @@ namespace Lisa.Dobble
 
             foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
             {
-                var imageObject = ((StackLayout)dieOptionLayout).Children.OfType<Image>().FirstOrDefault();
-                imageObject.GestureRecognizers.Add(tapGestureRecognizer);
+                if (dieOptionLayout.Children.OfType<Image>().FirstOrDefault() != null)
+                {
+                    var imageObject = ((StackLayout)dieOptionLayout).Children.OfType<Image>().FirstOrDefault();
+                    imageObject.GestureRecognizers.Add(tapGestureRecognizer);
+                }
             }
 
             fileManager = DependencyService.Get<IFileManager>();
@@ -184,6 +187,8 @@ namespace Lisa.Dobble
             foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
             {
                 var imageObject = ((StackLayout)dieOptionLayout).Children.OfType<Image>().FirstOrDefault();
+                if (imageObject == null)
+                    return;
                 var dieImage = (Image)imageObject;
                 if (die.Options[count].Image == "notset.png")
                 {

@@ -35,7 +35,6 @@
         </ListView.ItemTemplate>
       </ListView>
     </StackLayout>
-    <Button Grid.Column="2" HorizontalOptions="Center" x:Name="DieName" Text="Nieuwe dobbelsteen"/>
     <Grid Grid.Column="1" VerticalOptions="FillAndExpand" Grid.Row="0" Padding="0,80,0,0" x:Name="ProfileGrid">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>
@@ -43,36 +42,40 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Grid.RowDefinitions>
+        <RowDefinition Height="2"/>
         <RowDefinition Height="*"/>
         <RowDefinition Height="*"/>
         <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
-      <StackLayout Grid.Column="0" Grid.Row="0">
+      <Button Grid.ColumnSpan="3" HorizontalOptions="Center" Grid.Row="0" x:Name="DieName" Text="Nieuwe dobbelsteen"/>
+      <StackLayout Grid.Column="0" Grid.Row="1">
         <Image ClassId="1" HeightRequest="100"/>
         <Button Clicked="RecordSound" ClassId="0" Text="Geluid opnemen"/>
       </StackLayout>
-      <StackLayout Grid.Column="1" Grid.Row="0">
+      <StackLayout Grid.Column="1" Grid.Row="1">
         <Image ClassId="2" HeightRequest="100"/>
         <Button Clicked="RecordSound" ClassId="1" Text="Geluid opnemen"/>
       </StackLayout>
-      <StackLayout Grid.Column="2" Grid.Row="0">
+      <StackLayout Grid.Column="2" Grid.Row="1">
         <Image ClassId="3" HeightRequest="100"/>
         <Button Clicked="RecordSound" ClassId="2" Text="Geluid opnemen"/>
       </StackLayout>
-      <StackLayout Grid.Column="0" Grid.Row="1">
+      <StackLayout Grid.Column="0" Grid.Row="2">
         <Image ClassId="4" HeightRequest="100"/>
         <Button Clicked="RecordSound" ClassId="3" Text="Geluid opnemen"/>
       </StackLayout>
-      <StackLayout Grid.Column="1" Grid.Row="1">
+      <StackLayout Grid.Column="1" Grid.Row="2">
         <Image ClassId="5" HeightRequest="100"/>
         <Button Clicked="RecordSound" ClassId="4" Text="Geluid opnemen"/>
       </StackLayout>
-      <StackLayout Grid.Column="2" Grid.Row="1">
+      <StackLayout Grid.Column="2" Grid.Row="2">
         <Image ClassId="6" HeightRequest="100"/>
         <Button Clicked="RecordSound" ClassId="5" Text="Geluid opnemen"/>
       </StackLayout>
-      <Button x:Name="SelectDieButton" Grid.Row="2" Grid.ColumnSpan="3" Text="Profiel opslaan en dobbelsteen gebruiken"/>
-      <Button x:Name="DeleteDieButton" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Text="Profiel verwijderen"/>
+      <StackLayout Grid.Row="3" Grid.ColumnSpan="3" >
+        <Button x:Name="SelectDieButton" Text="Profiel opslaan en dobbelsteen gebruiken"/>
+        <Button x:Name="DeleteDieButton" Text="Profiel verwijderen"/>
+      </StackLayout>
     </Grid> 
   </Grid>
 

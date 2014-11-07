@@ -17,7 +17,7 @@
                Font="75"
                VerticalOptions="Center"
                Text="Dobble"/>
-        <Grid Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="FillAndExpand" x:Name="SettingsGrid" BackgroundColor="#E0E0E0" Padding="0, 0, 0, 50">
+        <Grid Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="FillAndExpand" x:Name="SettingsGrid" BackgroundColor="#E0E0E0" Padding="0, 0, 0, 20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="1*"/>
@@ -56,20 +56,7 @@
             <Label Grid.Row="1"
                    VerticalOptions="Center" HorizontalOptions="Start" 
                    Grid.Column="2"
-                   Text="Wachttijd in seconden"/>
-          
-            <Label Grid.Row="2"
-                   VerticalOptions="Center" HorizontalOptions="End" 
-                   Text="Wachttijd donker scherm"/>
-            <Entry Grid.Row="2"
-                   VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
-                       Grid.Column="1"
-                       Text="5"/>
-            <Label Grid.Row="2"
-                   Grid.Column="2"
-                   VerticalOptions="Center" HorizontalOptions="Start" 
-                   Text="Wachttijd in seconden"/>
-          
+                   Text="Wachttijd in seconden"/>   
             
             <Label Grid.Row="3"
                    VerticalOptions="Center" HorizontalOptions="End" 

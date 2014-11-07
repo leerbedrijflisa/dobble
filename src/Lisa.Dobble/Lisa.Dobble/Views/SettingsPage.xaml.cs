@@ -71,7 +71,7 @@ namespace Lisa.Dobble
                 }
             };
             dobbleTypeSegmentControl.SelectedSegment = 1;
-
+            SelectedDie = database.GetDice().FirstOrDefault();
             SettingsGrid.Children.Add(dobbleTypeSegmentControl, 1, 3);
         }
         
