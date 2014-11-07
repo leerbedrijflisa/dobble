@@ -68,13 +68,11 @@ namespace Lisa.Dobble
             }
 
             fileManager = DependencyService.Get<IFileManager>();
-
-            
         }
 
         protected override void OnDisappearing()
         {
-            if(imageSource != null)
+            if (imageSourceStream != null)
                 imageSourceStream.Dispose();
             base.OnDisappearing();
         }
