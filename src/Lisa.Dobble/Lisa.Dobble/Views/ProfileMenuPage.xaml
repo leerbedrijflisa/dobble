@@ -35,6 +35,7 @@
         </ListView.ItemTemplate>
       </ListView>
     </StackLayout>
+    <Label Grid.Column="1" Text="Nieuwe dobbelsteen"/>
     <Grid Grid.Column="1" VerticalOptions="FillAndExpand" Grid.Row="0" Padding="0,80,0,0" x:Name="ProfileGrid">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>

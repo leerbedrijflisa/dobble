@@ -1,4 +1,5 @@
-﻿using Lisa.Dobble.Data;
+﻿using Acr.XamForms.UserDialogs;
+using Lisa.Dobble.Data;
 using Lisa.Dobble.Models;
 using System;
 using System.Collections.Generic;
@@ -38,9 +39,11 @@ namespace Lisa.Dobble
             _fileManager = DependencyService.Get<IFileManager>();
             SelectDieButton.Clicked += SelectDieButton_Clicked;
             DeleteDieButton.Clicked += DeleteDieButton_Clicked;
+
+            
         }
 
-        private void InitializeAdditionalComponent()
+        private async void InitializeAdditionalComponent()
         {
             ToolbarItems.Add(new ToolbarItem("Add", "plus.png", async () =>
             {
@@ -65,6 +68,8 @@ namespace Lisa.Dobble
             }
 
             fileManager = DependencyService.Get<IFileManager>();
+
+            
         }
 
         protected override void OnDisappearing()

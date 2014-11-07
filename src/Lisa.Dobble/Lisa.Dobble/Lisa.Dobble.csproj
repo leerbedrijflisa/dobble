@@ -55,6 +55,12 @@
     <Compile Include="TouchMode.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Acr.XamForms">
+      <HintPath>..\..\packages\Acr.XamForms.1.2.0\lib\portable-win+net45+MonoAndroid+MonoTouch+wp8\Acr.XamForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.XamForms.UserDialogs">
+      <HintPath>..\..\packages\Acr.XamForms.UserDialogs.2.1.2\lib\portable-win+net45+MonoAndroid+MonoTouch+wp8\Acr.XamForms.UserDialogs.dll</HintPath>
+    </Reference>
     <Reference Include="ExifLib">
       <HintPath>..\..\packages\ExifLib.PCL.1.0.0\lib\portable-net45+sl50+win+WindowsPhoneApp81+wp80+MonoAndroid10+MonoTouch10\ExifLib.dll</HintPath>
     </Reference>
