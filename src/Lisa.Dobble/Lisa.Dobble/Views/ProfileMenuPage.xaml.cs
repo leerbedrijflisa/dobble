@@ -36,11 +36,10 @@ namespace Lisa.Dobble
             ProfileListView.ItemsSource = dice;
             ProfileListView.SelectedItem = 0;
             selectedDie = database.GetDice().LastOrDefault();
+            SetDie(selectedDie.Id);
             _fileManager = DependencyService.Get<IFileManager>();
             SelectDieButton.Clicked += SelectDieButton_Clicked;
             DeleteDieButton.Clicked += DeleteDieButton_Clicked;
-
-            
         }
 
         private async void InitializeAdditionalComponent()
