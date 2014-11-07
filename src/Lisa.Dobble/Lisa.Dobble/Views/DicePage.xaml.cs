@@ -137,8 +137,21 @@ namespace Lisa.Dobble
                 TimeOne.Opacity = 1;
                 TimeTwo.Opacity = 1;
                 TimeThree.Opacity = 1;
+
                 int delay = int.Parse(DobbleDelay);
                 delay = delay * 1000;
+                if (delay >= 250)
+                {
+                    TimeOne.IsVisible = true;
+                    TimeTwo.IsVisible = true;
+                    TimeThree.IsVisible = true;
+                }
+                else
+                {
+                    TimeOne.IsVisible = false;
+                    TimeTwo.IsVisible = false;
+                    TimeThree.IsVisible = false;
+                }
 
                 Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay / 3), () =>
                 {
