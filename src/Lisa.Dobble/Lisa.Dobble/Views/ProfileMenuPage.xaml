@@ -73,7 +73,7 @@
         <Button Clicked="RecordSound" ClassId="5" Text="Geluid opnemen"/>
       </StackLayout>
       <StackLayout Grid.Row="3" Grid.ColumnSpan="3" >
-        <Button x:Name="SelectDieButton" Text="Profiel opslaan en dobbelsteen gebruiken"/>
+        <Button x:Name="SelectDieButton" Text="Opslaan"/>
         <Button x:Name="DeleteDieButton" Text="Profiel verwijderen"/>
       </StackLayout>
     </Grid> 

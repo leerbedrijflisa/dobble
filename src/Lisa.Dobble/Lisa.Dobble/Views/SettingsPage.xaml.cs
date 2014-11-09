@@ -29,6 +29,11 @@ namespace Lisa.Dobble
             ChooseProfileButton.Clicked += ChooseProfileButton_Clicked;
 
             DobbleDelay.Keyboard = Keyboard.Numeric;
+
+            MessagingCenter.Subscribe<ProfileMenuPage, Die>(this, "SetDie", (sender, args) =>
+            {
+                SelectedDie = args;
+            });
         }
 
         void ChooseProfileButton_Clicked(object sender, EventArgs e)

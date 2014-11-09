@@ -89,6 +89,7 @@ namespace Lisa.Dobble
         {
             if(imageSourceStream != null)
                 imageSourceStream.Dispose();
+            MessagingCenter.Send<ProfileMenuPage, Die>(this, "SetDie", selectedDie);
             base.OnDisappearing();
         }
 
