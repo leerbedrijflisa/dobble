@@ -63,6 +63,7 @@ namespace Lisa.Dobble
 
         private void InitializeAdditionalComponent()
         {
+            SetDieImage(SelectedDie.Options[0].Image);
             var tapGestureRecognizer = new TapGestureRecognizer();
             tapGestureRecognizer.TappedCallback += (s, e) =>
             {
@@ -110,26 +111,7 @@ namespace Lisa.Dobble
                     }
                     soundService.PlayAsync(filePath);
                 }
-
-                if (imageName == "notset.png")
-                {
-                    DieView.Source = Device.OnPlatform(
-                    iOS: ImageSource.FromFile("notset.png"),
-                    Android: ImageSource.FromFile("Drawable/notset.png"),
-                    WinPhone: ImageSource.FromFile("notset.png"));
-                }
-                else if (SelectedDie.IsDefault)
-                {
-                    DieView.Source = Device.OnPlatform(
-                        iOS: ImageSource.FromFile("Dice/" + imageName),
-                        Android: ImageSource.FromFile("Drawable/dice/" + imageName),
-                        WinPhone: ImageSource.FromFile("dice/" + imageName));
-                }
-                else
-                {
-                    imageSourceStream = fileManager.OpenFile(imageName, FileMode.Open, FileAccess.Read);
-                    DieView.Source = ImageSource.FromStream(() => imageSourceStream);
-                }
+                SetDieImage(imageName);
 
                 TimeOne.IsVisible = true;
                 TimeTwo.IsVisible = true;
@@ -153,19 +135,19 @@ namespace Lisa.Dobble
                     TimeThree.IsVisible = false;
                 }
 
-                Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay / 3), () =>
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, (delay / 3) - 250), () =>
                 {
                     TimeOne.FadeTo(0, 250);
                     return false;
                 });
 
-                Device.StartTimer(new TimeSpan(0, 0, 0, 0, (delay / 3) * 2), () =>
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, ((delay / 3) * 2) - 250), () =>
                 {
                     TimeTwo.FadeTo(0, 250);
                     return false;
                 });
 
-                Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay), () =>
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay - 250), () =>
                 {
                     TimeThree.FadeTo(0, 250);
                     return false;
@@ -177,6 +159,29 @@ namespace Lisa.Dobble
                         enabled = true;
                         return false;
                     });
+            }
+        }
+
+        private void SetDieImage(string image)
+        {
+            if (image == "notset.png")
+            {
+                DieView.Source = Device.OnPlatform(
+                iOS: ImageSource.FromFile("notset.png"),
+                Android: ImageSource.FromFile("Drawable/notset.png"),
+                WinPhone: ImageSource.FromFile("notset.png"));
+            }
+            else if (SelectedDie.IsDefault)
+            {
+                DieView.Source = Device.OnPlatform(
+                    iOS: ImageSource.FromFile("Dice/" + image),
+                    Android: ImageSource.FromFile("Drawable/dice/" + image),
+                    WinPhone: ImageSource.FromFile("dice/" + image));
+            }
+            else
+            {
+                imageSourceStream = fileManager.OpenFile(image, FileMode.Open, FileAccess.Read);
+                DieView.Source = ImageSource.FromStream(() => imageSourceStream);
             }
         }
 
