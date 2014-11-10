@@ -178,6 +178,14 @@ namespace Lisa.Dobble
         private void SetDie(int dieId)
         {
             selectedDie = dice.Where(x => x.Id == dieId).FirstOrDefault();
+            if(selectedDie.IsDefault)
+            {
+                DeleteDieButton.IsVisible = false;
+            }
+            else
+            {
+                DeleteDieButton.IsVisible = true;
+            }
             DieName.Text = selectedDie.Name;
             SetImages(selectedDie);
         }
@@ -217,10 +225,11 @@ namespace Lisa.Dobble
         {
             if (!selectedDie.IsDefault)
             {
-                database.DeleteDie(selectedDie.Id);
+                database.DeleteDie(selectedDie.Id); 
+                dice = database.GetDice();
+                ProfileListView.ItemsSource = dice;
+                SetDie(dice.LastOrDefault().Id);
             }
-            dice = database.GetDice();
-            ProfileListView.ItemsSource = dice;
         }
 
         private void RecordSound(object sender, EventArgs e)
