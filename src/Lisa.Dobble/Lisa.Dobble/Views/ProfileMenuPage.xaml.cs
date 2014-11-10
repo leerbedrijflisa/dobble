@@ -82,7 +82,14 @@ namespace Lisa.Dobble
                 DieName.Text = r.Text;
                 selectedDie.Name = r.Text;
                 database.SaveDie(selectedDie);
+                RefreshProfileList();
             }
+        }
+
+        private void RefreshProfileList()
+        {
+            dice = database.GetDice();
+            ProfileListView.ItemsSource = dice;
         }
 
         protected override void OnDisappearing()
@@ -160,6 +167,7 @@ namespace Lisa.Dobble
             dice = database.GetDice();
             _fileManager.CreateDirectory(dice.LastOrDefault().Id.ToString());
             ProfileListView.ItemsSource = dice;
+            SetDie(dice.LastOrDefault().Id);
         }
 
         void SelectDieButton_Clicked(object sender, EventArgs e)
@@ -225,9 +233,8 @@ namespace Lisa.Dobble
         {
             if (!selectedDie.IsDefault)
             {
-                database.DeleteDie(selectedDie.Id); 
-                dice = database.GetDice();
-                ProfileListView.ItemsSource = dice;
+                database.DeleteDie(selectedDie.Id);
+                RefreshProfileList();
                 SetDie(dice.LastOrDefault().Id);
             }
         }
