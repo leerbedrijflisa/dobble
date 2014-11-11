@@ -98,20 +98,9 @@ namespace Lisa.Dobble
                 soundService.PlayAsync(fullpath);
 
                 enabled = false;
-                var random = new Random();
-                int randomNumber = random.Next(0, SelectedDie.Options.Count());
-                var imageName = SelectedDie.Options[randomNumber].Image;
-                var soundName = SelectedDie.Options[randomNumber].Sound;
-                if(soundName != null)
-                {
-                    var filePath = pathService.CreateDocumentsPath(soundName);
-                    if(SelectedDie.IsDefault)
-                    {
-                        filePath = "Dice/" + SelectedDie.Options[randomNumber].Sound;
-                    }
-                    soundService.PlayAsync(filePath);
-                }
-                SetDieImage(imageName);
+
+                random = new Random();
+                NextDie();
 
                 TimeOne.IsVisible = true;
                 TimeTwo.IsVisible = true;
@@ -184,6 +173,34 @@ namespace Lisa.Dobble
             }
         }
 
+        private void NextDie()
+        {
+            
+            int randomNumber = random.Next(0, SelectedDie.Options.Count());
+            var imageName = SelectedDie.Options[randomNumber].Image;
+            var soundName = SelectedDie.Options[randomNumber].Sound;
+
+            if (imageName == "notset.png")
+            {
+                NextDie();
+            }
+            else
+            {
+                if (soundName != null)
+                {
+                    var filePath = pathService.CreateDocumentsPath(soundName);
+                    if (SelectedDie.IsDefault)
+                    {
+                        filePath = "Dice/" + SelectedDie.Options[randomNumber].Sound;
+                    }
+                    soundService.PlayAsync(filePath);
+                }
+                SetDieImage(imageName);
+            }
+
+        }
+
+        private Random random;
         private IFileManager fileManager;
         private Stream imageSourceStream;
 
