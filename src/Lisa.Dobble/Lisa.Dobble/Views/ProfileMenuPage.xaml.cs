@@ -70,6 +70,7 @@ namespace Lisa.Dobble
             }
 
             fileManager = DependencyService.Get<IFileManager>();
+            _pathService = DependencyService.Get<IPathService>();
             DieName.Clicked += ChangeDieName;
         }
 
@@ -131,7 +132,8 @@ namespace Lisa.Dobble
                 database.SaveDie(selectedDie);
                 var ok = database.GetDice();
                 dice = database.GetDice();
-                
+
+                SetDie(selectedDie.Id);
             }
             catch (System.Exception ex)
             {
@@ -243,8 +245,7 @@ namespace Lisa.Dobble
                         WinPhone: ImageSource.FromFile("dice/" + die.Options[count].Image));
                 }else
                 {
-                    var pathService = DependencyService.Get<IPathService>();
-                    var fullPath = pathService.CreateDocumentsPath(die.Options[count].Image);
+                    var fullPath = _pathService.CreateDocumentsPath(die.Options[count].Image);
                     dieImage.Source = ImageSource.FromFile(fullPath);
                 }
                 count++;
@@ -301,7 +302,7 @@ namespace Lisa.Dobble
         private Stream _fileStream;
         private string _fullPath;
         private IAudioStream _microphone;
-
+        private IPathService _pathService;
         private Stream imageSourceStream;
     }
 }
