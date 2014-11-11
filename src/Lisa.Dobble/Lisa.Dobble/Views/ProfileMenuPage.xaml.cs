@@ -79,10 +79,15 @@ namespace Lisa.Dobble
             var r = await _userDialogService.PromptAsync("Vul de naam in van deze dobbelsteen.", "Opslaan");
             if(r.Ok)
             {
-                DieName.Text = r.Text;
-                selectedDie.Name = r.Text;
-                database.SaveDie(selectedDie);
-                RefreshProfileList();
+                if (r.Text.Length < 1){
+                    DisplayAlert("Fout", "Naam van de dobbelsteen moet minimaal 1 karakter lang zijn", "OK");
+                }
+                else{
+                    DieName.Text = r.Text;
+                    selectedDie.Name = r.Text;
+                    database.SaveDie(selectedDie);
+                    RefreshProfileList();
+                }
             }
         }
 
