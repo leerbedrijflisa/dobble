@@ -70,6 +70,7 @@ namespace Lisa.Dobble
             }
 
             fileManager = DependencyService.Get<IFileManager>();
+            _soundService = DependencyService.Get<ILisaSoundService>();
             _pathService = DependencyService.Get<IPathService>();
             DieName.Clicked += ChangeDieName;
         }
@@ -109,7 +110,6 @@ namespace Lisa.Dobble
         private async Task SelectPicture(int option = 1)
         {
             Setup();
-
             imageSource = null;
             try
             {
@@ -201,7 +201,7 @@ namespace Lisa.Dobble
                     var recordSoundButton = ((StackLayout)dieOptionLayout).Children.OfType<Button>().Where(X => X.Text == "Geluid opnemen").FirstOrDefault();
                     if(recordSoundButton != null)
                         recordSoundButton.IsVisible = false;
-
+                    
                     SelectDieButton.IsVisible = false;
                 }
             }
@@ -261,6 +261,21 @@ namespace Lisa.Dobble
             }
         }
 
+        private void PlaySound(object sender, EventArgs e)
+        {
+            var playSoundButton = (Button)sender;
+
+            var dieCount = 0;
+            int.TryParse(playSoundButton.ClassId, out dieCount);
+
+            var fullpath = _pathService.CreateDocumentsPath(selectedDie.Options[dieCount].Sound);
+            if (selectedDie.IsDefault)
+            {
+                fullpath = "Dice/" + selectedDie.Options[dieCount].Sound;
+            }
+            _soundService.PlayAsync(fullpath);
+        }
+
         private void RecordSound(object sender, EventArgs e)
         {
             var recordSoundButton = (Button)sender;
@@ -274,9 +289,9 @@ namespace Lisa.Dobble
             _microphone = microphoneService.GetMicrophone();
             _microphone.Start(22050);
             _recorder.StartRecorder(_microphone, _fileStream, 22050);
-            recordSoundButton.Text = "Opnemen stoppen";
+            recordSoundButton.Image = "stop.png";
 
-            selectedDie.Options[imageCount].Sound = String.Format("{0}/{1}.wav", selectedDie.Id, imageCount + 1);
+            selectedDie.Options[imageCount].Sound = String.Format("{0}/{1}.wav", selectedDie.Id, imageCount);
             database.SaveDie(selectedDie);
 
             recordSoundButton.Clicked -= RecordSound;
@@ -291,7 +306,7 @@ namespace Lisa.Dobble
             _microphone.Stop();
             _recorder.StopRecorder();
 
-            recordSoundButton.Text = "Geluid opnemen";
+            recordSoundButton.Image = "record.png";
             recordSoundButton.Clicked -= StopRecording;
             recordSoundButton.Clicked += RecordSound;   
         }
@@ -303,6 +318,7 @@ namespace Lisa.Dobble
         private string _fullPath;
         private IAudioStream _microphone;
         private IPathService _pathService;
+        private ILisaSoundService _soundService;
         private Stream imageSourceStream;
     }
 }
