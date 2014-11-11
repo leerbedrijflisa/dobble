@@ -123,7 +123,7 @@ namespace Lisa.Dobble
                 var imageStream = mediaFile.Source;
                 fileManager.CreateDirectory(selectedDie.Id.ToString());
 
-                var imageFile = fileManager.OpenFile(String.Format("{0}/{1}.png", selectedDie.Id, option), FileMode.Create, FileAccess.ReadWrite);
+                var imageFile = fileManager.OpenFile(String.Format("{0}/{1}.png", selectedDie.Id, option), FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
                 imageStream.CopyTo(imageFile);
 
                 selectedDie.Options[option].Image = String.Format("{0}/{1}.png", selectedDie.Id, option);
@@ -243,9 +243,9 @@ namespace Lisa.Dobble
                         WinPhone: ImageSource.FromFile("dice/" + die.Options[count].Image));
                 }else
                 {
-                    imageSourceStream = fileManager.OpenFile(die.Options[count].Image, FileMode.Open, FileAccess.Read, FileShare.Read);
-                    dieImage.Source = ImageSource.FromStream(() => imageSourceStream);
-                    imageSourceStream.Flush();
+                    var pathService = DependencyService.Get<IPathService>();
+                    var fullPath = pathService.CreateDocumentsPath(die.Options[count].Image);
+                    dieImage.Source = ImageSource.FromFile(fullPath);
                 }
                 count++;
             }
