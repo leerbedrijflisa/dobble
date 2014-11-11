@@ -42,12 +42,12 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       <Grid.RowDefinitions>
-        <RowDefinition Height="2"/>
+        <RowDefinition Height="70"/>
         <RowDefinition Height="*"/>
         <RowDefinition Height="*"/>
         <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
-      <Button Grid.ColumnSpan="3" HorizontalOptions="Center" Grid.Row="0" x:Name="DieName" Text="Nieuwe dobbelsteen"/>
+      <Button Grid.ColumnSpan="3" HorizontalOptions="Center"  VerticalOptions="Start" Grid.Row="0" Font="24" x:Name="DieName" Text="Nieuwe dobbelsteen" />
       <StackLayout Grid.Column="0" Grid.Row="1">
         <Image ClassId="1" HeightRequest="100"/>
         <Button Clicked="RecordSound" ClassId="0" Text="Geluid opnemen"/>
@@ -74,7 +74,7 @@
       </StackLayout>
       <StackLayout Grid.Row="3" Grid.ColumnSpan="3" >
         <Button x:Name="SelectDieButton" Text="Opslaan"/>
-        <Button x:Name="DeleteDieButton" Text="Profiel verwijderen"/>
+        <Button x:Name="DeleteDieButton" Text="Verwijderen"/>
       </StackLayout>
     </Grid> 
   </Grid>
