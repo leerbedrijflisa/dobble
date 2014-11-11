@@ -203,6 +203,14 @@ namespace Lisa.Dobble
                         recordSoundButton.IsVisible = false;
                     
                     SelectDieButton.IsVisible = false;
+                    
+                    var interactionButtons = ((StackLayout)dieOptionLayout).Children.OfType<StackLayout>().FirstOrDefault();
+                    if (interactionButtons != null)
+                    {
+                        var recordButton = (Button)interactionButtons.Children.OfType<Button>().LastOrDefault();
+                        recordButton.IsEnabled = false;
+                    }
+                    
                 }
             }
             else
@@ -215,6 +223,13 @@ namespace Lisa.Dobble
                         recordSoundButton.IsVisible = true;
 
                     SelectDieButton.IsVisible = true;
+
+                    var interactionButtons = ((StackLayout)dieOptionLayout).Children.OfType<StackLayout>().FirstOrDefault();
+                    if (interactionButtons != null)
+                    {
+                        var recordButton = (Button)interactionButtons.Children.OfType<Button>().LastOrDefault();
+                        recordButton.IsEnabled = true;
+                    }
                 }
             }
             DieName.Text = selectedDie.Name;
