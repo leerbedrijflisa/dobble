@@ -222,7 +222,7 @@ namespace Lisa.Dobble
                         WinPhone: ImageSource.FromFile("dice/" + die.Options[count].Image));
                 }else
                 {
-                    imageSourceStream = fileManager.OpenFile(die.Options[count].Image, FileMode.Open, FileAccess.Read);
+                    imageSourceStream = fileManager.OpenFile(die.Options[count].Image, FileMode.Open, FileAccess.Read, FileShare.Read);
                     dieImage.Source = ImageSource.FromStream(() => imageSourceStream);
                     imageSourceStream.Flush();
                 }
@@ -278,7 +278,6 @@ namespace Lisa.Dobble
         private IUserDialogService _userDialogService;
         private IFileManager _fileManager;
         private Stream _fileStream;
-        private Stream _tempFileStream;
         private string _fullPath;
         private IAudioStream _microphone;
 

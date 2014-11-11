@@ -30,7 +30,7 @@ namespace Xamarin.Forms.Labs.Services.IO
         public Stream OpenFile(string path, Xamarin.Forms.Labs.Services.IO.FileMode mode, Xamarin.Forms.Labs.Services.IO.FileAccess access, Xamarin.Forms.Labs.Services.IO.FileShare fileShare)
         {
             string fullPath = CreateFullPath(path);
-            return File.Open(fullPath, TranslateFileMode(mode), TranslateFileAccess(access));
+            return File.Open(fullPath, TranslateFileMode(mode), TranslateFileAccess(access), TranslateFileShare(fileShare));
         }
 
         public bool FileExists(string path)
