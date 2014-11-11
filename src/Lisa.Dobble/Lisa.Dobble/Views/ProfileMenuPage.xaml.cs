@@ -194,10 +194,26 @@ namespace Lisa.Dobble
             if(selectedDie.IsDefault)
             {
                 DeleteDieButton.IsVisible = false;
+                foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
+                {
+                    var recordSoundButton = ((StackLayout)dieOptionLayout).Children.OfType<Button>().Where(X => X.Text == "Geluid opnemen").FirstOrDefault();
+                    if(recordSoundButton != null)
+                        recordSoundButton.IsVisible = false;
+
+                    SelectDieButton.IsVisible = false;
+                }
             }
             else
             {
                 DeleteDieButton.IsVisible = true;
+                foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
+                {
+                    var recordSoundButton = ((StackLayout)dieOptionLayout).Children.OfType<Button>().Where(X => X.Text == "Geluid opnemen").FirstOrDefault();
+                    if(recordSoundButton != null)
+                        recordSoundButton.IsVisible = true;
+
+                    SelectDieButton.IsVisible = true;
+                }
             }
             DieName.Text = selectedDie.Name;
             SetImages(selectedDie);
