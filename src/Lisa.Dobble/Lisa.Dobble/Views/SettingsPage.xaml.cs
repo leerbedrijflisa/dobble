@@ -84,12 +84,18 @@ namespace Lisa.Dobble
         
         private void StartButton_Clicked(object sender, EventArgs e)
         {
+            int dobbleDelay;
+            if(!int.TryParse(DobbleDelay.Text, out dobbleDelay))
+            {
+                DisplayAlert("Fout", "Je kunt alleen maar cijfers invullen bij de wachttijd.", "OK");
+                return;
+            }
             var DicePage = new DicePage();
             if(SelectedDie == null)
             {
                 SelectedDie = database.GetDice().FirstOrDefault();
             }
-            DicePage.DobbleDelay = DobbleDelay.Text;
+            DicePage.DobbleDelay = dobbleDelay;
             DicePage.SelectedDie = SelectedDie;
             DicePage.SelectedTouchMode = touchMode;
             Navigation.PushAsync(DicePage);

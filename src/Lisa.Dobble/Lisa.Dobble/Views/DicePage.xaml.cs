@@ -18,7 +18,7 @@ namespace Lisa.Dobble
         public Die SelectedDie;
         public TouchMode SelectedTouchMode;
         public bool enabled;
-        public string DobbleDelay;
+        public int DobbleDelay;
         private bool IsPopped = false;
         private ISoundService soundService;
         private IPathService pathService;
@@ -119,8 +119,7 @@ namespace Lisa.Dobble
                 TimeOne.Opacity = 1;
                 TimeTwo.Opacity = 1;
                 TimeThree.Opacity = 1;
-
-                int delay = int.Parse(DobbleDelay);
+                int delay = DobbleDelay;
                 delay = delay * 1000;
                 if (delay >= 250)
                 {
