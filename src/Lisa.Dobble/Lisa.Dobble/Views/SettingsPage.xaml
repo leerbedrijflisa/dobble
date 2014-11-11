@@ -11,12 +11,7 @@
       <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
-        <Label Grid.Row="0"
-               Grid.Column="0"
-               HorizontalOptions="Center"
-               Font="75"
-               VerticalOptions="Center"
-               Text="Dobble"/>
+      <Image Source="Logo.png" HeightRequest="100" WidthRequest="300" HorizontalOptions="Center" VerticalOptions="End"/>
         <Grid Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="FillAndExpand" x:Name="SettingsGrid" BackgroundColor="#E0E0E0" Padding="0, 0, 0, 20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
