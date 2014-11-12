@@ -125,6 +125,7 @@ namespace Lisa.Dobble
             {
                 var option = new Option();
                 option.Image = String.Format("2/{0}.png", i + 1);
+                option.Sound = String.Format("2/{0}.wav", i + 1);
                 secondDie.Options.Add(option);
             }
 
