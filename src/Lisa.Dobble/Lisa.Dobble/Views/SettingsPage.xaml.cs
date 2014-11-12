@@ -103,7 +103,7 @@ namespace Lisa.Dobble
         private void CreateDefaultDice()
         {
             var firstDie = new Die();
-            firstDie.Name = "Zwart / Wit";
+            firstDie.Name = "Stippen (zwart/wit)";
             firstDie.IsDefault = true;
             firstDie.Options = new List<Option>();
             for(var i = 0; i < 6; i++)
@@ -115,7 +115,7 @@ namespace Lisa.Dobble
             }
 
             var secondDie = new Die();
-            secondDie.Name = "Geel / Blauw";
+            secondDie.Name = "Stippen (blauw/geel)";
             secondDie.IsDefault = true;
             secondDie.Options = new List<Option>();
             for(var i = 0; i < 6; i++)
