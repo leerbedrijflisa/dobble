@@ -28,7 +28,7 @@ namespace Lisa.Dobble
             InitializeComponent();
             var device = Resolver.Resolve<IDevice>();
             fileManager = DependencyService.Get<IFileManager>();
-            soundService = DependencyService.Get<ISoundService>();
+            soundService = DependencyService.Get<ILisaSoundService>();
             pathService = DependencyService.Get<IPathService>();
             NavigationPage.SetHasNavigationBar(this, false);
             TimeOne.IsVisible = false;
@@ -90,7 +90,7 @@ namespace Lisa.Dobble
                     imageSourceStream.Dispose();
                 }
 
-                soundService = DependencyService.Get<ISoundService>();
+                soundService = DependencyService.Get<ILisaSoundService>();
                 var fullpath = Device.OnPlatform(
                     iOS: "dice.wav",
                     Android: "dice.wav",
