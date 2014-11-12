@@ -61,7 +61,8 @@ namespace Lisa.Dobble
 
         private void InitializeAdditionalComponent()
         {
-            SetDieImage(SelectedDie.Options[0].Image);
+            firstDie = true;
+            NextDie();
             var tapGestureRecognizer = new TapGestureRecognizer();
             tapGestureRecognizer.TappedCallback += (s, e) =>
             {
@@ -106,7 +107,7 @@ namespace Lisa.Dobble
 
                 enabled = false;
 
-                random = new Random();
+                
                 NextDie();
 
                 TimeOne.IsVisible = true;
@@ -192,6 +193,7 @@ namespace Lisa.Dobble
 
         private void NextDie()
         {
+            random = new Random();
             int randomNumber = random.Next(0, SelectedDie.Options.Count());
             var imageName = SelectedDie.Options[randomNumber].Image;
             var soundName = SelectedDie.Options[randomNumber].Sound;
@@ -202,7 +204,7 @@ namespace Lisa.Dobble
             }
             else
             {
-                if (soundName != null)
+                if (soundName != null && !firstDie)
                 {
                     var filePath = pathService.CreateDocumentsPath(soundName);
                     if (SelectedDie.IsDefault)
@@ -251,6 +253,7 @@ namespace Lisa.Dobble
         private IFileManager fileManager;
         private bool needsAnimation;
         private bool isAnimating;
+        private bool firstDie;
         private Stream imageSourceStream;
 
     }
