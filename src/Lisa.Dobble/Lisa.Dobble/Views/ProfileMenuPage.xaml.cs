@@ -110,11 +110,18 @@ namespace Lisa.Dobble
 
         protected override void OnDisappearing()
         {
-            if(imageSourceStream != null)
-                imageSourceStream.Dispose();
-            MessagingCenter.Send<ProfileMenuPage, Die>(this, "SetDie", selectedDie);
+            if (selectedDie.Options.All(option => option.Image == "notset.png"))
+            {
+                DisplayAlert("Fout", "Je moet minimaal 1 plaatje toevoegen aan het dobbelsteen profiel", "OK");
+            }
+            else
+            {
+                if (imageSourceStream != null)
+                    imageSourceStream.Dispose();
+                MessagingCenter.Send<ProfileMenuPage, Die>(this, "SetDie", selectedDie);
 
-            base.OnDisappearing();
+                base.OnDisappearing();
+            }
         }
 
         private async Task SelectPicture(int option = 1)
@@ -189,9 +196,16 @@ namespace Lisa.Dobble
 
         void SelectDieButton_Clicked(object sender, EventArgs e)
         {
-            var settingsPage = new SettingsPage();
-            settingsPage.SelectedDie = selectedDie;
-            Navigation.PushAsync(settingsPage);
+            if (selectedDie.Options.All(option => option.Image == "notset.png"))
+            {
+                DisplayAlert("Fout", "Je moet minimaal 1 plaatje toevoegen aan het dobbelsteen profiel", "OK");
+            }
+            else
+            {
+                var settingsPage = new SettingsPage();
+                settingsPage.SelectedDie = selectedDie;
+                Navigation.PushAsync(settingsPage);
+            }
         }
 
         private void dieCell_Tapped(object sender, ItemTappedEventArgs args)
