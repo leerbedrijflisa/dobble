@@ -27,7 +27,6 @@ namespace Lisa.Dobble
         public DicePage()
         {
             InitializeComponent();
-            var device = Resolver.Resolve<IDevice>();
             fileManager = DependencyService.Get<IFileManager>();
             soundService = DependencyService.Get<ILisaSoundService>();
             pathService = DependencyService.Get<IPathService>();
@@ -36,8 +35,6 @@ namespace Lisa.Dobble
             TimeTwo.IsVisible = false;
             TimeThree.IsVisible = false;
             enabled = true;
-            device.Accelerometer.Interval = AccelerometerInterval.Normal;
-            device.Accelerometer.ReadingAvailable += Accelerometer_ReadingAvailable;
         }
 
         void Accelerometer_ReadingAvailable(object sender, EventArgs<Xamarin.Forms.Labs.Helpers.Vector3> e)
@@ -79,6 +76,9 @@ namespace Lisa.Dobble
             {
                 MainGrid.GestureRecognizers.Add(tapGestureRecognizer);
             }
+            var device = Resolver.Resolve<IDevice>();
+            device.Accelerometer.Interval = AccelerometerInterval.Normal;
+            device.Accelerometer.ReadingAvailable += Accelerometer_ReadingAvailable;
         }
 
         private void RollDice()
