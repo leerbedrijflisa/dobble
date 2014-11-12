@@ -21,7 +21,7 @@ namespace Lisa.Dobble
     {
         DieDatabase database;
         List<Die> dice;
-        Die selectedDie;
+        public Die selectedDie;
         IMediaPicker mediaPicker;
         ImageSource imageSource;
         IFileManager fileManager;
@@ -35,7 +35,11 @@ namespace Lisa.Dobble
             ProfileListView.ItemTapped += dieCell_Tapped;
             ProfileListView.ItemsSource = dice;
             ProfileListView.SelectedItem = 0;
-            selectedDie = database.GetDice().LastOrDefault();
+            
+            if (selectedDie == null)
+            {
+                selectedDie = database.GetDice().FirstOrDefault();
+            }
             SetDie(selectedDie.Id);
             _fileManager = DependencyService.Get<IFileManager>();
             SelectDieButton.Clicked += SelectDieButton_Clicked;
@@ -109,6 +113,7 @@ namespace Lisa.Dobble
             if(imageSourceStream != null)
                 imageSourceStream.Dispose();
             MessagingCenter.Send<ProfileMenuPage, Die>(this, "SetDie", selectedDie);
+
             base.OnDisappearing();
         }
 

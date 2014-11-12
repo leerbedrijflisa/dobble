@@ -38,7 +38,10 @@ namespace Lisa.Dobble
 
         void ChooseProfileButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new ProfileMenuPage());
+            var profileMenuPage = new ProfileMenuPage();
+            profileMenuPage.selectedDie = SelectedDie;
+            Navigation.PushAsync(profileMenuPage);
+
         }
 
         protected override void OnAppearing()
