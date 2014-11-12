@@ -77,6 +77,11 @@ namespace Lisa.Dobble
 
         private async void ChangeDieName(object sender, object args)
         {
+            if(selectedDie.IsDefault)
+            {
+                DisplayAlert("Fout", "Je kunt de naam van een deze dobbelsteen niet veranderen", "OK");
+                return;
+            }
             var _userDialogService = DependencyService.Get<IUserDialogService>();
             var r = await _userDialogService.PromptAsync("Vul de naam in van deze dobbelsteen.", "Opslaan");
             if(r.Ok)
