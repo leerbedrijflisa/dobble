@@ -202,9 +202,11 @@ namespace Lisa.Dobble
             }
             else
             {
-                var settingsPage = new SettingsPage();
-                settingsPage.SelectedDie = selectedDie;
-                Navigation.PushAsync(settingsPage);
+                if (imageSourceStream != null)
+                    imageSourceStream.Dispose();
+                MessagingCenter.Send<ProfileMenuPage, Die>(this, "SetDie", selectedDie);
+
+                Navigation.PopAsync();
             }
         }
 
