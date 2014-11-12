@@ -83,6 +83,12 @@ namespace Lisa.Dobble
 
         private void RollDice()
         {
+            needsAnimation = false;
+            Device.StartTimer(new TimeSpan(0, 0, 0, 9), () =>
+            {
+                needsAnimation = true;
+                return false;
+            });
             if (enabled)
             {
                 soundService.Stop();
@@ -123,7 +129,18 @@ namespace Lisa.Dobble
                     TimeTwo.IsVisible = false;
                     TimeThree.IsVisible = false;
                 }
-
+                Device.StartTimer(new TimeSpan(0, 0, 0, 10), () =>
+                {
+                    if (!needsAnimation)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        AnimateImage();
+                        return true;
+                    }
+                });
                 Device.StartTimer(new TimeSpan(0, 0, 0, 0, (delay / 3) - 250), () =>
                 {
                     TimeOne.FadeTo(0, 250);
@@ -141,13 +158,12 @@ namespace Lisa.Dobble
                     TimeThree.FadeTo(0, 250);
                     return false;
                 });
-                
+
                 Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay), () =>
-                    {
-                        
-                        enabled = true;
-                        return false;
-                    });
+                {
+                    enabled = true;
+                    return false;
+                });
             }
         }
 
@@ -176,7 +192,6 @@ namespace Lisa.Dobble
 
         private void NextDie()
         {
-            
             int randomNumber = random.Next(0, SelectedDie.Options.Count());
             var imageName = SelectedDie.Options[randomNumber].Image;
             var soundName = SelectedDie.Options[randomNumber].Sound;
@@ -196,13 +211,46 @@ namespace Lisa.Dobble
                     }
                     soundService.PlayAsync(filePath);
                 }
+
                 SetDieImage(imageName);
+                
             }
 
         }
 
+        private async void AnimateImage()
+        {
+            if (needsAnimation)
+            {
+                if (!isAnimating)
+                {
+                    for (var i = 0; i < 5; i++)
+                    {
+                        isAnimating = true;
+                        var xPosition = DieView.X;
+                        var yPosition = DieView.Y;
+                        Rectangle rec = new Rectangle(xPosition + 10, yPosition, 367, 367);
+
+                        Rectangle rec2 = new Rectangle(rec.X - 20, yPosition, 367, 367);
+
+                        Rectangle rec3 = new Rectangle(rec2.X + 10, yPosition, 367, 367);
+
+                        await DieView.LayoutTo(rec, 35);
+                        await DieView.LayoutTo(rec2, 35);
+                        await DieView.LayoutTo(rec3, 35);
+                    }
+
+                  
+
+                    isAnimating = false;
+                }
+            }
+        }
+
         private Random random;
         private IFileManager fileManager;
+        private bool needsAnimation;
+        private bool isAnimating;
         private Stream imageSourceStream;
 
     }
