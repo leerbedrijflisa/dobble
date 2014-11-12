@@ -185,8 +185,8 @@ namespace Lisa.Dobble
             }
             else
             {
-                imageSourceStream = fileManager.OpenFile(image, FileMode.Open, FileAccess.Read);
-                DieView.Source = ImageSource.FromStream(() => imageSourceStream);
+                var fullPath = pathService.CreateDocumentsPath(image);
+                DieView.Source = ImageSource.FromFile(fullPath);
             }
         }
 
