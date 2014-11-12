@@ -1,4 +1,5 @@
 ﻿using Lisa.Dobble.Models;
+using Lisa.Dobble;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,7 +21,7 @@ namespace Lisa.Dobble
         public bool enabled;
         public int DobbleDelay;
         private bool IsPopped = false;
-        private ISoundService soundService;
+        private ILisaSoundService soundService;
         private IPathService pathService;
         
         public DicePage()
