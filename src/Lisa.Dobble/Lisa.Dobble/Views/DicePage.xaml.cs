@@ -80,10 +80,19 @@ namespace Lisa.Dobble
             var device = Resolver.Resolve<IDevice>();
             device.Accelerometer.Interval = AccelerometerInterval.Normal;
             device.Accelerometer.ReadingAvailable += Accelerometer_ReadingAvailable;
+
+            _timer = new Timer();
+            _timer.Tick += OnTick;
+        }
+
+        void OnTick(object sender, EventArgs e)
+        {
+            AnimateImage();
         }
 
         private void RollDice()
         {
+            _timer.Stop();
             needsAnimation = false;
             Device.StartTimer(new TimeSpan(0, 0, 0, 9), () =>
             {
@@ -130,18 +139,7 @@ namespace Lisa.Dobble
                     TimeTwo.IsVisible = false;
                     TimeThree.IsVisible = false;
                 }
-                Device.StartTimer(new TimeSpan(0, 0, 0, 10), () =>
-                {
-                    if (!needsAnimation)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        AnimateImage();
-                        return true;
-                    }
-                });
+                _timer.Start(10000);
                 Device.StartTimer(new TimeSpan(0, 0, 0, 0, (delay / 3) - 250), () =>
                 {
                     TimeOne.FadeTo(0, 250);
@@ -222,35 +220,30 @@ namespace Lisa.Dobble
 
         private async void AnimateImage()
         {
-            if (needsAnimation)
+            if (!isAnimating)
             {
-                if (!isAnimating)
+                for (var i = 0; i < 5; i++)
                 {
-                    for (var i = 0; i < 5; i++)
-                    {
-                        isAnimating = true;
-                        var xPosition = DieView.X;
-                        var yPosition = DieView.Y;
-                        Rectangle rec = new Rectangle(xPosition + 10, yPosition, 367, 367);
+                    isAnimating = true;
+                    var xPosition = DieView.X;
+                    var yPosition = DieView.Y;
+                    Rectangle rec = new Rectangle(xPosition + 10, yPosition, 367, 367);
 
-                        Rectangle rec2 = new Rectangle(rec.X - 20, yPosition, 367, 367);
+                    Rectangle rec2 = new Rectangle(rec.X - 20, yPosition, 367, 367);
 
-                        Rectangle rec3 = new Rectangle(rec2.X + 10, yPosition, 367, 367);
+                    Rectangle rec3 = new Rectangle(rec2.X + 10, yPosition, 367, 367);
 
-                        await DieView.LayoutTo(rec, 35);
-                        await DieView.LayoutTo(rec2, 35);
-                        await DieView.LayoutTo(rec3, 35);
-                    }
-
-                  
-
-                    isAnimating = false;
+                    await DieView.LayoutTo(rec, 35);
+                    await DieView.LayoutTo(rec2, 35);
+                    await DieView.LayoutTo(rec3, 35);
                 }
+                isAnimating = false;
             }
         }
 
         private Random random;
         private IFileManager fileManager;
+        private Timer _timer;
         private bool needsAnimation;
         private bool isAnimating;
         private bool firstDie;
