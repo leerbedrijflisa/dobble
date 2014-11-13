@@ -87,20 +87,21 @@ namespace Lisa.Dobble
 
         void OnTick(object sender, EventArgs e)
         {
-            AnimateImage();
+            StartSnoozeAnimation();
         }
 
-        private void RollDice()
+        private async void RollDice()
         {
-            _timer.Stop();
-            needsAnimation = false;
-            Device.StartTimer(new TimeSpan(0, 0, 0, 9), () =>
-            {
-                needsAnimation = true;
-                return false;
-            });
+
             if (enabled)
-            {
+            {   
+                _timer.Stop();
+                needsAnimation = false;
+                Device.StartTimer(new TimeSpan(0, 0, 0, 9), () =>
+                {
+                    needsAnimation = true;
+                    return false;
+                });
                 soundService.Stop();
                 if(imageSourceStream != null)
                 {
@@ -116,9 +117,12 @@ namespace Lisa.Dobble
 
                 enabled = false;
 
-                
-                NextDie();
-
+                StartRollOutAnimation();
+                Device.StartTimer(new TimeSpan(0, 0, 0, 2), () =>
+                {
+                    NextDie();
+                    return false;
+                });
                 TimeOne.IsVisible = true;
                 TimeTwo.IsVisible = true;
                 TimeThree.IsVisible = true;
@@ -187,6 +191,10 @@ namespace Lisa.Dobble
                 var fullPath = pathService.CreateDocumentsPath(image);
                 DieView.Source = ImageSource.FromFile(fullPath);
             }
+            if (!firstDie)
+                StartRollInAnimation();
+            firstDie = false;
+
         }
 
         private void NextDie()
@@ -211,14 +219,14 @@ namespace Lisa.Dobble
                     }
                     soundService.PlayAsync(filePath);
                 }
-
+                firstDie = false;
                 SetDieImage(imageName);
                 
             }
 
         }
 
-        private async void AnimateImage()
+        private async void StartSnoozeAnimation()
         {
             if (!isAnimating)
             {
@@ -239,6 +247,29 @@ namespace Lisa.Dobble
                 }
                 isAnimating = false;
             }
+        }
+
+        private async Task StartRollOutAnimation()
+        {
+            var xPosition = DieView.X;
+            var yPosition = DieView.Y;
+            Rectangle rec = new Rectangle(1200, yPosition, 367, 367);
+            DieView.LayoutTo(rec, 1000, Easing.Linear);
+            for (var i = 0; i < 4; i++)
+            {
+                await DieView.RelRotateTo(90);
+            }
+        }
+
+        private async void StartRollInAnimation()
+        {
+            var xPosition = DieView.X;
+            var yPosition = DieView.Y;
+            Rectangle rec = new Rectangle(-600, yPosition, 367, 367);
+            Rectangle rec2 = new Rectangle(xPosition, yPosition, 367, 367);
+            DieView.Layout(rec);
+            await DieView.LayoutTo(rec, 0);
+            await DieView.LayoutTo(rec2, 450, Easing.Linear);
         }
 
         private Random random;
