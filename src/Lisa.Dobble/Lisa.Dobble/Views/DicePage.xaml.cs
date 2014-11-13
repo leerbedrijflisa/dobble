@@ -191,7 +191,11 @@ namespace Lisa.Dobble
 
         private void NextDie()
         {
-            random = new Random();
+            if(random == null)
+            {
+                random = new Random();
+            }
+            
             int randomNumber = random.Next(0, SelectedDie.Options.Count());
             var imageName = SelectedDie.Options[randomNumber].Image;
             var soundName = SelectedDie.Options[randomNumber].Sound;
