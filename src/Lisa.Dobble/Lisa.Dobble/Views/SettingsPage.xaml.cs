@@ -129,8 +129,34 @@ namespace Lisa.Dobble
                 secondDie.Options.Add(option);
             }
 
+            var thirdDie = new Die();
+            thirdDie.Name = "Instrumenten";
+            thirdDie.IsDefault = true;
+            thirdDie.Options = new List<Option>();
+            for (var i = 0; i < 6; i++)
+            {
+                var option = new Option();
+                option.Image = String.Format("3/{0}.png", i + 1);
+                option.Sound = String.Format("3/{0}.wav", i + 1);
+                thirdDie.Options.Add(option);
+            }
+
+            var fourthDie = new Die();
+            fourthDie.Name = "Kleuren";
+            fourthDie.IsDefault = true;
+            fourthDie.Options = new List<Option>();
+            for (var i = 0; i < 6; i++)
+            {
+                var option = new Option();
+                option.Image = String.Format("4/{0}.png", i + 1);
+                option.Sound = String.Format("4/{0}.wav", i + 1);
+                fourthDie.Options.Add(option);
+            }
+
             database.InsertDie(firstDie);
             database.InsertDie(secondDie);
+            database.InsertDie(thirdDie);
+            database.InsertDie(fourthDie);
         }
 
         private TouchMode touchMode;

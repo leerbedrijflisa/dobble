@@ -260,6 +260,78 @@
   <ItemGroup>
     <BundleResource Include="Resources\Dice\2\6.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\3\1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\3\1.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\3\2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\3\2.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\3\3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\3\3.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\3\4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\3\4.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\3\5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\3\5.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\3\6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\3\6.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\4\1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\4\1.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\4\2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\4\2.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\4\3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\4\3.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\4\4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\4\4.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\4\5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\4\5.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\4\6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Dice\4\6.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.1.2.3.6257\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.1.2.3.6257\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
