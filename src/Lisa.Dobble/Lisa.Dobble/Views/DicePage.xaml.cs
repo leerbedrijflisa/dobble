@@ -255,10 +255,8 @@ namespace Lisa.Dobble
             var yPosition = DieView.Y;
             Rectangle rec = new Rectangle(1200, yPosition, 367, 367);
             DieView.LayoutTo(rec, 1000, Easing.Linear);
-            for (var i = 0; i < 4; i++)
-            {
-                await DieView.RelRotateTo(90);
-            }
+            await DieView.RelRotateTo(220, 750);
+
         }
 
         private async void StartRollInAnimation()
@@ -269,7 +267,9 @@ namespace Lisa.Dobble
             Rectangle rec2 = new Rectangle(xPosition, yPosition, 367, 367);
             DieView.Layout(rec);
             await DieView.LayoutTo(rec, 0);
-            await DieView.LayoutTo(rec2, 450, Easing.Linear);
+            DieView.Rotation = 0;
+            DieView.LayoutTo(rec2, 450, Easing.Linear);
+            await DieView.RelRotateTo(360, 450);
         }
 
         private Random random;
