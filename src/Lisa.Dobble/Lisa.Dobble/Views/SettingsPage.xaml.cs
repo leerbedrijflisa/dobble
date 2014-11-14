@@ -105,58 +105,39 @@ namespace Lisa.Dobble
         }
         private void CreateDefaultDice()
         {
-            var firstDie = new Die();
-            firstDie.Name = "Stippen (zwart/wit)";
-            firstDie.IsDefault = true;
-            firstDie.Options = new List<Option>();
-            for(var i = 0; i < 6; i++)
+            for (var dice = 1; dice <= 5; dice++)
             {
-                var option = new Option();
-                option.Image = String.Format("1/{0}.png", i + 1);
-                option.Sound = String.Format("1/{0}.wav", i + 1);
-                firstDie.Options.Add(option);
+                var die = new Die();
+                die.Name = "Default";
+                die.IsDefault = true;
+                die.Options = new List<Option>();
+                for (var i = 0; i < 6; i++)
+                {
+                    var option = new Option();
+                    option.Image = String.Format(dice.ToString() + "/{0}.png", i + 1);
+                    option.Sound = String.Format(dice.ToString() + "/{0}.wav", i + 1);
+                    die.Options.Add(option);
+                }
+                switch (dice)
+                {
+                    case 1:
+                        die.Name = "Stippen (zwart/wit)";
+                        break;
+                    case 2:
+                        die.Name = "Stippen (blauw/geel)";
+                        break;
+                    case 3:
+                        die.Name = "Instrumenten";
+                        break;
+                    case 4:
+                        die.Name = "Kleuren";
+                        break;
+                    case 5:
+                        die.Name = "Vormen (zwart/wit)";
+                        break;
+                }
+                database.InsertDie(die);
             }
-
-            var secondDie = new Die();
-            secondDie.Name = "Stippen (blauw/geel)";
-            secondDie.IsDefault = true;
-            secondDie.Options = new List<Option>();
-            for(var i = 0; i < 6; i++)
-            {
-                var option = new Option();
-                option.Image = String.Format("2/{0}.png", i + 1);
-                option.Sound = String.Format("2/{0}.wav", i + 1);
-                secondDie.Options.Add(option);
-            }
-
-            var thirdDie = new Die();
-            thirdDie.Name = "Instrumenten";
-            thirdDie.IsDefault = true;
-            thirdDie.Options = new List<Option>();
-            for (var i = 0; i < 6; i++)
-            {
-                var option = new Option();
-                option.Image = String.Format("3/{0}.png", i + 1);
-                option.Sound = String.Format("3/{0}.wav", i + 1);
-                thirdDie.Options.Add(option);
-            }
-
-            var fourthDie = new Die();
-            fourthDie.Name = "Kleuren";
-            fourthDie.IsDefault = true;
-            fourthDie.Options = new List<Option>();
-            for (var i = 0; i < 6; i++)
-            {
-                var option = new Option();
-                option.Image = String.Format("4/{0}.png", i + 1);
-                option.Sound = String.Format("4/{0}.wav", i + 1);
-                fourthDie.Options.Add(option);
-            }
-
-            database.InsertDie(firstDie);
-            database.InsertDie(secondDie);
-            database.InsertDie(thirdDie);
-            database.InsertDie(fourthDie);
         }
 
         private TouchMode touchMode;
