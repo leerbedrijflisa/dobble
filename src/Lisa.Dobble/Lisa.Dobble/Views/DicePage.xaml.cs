@@ -290,7 +290,7 @@ namespace Lisa.Dobble
                 TimeOne.Opacity = 1;
                 TimeTwo.Opacity = 1;
                 TimeThree.Opacity = 1;
-                _timer.Start(10000);
+                _timer.Start(DobbleDelay * 10000 + 10000);
             }
             else
             {
