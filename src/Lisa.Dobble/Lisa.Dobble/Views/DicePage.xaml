@@ -12,7 +12,7 @@
         </Grid.RowDefinitions>
         <AbsoluteLayout x:Name="DieLayout" Grid.Row="0" VerticalOptions="Center"  HeightRequest="367" WidthRequest="367" HorizontalOptions="Center"  BackgroundColor="#BFBFBF">
           <Image x:Name="DieView" HeightRequest="367" WidthRequest="367" Aspect="Fill"/>
-          <Image x:Name="DieMask" HeightRequest="367" WidthRequest="367" Aspect="Fill" Source="dobblemask.png"/>
+          <Image x:Name="DieMask" HeightRequest="367" WidthRequest="367" Aspect="Fill"/>
         </AbsoluteLayout>
         
         <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" >
