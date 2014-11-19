@@ -308,13 +308,18 @@ namespace Lisa.Dobble
 
             var dieCount = 0;
             int.TryParse(playSoundButton.ClassId, out dieCount);
+            var fullpath = "";
 
-            var fullpath = _pathService.CreateDocumentsPath(selectedDie.Options[dieCount].Sound);
+            if(!String.IsNullOrEmpty(selectedDie.Options[dieCount].Sound))
+                fullpath = _pathService.CreateDocumentsPath(selectedDie.Options[dieCount].Sound);
+
             if (selectedDie.IsDefault)
             {
                 fullpath = "Dice/" + selectedDie.Options[dieCount].Sound;
             }
-            _soundService.PlayAsync(fullpath);
+
+            if(!String.IsNullOrEmpty(fullpath))
+                _soundService.PlayAsync(fullpath);
         }
 
         private void RecordSound(object sender, EventArgs e)
