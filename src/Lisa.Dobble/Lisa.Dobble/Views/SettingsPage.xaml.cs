@@ -34,6 +34,7 @@ namespace Lisa.Dobble
             {
                 SelectedDie = args;
             });
+            _pathService = DependencyService.Get<IPathService>();
         }
 
         void ChooseProfileButton_Clicked(object sender, EventArgs e)
@@ -50,6 +51,18 @@ namespace Lisa.Dobble
             if (SelectedDie != null)
             {
                 DieNameLabel.Text = SelectedDie.Name;
+                //DieNameImage.Source = ImageSource.FromFile(SelectedDie.Options[0].Image);
+                if (SelectedDie.IsDefault)
+                {
+                    DieNameImage.Source = Device.OnPlatform(
+                        iOS: ImageSource.FromFile("Dice/" + SelectedDie.Options[0].Image),
+                        Android: ImageSource.FromFile("Drawable/dice/" + SelectedDie.Options[0].Image),
+                        WinPhone: ImageSource.FromFile("dice/" + SelectedDie.Options[0].Image));
+                }else
+                {
+                    var fullPath = _pathService.CreateDocumentsPath(SelectedDie.Options[0].Image);
+                    DieNameImage.Source = ImageSource.FromFile(fullPath);
+                }
             }
             NavigationPage.SetHasNavigationBar(this, false);
         }
@@ -146,5 +159,6 @@ namespace Lisa.Dobble
         }
 
         private TouchMode touchMode;
+        private IPathService _pathService;
     }
 }
