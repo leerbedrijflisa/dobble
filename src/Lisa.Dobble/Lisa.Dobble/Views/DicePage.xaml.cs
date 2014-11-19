@@ -107,7 +107,7 @@ namespace Lisa.Dobble
                 {
                     imageSourceStream.Dispose();
                 }
-
+                Instructions.IsVisible = false;
                 soundService = DependencyService.Get<ILisaSoundService>();
                 var fullpath = Device.OnPlatform(
                     iOS: "dice.wav",

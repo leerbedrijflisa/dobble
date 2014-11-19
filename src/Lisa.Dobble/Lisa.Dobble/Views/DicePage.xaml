@@ -13,7 +13,9 @@
         <StackLayout Grid.Row="0" VerticalOptions="Center"  HeightRequest="367" WidthRequest="367" HorizontalOptions="Center"  BackgroundColor="#BFBFBF">
           <Image x:Name="DieView" HeightRequest="367" WidthRequest="367" Aspect="Fill"/>
         </StackLayout>
+        
         <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" >
+          <Label x:Name="Instructions" Text="Draai de iPad naar u toe om terug te keren naar het menu"></Label>
           <Image x:Name="TimeOne" Source="tick.png"/>
           <Image x:Name="TimeTwo" Source="tick.png"/>
           <Image x:Name="TimeThree" Source="tick.png" />
