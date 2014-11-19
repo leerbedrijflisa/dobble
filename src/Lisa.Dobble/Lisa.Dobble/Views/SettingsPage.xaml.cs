@@ -88,6 +88,11 @@ namespace Lisa.Dobble
         private void StartButton_Clicked(object sender, EventArgs e)
         {
             int dobbleDelay;
+            if(DobbleDelay.Text.Length >= 3)
+            {
+                DisplayAlert("Fout", "Je kunt de wachttijd niet hoger zetten dan 99", "OK");
+                return;
+            }
             if(!int.TryParse(DobbleDelay.Text, out dobbleDelay))
             {
                 DisplayAlert("Fout", "Je kunt alleen maar cijfers invullen bij de wachttijd.", "OK");
