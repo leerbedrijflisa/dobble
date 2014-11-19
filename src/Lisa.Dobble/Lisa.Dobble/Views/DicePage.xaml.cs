@@ -262,6 +262,13 @@ namespace Lisa.Dobble
 
         private async void StartRollInAnimation()
         {
+            if(DieMask.Source == null)
+            {
+                DieMask.Source = Device.OnPlatform(
+                    iOS: ImageSource.FromFile("dobblemask.png"),
+                    Android: ImageSource.FromFile("Drawable/dobblemask.png"),
+                    WinPhone: ImageSource.FromFile("dobblemask.png"));
+            }
             isAnimating = true;
             var xPosition = DieLayout.X;
             var yPosition = DieLayout.Y;
