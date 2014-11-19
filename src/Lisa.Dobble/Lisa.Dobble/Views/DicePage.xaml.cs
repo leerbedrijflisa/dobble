@@ -146,11 +146,22 @@ namespace Lisa.Dobble
                     return false;
                 });
 
-                Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay), () =>
+                if (delay < 3)
                 {
-                    enabled = true;
-                    return false;
-                });
+                    Device.StartTimer(new TimeSpan(0, 0, 0, 1 ), () =>
+                        {
+                            enabled = true;
+                            return false;
+                        });
+                }
+                else
+                {
+                    Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay), () =>
+                    {
+                        enabled = true;
+                        return false;
+                    });
+                }
             }
         }
 
@@ -175,9 +186,8 @@ namespace Lisa.Dobble
                 var fullPath = pathService.CreateDocumentsPath(image);
                 DieView.Source = ImageSource.FromFile(fullPath);
             }
-            if (!firstDie)
-                StartRollInAnimation();
-            firstDie = false;
+            StartRollInAnimation();
+ 
 
         }
 
@@ -203,7 +213,7 @@ namespace Lisa.Dobble
                     }
                     soundService.PlayAsync(filePath);
                 }
-                firstDie = false;
+                
                 SetDieImage(imageName);
                 
             }
@@ -236,11 +246,13 @@ namespace Lisa.Dobble
         private async Task StartRollOutAnimation()
         {
             enabled = false;
+            isAnimating = true;
             var xPosition = DieView.X;
             var yPosition = DieView.Y;
             Rectangle rec = new Rectangle(MainGrid.Width, yPosition, 367, 367);
             DieView.LayoutTo(rec, 1000, Easing.Linear);
             await DieView.RelRotateTo(220, 750);
+            isAnimating = false;
             NextDie();
         }
 
@@ -254,10 +266,9 @@ namespace Lisa.Dobble
             DieView.Layout(rec);
             DieView.Rotation = 160;
             await DieView.LayoutTo(rec, 0);
-            DieView.LayoutTo(rec2, 750, Easing.Linear);
+            DieView.LayoutTo(rec2, 750, Easing.Linear); 
             await DieView.RelRotateTo(200, 750);
-            isAnimating = false;
-
+           isAnimating = false;
             if (!firstDie)
             {
                 if (DobbleDelay > 0)
@@ -277,6 +288,11 @@ namespace Lisa.Dobble
                 TimeThree.Opacity = 1;
                 _timer.Start(10000);
             }
+            else
+            {
+                firstDie = false;
+            }
+           
 
         }
 
