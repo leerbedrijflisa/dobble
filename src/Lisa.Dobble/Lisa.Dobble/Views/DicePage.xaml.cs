@@ -231,17 +231,17 @@ namespace Lisa.Dobble
                 for (var i = 0; i < 5; i++)
                 {
                     isAnimating = true;
-                    var xPosition = DieView.X;
-                    var yPosition = DieView.Y;
+                    var xPosition = DieLayout.X;
+                    var yPosition = DieLayout.Y;
                     Rectangle rec = new Rectangle(xPosition + 10, yPosition, 367, 367);
 
                     Rectangle rec2 = new Rectangle(rec.X - 20, yPosition, 367, 367);
 
                     Rectangle rec3 = new Rectangle(rec2.X + 10, yPosition, 367, 367);
 
-                    await DieView.LayoutTo(rec, 35);
-                    await DieView.LayoutTo(rec2, 35);
-                    await DieView.LayoutTo(rec3, 35);
+                    await DieLayout.LayoutTo(rec, 35);
+                    await DieLayout.LayoutTo(rec2, 35);
+                    await DieLayout.LayoutTo(rec3, 35);
                 }
                 isAnimating = false;
             }
@@ -251,11 +251,11 @@ namespace Lisa.Dobble
         {
             enabled = false;
             isAnimating = true;
-            var xPosition = DieView.X;
-            var yPosition = DieView.Y;
+            var xPosition = DieLayout.X;
+            var yPosition = DieLayout.Y;
             Rectangle rec = new Rectangle(MainGrid.Width, yPosition, 367, 367);
-            DieView.LayoutTo(rec, 1000, Easing.Linear);
-            await DieView.RelRotateTo(220, 750);
+            DieLayout.LayoutTo(rec, 1000, Easing.Linear);
+            await DieLayout.RelRotateTo(220, 750);
             isAnimating = false;
             NextDie();
         }
@@ -263,16 +263,16 @@ namespace Lisa.Dobble
         private async void StartRollInAnimation()
         {
             isAnimating = true;
-            var xPosition = DieView.X;
-            var yPosition = DieView.Y;
+            var xPosition = DieLayout.X;
+            var yPosition = DieLayout.Y;
             Rectangle rec = new Rectangle(-600, yPosition, 367, 367);
             Rectangle rec2 = new Rectangle(xPosition, yPosition, 367, 367);
-            DieView.Layout(rec);
-            DieView.Rotation = 160;
-            await DieView.LayoutTo(rec, 0);
-            DieView.LayoutTo(rec2, 750, Easing.Linear); 
-            await DieView.RelRotateTo(200, 750);
-           isAnimating = false;
+            DieLayout.Layout(rec);
+            DieLayout.Rotation = 160;
+            await DieLayout.LayoutTo(rec, 0);
+            DieLayout.LayoutTo(rec2, 750, Easing.Linear);
+            await DieLayout.RelRotateTo(200, 750);
+            isAnimating = false;
             if (!firstDie)
             {
                 if (DobbleDelay > 0)
@@ -290,7 +290,7 @@ namespace Lisa.Dobble
                 TimeOne.Opacity = 1;
                 TimeTwo.Opacity = 1;
                 TimeThree.Opacity = 1;
-                _timer.Start(DobbleDelay * 10000 + 10000);
+                _timer.Start(DobbleDelay * 1000 + 10000);
             }
             else
             {
