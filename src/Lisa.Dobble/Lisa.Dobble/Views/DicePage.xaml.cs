@@ -71,7 +71,7 @@ namespace Lisa.Dobble
 
             if(SelectedTouchMode == TouchMode.Die)
             {
-                DieView.GestureRecognizers.Add(tapGestureRecognizer);
+                DieLayout.GestureRecognizers.Add(tapGestureRecognizer);
             }
             else
             {
@@ -93,7 +93,7 @@ namespace Lisa.Dobble
         private async void RollDice()
         {
 
-            if (enabled)
+            if (enabled && !isAnimating)
             {   
                 _timer.Stop();
                 needsAnimation = false;
@@ -226,22 +226,29 @@ namespace Lisa.Dobble
 
         private async void StartSnoozeAnimation()
         {
+            var xPosition = DieLayout.X;
+            var yPosition = DieLayout.Y;
             if (!isAnimating)
             {
-                for (var i = 0; i < 5; i++)
+                try
                 {
-                    isAnimating = true;
-                    var xPosition = DieLayout.X;
-                    var yPosition = DieLayout.Y;
-                    Rectangle rec = new Rectangle(xPosition + 10, yPosition, 367, 367);
+                    for (var i = 0; i < 5; i++)
+                    {
+                        isAnimating = true;
 
-                    Rectangle rec2 = new Rectangle(rec.X - 20, yPosition, 367, 367);
+                        Rectangle rec = new Rectangle(xPosition + 10, yPosition, 367, 367);
 
-                    Rectangle rec3 = new Rectangle(rec2.X + 10, yPosition, 367, 367);
+                        Rectangle rec2 = new Rectangle(rec.X - 20, yPosition, 367, 367);
 
-                    await DieLayout.LayoutTo(rec, 35);
-                    await DieLayout.LayoutTo(rec2, 35);
-                    await DieLayout.LayoutTo(rec3, 35);
+                        Rectangle rec3 = new Rectangle(rec2.X + 10, yPosition, 367, 367);
+                        
+                        await DieLayout.LayoutTo(rec, 35);
+                        await DieLayout.LayoutTo(rec2, 35);
+                        await DieLayout.LayoutTo(rec3, 35);
+                    }
+                }catch(Exception e)
+                {
+
                 }
                 isAnimating = false;
             }
@@ -258,6 +265,7 @@ namespace Lisa.Dobble
             await DieLayout.RelRotateTo(220, 750);
             isAnimating = false;
             NextDie();
+            
         }
 
         private async void StartRollInAnimation()
