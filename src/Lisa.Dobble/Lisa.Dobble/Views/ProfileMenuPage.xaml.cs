@@ -77,6 +77,7 @@ namespace Lisa.Dobble
             _soundService = DependencyService.Get<ILisaSoundService>();
             _pathService = DependencyService.Get<IPathService>();
             DieName.Clicked += ChangeDieName;
+            DieNameIcon.Clicked += ChangeDieName;
         }
 
         private async void ChangeDieName(object sender, object args)
@@ -269,7 +270,7 @@ namespace Lisa.Dobble
             {
                 var imageObject = ((StackLayout)dieOptionLayout).Children.OfType<Image>().FirstOrDefault();
                 if (imageObject == null)
-                    return;
+                    continue;
                 var dieImage = (Image)imageObject;
                 if (die.Options[count].Image == "notset.png")
                 {
