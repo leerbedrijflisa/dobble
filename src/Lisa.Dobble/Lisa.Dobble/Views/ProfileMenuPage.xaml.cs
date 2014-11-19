@@ -36,11 +36,6 @@ namespace Lisa.Dobble
             ProfileListView.ItemsSource = dice;
             ProfileListView.SelectedItem = 0;
             
-            if (selectedDie == null)
-            {
-                selectedDie = database.GetDice().FirstOrDefault();
-            }
-            SetDie(selectedDie.Id);
             _fileManager = DependencyService.Get<IFileManager>();
             SelectDieButton.Clicked += SelectDieButton_Clicked;
             DeleteDieButton.Clicked += DeleteDieButton_Clicked;
@@ -107,6 +102,17 @@ namespace Lisa.Dobble
         {
             dice = database.GetDice();
             ProfileListView.ItemsSource = dice;
+        }
+
+        protected override void OnAppearing()
+        {
+            if (selectedDie == null)
+            {
+                selectedDie = database.GetDice().FirstOrDefault();
+            }
+            SetDie(selectedDie.Id);
+
+            base.OnAppearing();
         }
 
         protected override void OnDisappearing()
