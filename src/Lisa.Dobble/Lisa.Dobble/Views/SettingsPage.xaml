@@ -68,8 +68,9 @@
         <Button x:Name="StartButton"
                 Grid.Row="2"
                 HorizontalOptions="Center"
-                VerticalOptions="Center"
-                Text="Beginnen met dobbelen"/>
+                VerticalOptions="Start"
+                Text="Beginnen met dobbelen"
+                Font="30"/>
     </Grid>
 
 </ContentPage>
