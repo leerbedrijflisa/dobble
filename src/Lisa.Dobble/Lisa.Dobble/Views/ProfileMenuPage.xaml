@@ -48,7 +48,10 @@
         <RowDefinition Height="*"/>
         <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
+      <StackLayout Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalOptions="Center" Padding="0,10,0,0">
       <Button Grid.ColumnSpan="3" HorizontalOptions="Center"  VerticalOptions="Start" Grid.Row="0" Font="24" x:Name="DieName" Text="Nieuwe dobbelsteen" />
+      <Button x:Name="DieNameIcon" Grid.ColumnSpan="1" HorizontalOptions="End"  VerticalOptions="Start" Grid.Column="1" Grid.Row="0" Font="24" Image="edit.png" HeightRequest="32" WidthRequest="32"/>
+      </StackLayout>
       <StackLayout Grid.Column="0" Grid.Row="1">
         <Image ClassId="1" HeightRequest="100"/>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">

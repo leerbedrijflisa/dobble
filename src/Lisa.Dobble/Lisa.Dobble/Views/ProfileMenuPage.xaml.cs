@@ -36,11 +36,6 @@ namespace Lisa.Dobble
             ProfileListView.ItemsSource = dice;
             ProfileListView.SelectedItem = 0;
             
-            if (selectedDie == null)
-            {
-                selectedDie = database.GetDice().FirstOrDefault();
-            }
-            SetDie(selectedDie.Id);
             _fileManager = DependencyService.Get<IFileManager>();
             SelectDieButton.Clicked += SelectDieButton_Clicked;
             DeleteDieButton.Clicked += DeleteDieButton_Clicked;
@@ -77,6 +72,7 @@ namespace Lisa.Dobble
             _soundService = DependencyService.Get<ILisaSoundService>();
             _pathService = DependencyService.Get<IPathService>();
             DieName.Clicked += ChangeDieName;
+            DieNameIcon.Clicked += ChangeDieName;
         }
 
         private async void ChangeDieName(object sender, object args)
@@ -106,6 +102,17 @@ namespace Lisa.Dobble
         {
             dice = database.GetDice();
             ProfileListView.ItemsSource = dice;
+        }
+
+        protected override void OnAppearing()
+        {
+            if (selectedDie == null)
+            {
+                selectedDie = database.GetDice().FirstOrDefault();
+            }
+            SetDie(selectedDie.Id);
+
+            base.OnAppearing();
         }
 
         protected override void OnDisappearing()
@@ -269,7 +276,7 @@ namespace Lisa.Dobble
             {
                 var imageObject = ((StackLayout)dieOptionLayout).Children.OfType<Image>().FirstOrDefault();
                 if (imageObject == null)
-                    return;
+                    continue;
                 var dieImage = (Image)imageObject;
                 if (die.Options[count].Image == "notset.png")
                 {
