@@ -244,6 +244,7 @@ namespace Lisa.Dobble
                         
                         await DieLayout.LayoutTo(rec, 35);
                         await DieLayout.LayoutTo(rec2, 35);
+                        DieLayout.Opacity = 0.4;
                         await DieLayout.LayoutTo(rec3, 35);
                     }
                 }catch(Exception e)
@@ -270,6 +271,7 @@ namespace Lisa.Dobble
 
         private async void StartRollInAnimation()
         {
+            DieLayout.Opacity = 1;
             if(DieMask.Source == null)
             {
                 DieMask.Source = Device.OnPlatform(
