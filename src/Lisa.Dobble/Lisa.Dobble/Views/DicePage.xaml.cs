@@ -210,7 +210,7 @@ namespace Lisa.Dobble
             }
             else
             {
-                if (soundName != null)
+                if (soundName != null && !firstDie)
                 {
                     var filePath = pathService.CreateDocumentsPath(soundName);
                     if (SelectedDie.IsDefault)
