@@ -28,11 +28,15 @@
                    VerticalOptions="Center" HorizontalOptions="End" 
                    Grid.Column="0"
                    Text="Soort dobbelsteen"/>
+          <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+            <Image x:Name="DieNameImage" Source="Dice/1/1.png" Grid.Row="0" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start" HeightRequest="35" WidthRequest="35"/>
             <Label Grid.Row="0"
-                   VerticalOptions="Center" HorizontalOptions="Start" 
+                   VerticalOptions="Center" HorizontalOptions="Start"
                    Grid.Column="1"
                    x:Name="DieNameLabel"
                    Text="Geen dobbelsteen geselecteerd ..."/>
+          </StackLayout>
+          
             <Button Grid.Row="0"
                     x:Name="ChooseProfileButton"
                     VerticalOptions="Center" HorizontalOptions="Start" 

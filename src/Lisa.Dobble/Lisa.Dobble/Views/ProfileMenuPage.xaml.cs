@@ -121,7 +121,7 @@ namespace Lisa.Dobble
 
             if (selectedDie.Options.All(option => option.Image == "notset.png"))
             {
-                DisplayAlert("Fout", "Je moet minimaal 1 plaatje toevoegen aan het dobbelsteen profiel", "OK");
+                DisplayAlert("Fout", "Je moet minimaal één afbeelding toevoegen aan je dobbelsteen.", "OK");
             }
             else
             {
@@ -237,7 +237,7 @@ namespace Lisa.Dobble
             StopRecording();
             if (selectedDie.Options.All(option => option.Image == "notset.png"))
             {
-                DisplayAlert("Fout", "Je moet minimaal 1 plaatje toevoegen aan het dobbelsteen profiel", "OK");
+                DisplayAlert("Fout", "Je moet minimaal één afbeelding toevoegen aan je dobbelsteen.", "OK");
             }
             else
             {
@@ -262,6 +262,7 @@ namespace Lisa.Dobble
             selectedDie = dice.Where(x => x.Id == dieId).FirstOrDefault();
             if(selectedDie.IsDefault)
             {
+                DieNameIcon.IsVisible = false;
                 DeleteDieButton.IsVisible = false;
                 foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
                 {
@@ -282,6 +283,7 @@ namespace Lisa.Dobble
             }
             else
             {
+                DieNameIcon.IsVisible = true;
                 DeleteDieButton.IsVisible = true;
                 foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
                 {
