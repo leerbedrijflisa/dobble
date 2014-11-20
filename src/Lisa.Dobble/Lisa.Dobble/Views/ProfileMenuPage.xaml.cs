@@ -117,6 +117,8 @@ namespace Lisa.Dobble
 
         protected override void OnDisappearing()
         {
+            StopRecording();
+
             if (selectedDie.Options.All(option => option.Image == "notset.png"))
             {
                 DisplayAlert("Fout", "Je moet minimaal 1 plaatje toevoegen aan het dobbelsteen profiel", "OK");
@@ -165,6 +167,34 @@ namespace Lisa.Dobble
             }
         }
 
+        private void DisableInteraction(Layout<View> layoutView)
+        {
+            foreach (var element in layoutView.Children)
+            {
+                if(element is Layout<View>)
+                {
+                    DisableInteraction((Layout<View>)element);
+                }else{
+                    ((View)element).IsEnabled = false;                        
+                }
+            }
+        }
+
+        private void EnableInteraction(Layout<View> layoutView)
+        {
+            foreach (var element in layoutView.Children)
+            {
+                if (element is Layout<View>)
+                {
+                    EnableInteraction((Layout<View>)element);
+                }
+                else
+                {
+                    ((View)element).IsEnabled = true;
+                }
+            }
+        }
+
         private void Setup()
         {
             if (mediaPicker != null)
@@ -183,6 +213,7 @@ namespace Lisa.Dobble
 
         private void CreateNewDie()
         {
+            StopRecording();
             var firstDie = new Die();
             firstDie.Name = String.Format("Dobbelsteen ({0})", database.GetDice().Count());
             firstDie.IsDefault = false;
@@ -203,6 +234,7 @@ namespace Lisa.Dobble
 
         void SelectDieButton_Clicked(object sender, EventArgs e)
         {
+            StopRecording();
             if (selectedDie.Options.All(option => option.Image == "notset.png"))
             {
                 DisplayAlert("Fout", "Je moet minimaal 1 plaatje toevoegen aan het dobbelsteen profiel", "OK");
@@ -225,6 +257,8 @@ namespace Lisa.Dobble
 
         private void SetDie(int dieId)
         {
+            EnableInteraction(ProfilePageGrid);
+            StopRecording();
             selectedDie = dice.Where(x => x.Id == dieId).FirstOrDefault();
             if(selectedDie.IsDefault)
             {
@@ -331,37 +365,54 @@ namespace Lisa.Dobble
 
         private void RecordSound(object sender, EventArgs e)
         {
-            var recordSoundButton = (Button)sender;
-            
-            var imageCount = 0;
-            int.TryParse(recordSoundButton.ClassId, out imageCount);
+            _isRecording = true;
+            DisableInteraction(ProfilePageGrid);
+            _lastRecordSoundButton = (Button)sender;
+            _lastRecordSoundButton.IsEnabled = true;
 
-            _fileStream = _fileManager.OpenFile(String.Format("{0}/{1}.wav", selectedDie.Id, imageCount), FileMode.Create, FileAccess.ReadWrite);
+            var imageCount = 0;
+            int.TryParse(_lastRecordSoundButton.ClassId, out imageCount);
+
+            _fileStream = _fileManager.OpenFile(String.Format("{0}/{1}.wav", selectedDie.Id, imageCount), FileMode.Create, FileAccess.ReadWrite, FileShare.Write);
 
             var microphoneService = DependencyService.Get<IMicrophoneService>();
             _microphone = microphoneService.GetMicrophone();
             _microphone.Start(22050);
             _recorder.StartRecorder(_microphone, _fileStream, 22050);
-            recordSoundButton.Image = "stop.png";
+            _lastRecordSoundButton.Image = "stop.png";
 
             selectedDie.Options[imageCount].Sound = String.Format("{0}/{1}.wav", selectedDie.Id, imageCount);
             database.SaveDie(selectedDie);
 
-            recordSoundButton.Clicked -= RecordSound;
-            recordSoundButton.Clicked += StopRecording;
+            _lastRecordSoundButton.Clicked -= RecordSound;
+            _lastRecordSoundButton.Clicked += StopRecordingButtonClicked;
             
         }
-
-        private void StopRecording(object sender, EventArgs e)
+        
+        private void StopRecording()
         {
-            var recordSoundButton = (Button)sender;
+            if (_isRecording)
+            {
+                _microphone.Stop();
+                _recorder.StopRecorder();
+                _lastRecordSoundButton.Image = "record.png";
+                _lastRecordSoundButton.Clicked -= StopRecordingButtonClicked;
+                _lastRecordSoundButton.Clicked += RecordSound;
+                _isRecording = false;
+            }
+        }
 
+        private void StopRecordingButtonClicked(object sender, EventArgs e)
+        {
             _microphone.Stop();
             _recorder.StopRecorder();
 
+            var recordSoundButton = (Button)sender;
             recordSoundButton.Image = "record.png";
-            recordSoundButton.Clicked -= StopRecording;
-            recordSoundButton.Clicked += RecordSound;   
+            recordSoundButton.Clicked -= StopRecordingButtonClicked;
+            recordSoundButton.Clicked += RecordSound;
+            _isRecording = false;
+            EnableInteraction(ProfilePageGrid);
         }
 
         private WaveRecorder _recorder = new WaveRecorder();
@@ -369,6 +420,8 @@ namespace Lisa.Dobble
         private IFileManager _fileManager;
         private Stream _fileStream;
         private string _fullPath;
+        private bool _isRecording;
+        private Button _lastRecordSoundButton;
         private IAudioStream _microphone;
         private IPathService _pathService;
         private ILisaSoundService _soundService;
