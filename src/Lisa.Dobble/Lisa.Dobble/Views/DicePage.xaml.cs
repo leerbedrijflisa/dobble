@@ -151,6 +151,7 @@ namespace Lisa.Dobble
                     Device.StartTimer(new TimeSpan(0, 0, 0, 1 ), () =>
                         {
                             enabled = true;
+
                             return false;
                         });
                 }
@@ -159,6 +160,7 @@ namespace Lisa.Dobble
                     Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay), () =>
                     {
                         enabled = true;
+                        DieLayout.FadeTo(0.4, 200);
                         return false;
                     });
                 }
@@ -244,7 +246,7 @@ namespace Lisa.Dobble
                         
                         await DieLayout.LayoutTo(rec, 35);
                         await DieLayout.LayoutTo(rec2, 35);
-                        DieLayout.Opacity = 0.4;
+                        DieLayout.FadeTo(0.4, 200);
                         await DieLayout.LayoutTo(rec3, 35);
                     }
                 }catch(Exception e)
@@ -259,6 +261,7 @@ namespace Lisa.Dobble
         {
             enabled = false;
             isAnimating = true;
+            await DieLayout.FadeTo(1, 200);
             var xPosition = DieLayout.X;
             var yPosition = DieLayout.Y;
             Rectangle rec = new Rectangle(MainGrid.Width, yPosition, 367, 367);
@@ -271,7 +274,6 @@ namespace Lisa.Dobble
 
         private async void StartRollInAnimation()
         {
-            DieLayout.Opacity = 1;
             if(DieMask.Source == null)
             {
                 DieMask.Source = Device.OnPlatform(
