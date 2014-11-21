@@ -54,7 +54,7 @@
       </StackLayout>
       <StackLayout Grid.Column="0" Grid.Row="1">
         <AbsoluteLayout ClassId="1" HorizontalOptions="Center">
-          <Image ClassId="1" HeightRequest="100" WidthRequest="100"/>
+          <Image ClassId="1" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
           <Image HeightRequest="100" Source="dobblemask_small.png"/>
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
@@ -64,7 +64,7 @@
       </StackLayout>
       <StackLayout Grid.Column="1" Grid.Row="1">
         <AbsoluteLayout ClassId="2" HorizontalOptions="Center">
-          <Image ClassId="2" HeightRequest="100" WidthRequest="100"/>
+          <Image ClassId="2" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
           <Image HeightRequest="100" Source="dobblemask_small.png"/>
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
@@ -74,7 +74,7 @@
       </StackLayout>
       <StackLayout Grid.Column="2" Grid.Row="1">
         <AbsoluteLayout  ClassId="3" HorizontalOptions="Center">
-          <Image ClassId="3" HeightRequest="100" WidthRequest="100"/>
+          <Image ClassId="3" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
           <Image HeightRequest="100" Source="dobblemask_small.png"/>
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
@@ -84,7 +84,7 @@
       </StackLayout>
       <StackLayout Grid.Column="0" Grid.Row="2">
         <AbsoluteLayout ClassId="4" HorizontalOptions="Center">
-          <Image ClassId="4" HeightRequest="100" WidthRequest="100"/>
+          <Image ClassId="4" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
           <Image HeightRequest="100" Source="dobblemask_small.png"/>
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
@@ -94,7 +94,7 @@
       </StackLayout>
       <StackLayout Grid.Column="1" Grid.Row="2">
         <AbsoluteLayout ClassId="5" HorizontalOptions="Center">
-          <Image ClassId="5" HeightRequest="100" WidthRequest="100"/>
+          <Image ClassId="5" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
           <Image HeightRequest="100" Source="dobblemask_small.png"/>
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
@@ -104,7 +104,7 @@
       </StackLayout>
       <StackLayout Grid.Column="2" Grid.Row="2">
         <AbsoluteLayout ClassId="6" HorizontalOptions="Center">
-          <Image ClassId="6" HeightRequest="100" WidthRequest="100"/>
+          <Image ClassId="6" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
           <Image HeightRequest="100" Source="dobblemask_small.png"/>
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
