@@ -169,12 +169,12 @@ namespace Lisa.Dobble
 
         private void SetDieImage(string image)
         {
-            if (image == "notset.png")
+            if (image == "white.png")
             {
                 DieView.Source = Device.OnPlatform(
-                iOS: ImageSource.FromFile("notset.png"),
-                Android: ImageSource.FromFile("Drawable/notset.png"),
-                WinPhone: ImageSource.FromFile("notset.png"));
+                iOS: ImageSource.FromFile("Dice/white.png"),
+                Android: ImageSource.FromFile("Drawable/dice/white.png"),
+                WinPhone: ImageSource.FromFile("dice/white.png"));
             }
             else if (SelectedDie.IsDefault)
             {
@@ -210,7 +210,7 @@ namespace Lisa.Dobble
             }
             else
             {
-                if (soundName != null && !firstDie)
+                if (soundName != null && !firstDie  )
                 {
                     var filePath = pathService.CreateDocumentsPath(soundName);
                     if (SelectedDie.IsDefault)

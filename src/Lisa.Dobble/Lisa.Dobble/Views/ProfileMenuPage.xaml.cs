@@ -61,10 +61,10 @@ namespace Lisa.Dobble
 
             foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
             {
-                if (dieOptionLayout.Children.OfType<Image>().FirstOrDefault() != null)
+                if (dieOptionLayout.Children.OfType<AbsoluteLayout>().FirstOrDefault() != null)
                 {
-                    var imageObject = ((StackLayout)dieOptionLayout).Children.OfType<Image>().FirstOrDefault();
-                    imageObject.GestureRecognizers.Add(tapGestureRecognizer);
+                    var layoutObject = ((StackLayout)dieOptionLayout).Children.OfType<AbsoluteLayout>().FirstOrDefault();
+                    layoutObject.GestureRecognizers.Add(tapGestureRecognizer);
                 }
             }
 
@@ -110,6 +110,7 @@ namespace Lisa.Dobble
             {
                 selectedDie = database.GetDice().FirstOrDefault();
             }
+            _previousSelectedDie = selectedDie;
             SetDie(selectedDie.Id);
 
             base.OnAppearing();
@@ -119,9 +120,11 @@ namespace Lisa.Dobble
         {
             StopRecording();
 
+
             if (selectedDie.Options.All(option => option.Image == "notset.png"))
             {
-                DisplayAlert("Fout", "Je moet minimaal één afbeelding toevoegen aan je dobbelsteen.", "OK");
+                database.DeleteDie(selectedDie.Id);
+                selectedDie = _previousSelectedDie;
             }
             else
             {
@@ -130,6 +133,12 @@ namespace Lisa.Dobble
                 MessagingCenter.Send<ProfileMenuPage, Die>(this, "SetDie", selectedDie);
 
                 base.OnDisappearing();
+            }
+
+            var dice = database.GetDice().Where(die => die.Options.All(option => option.Image == "notset.png"));
+            foreach(Die die in dice)
+            {
+                database.DeleteDie(die.Id);
             }
         }
 
@@ -156,7 +165,6 @@ namespace Lisa.Dobble
                 selectedDie.Options[option].Image = String.Format("{0}/{1}.png", selectedDie.Id, option);
 
                 database.SaveDie(selectedDie);
-                var ok = database.GetDice();
                 dice = database.GetDice();
 
                 SetDie(selectedDie.Id);
@@ -310,7 +318,11 @@ namespace Lisa.Dobble
             var count = 0;
             foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
             {
-                var imageObject = ((StackLayout)dieOptionLayout).Children.OfType<Image>().FirstOrDefault();
+                var absoluteLayoutObject = ((StackLayout)dieOptionLayout).Children.OfType<AbsoluteLayout>().FirstOrDefault();
+                if (absoluteLayoutObject == null)
+                    continue;
+
+                var imageObject = absoluteLayoutObject.Children.OfType<Image>().FirstOrDefault();
                 if (imageObject == null)
                     continue;
                 var dieImage = (Image)imageObject;
@@ -374,7 +386,7 @@ namespace Lisa.Dobble
 
             var imageCount = 0;
             int.TryParse(_lastRecordSoundButton.ClassId, out imageCount);
-
+            _recordingDie = selectedDie;
             _fileStream = _fileManager.OpenFile(String.Format("{0}/{1}.wav", selectedDie.Id, imageCount), FileMode.Create, FileAccess.ReadWrite, FileShare.Write);
 
             var microphoneService = DependencyService.Get<IMicrophoneService>();
@@ -414,6 +426,22 @@ namespace Lisa.Dobble
             recordSoundButton.Clicked -= StopRecordingButtonClicked;
             recordSoundButton.Clicked += RecordSound;
             _isRecording = false;
+
+            var imageCount = 0;
+            int.TryParse(_lastRecordSoundButton.ClassId, out imageCount);
+
+            fileManager.CreateDirectory(_recordingDie.Id.ToString());
+
+            //var imageFile = fileManager.OpenFile(String.Format("{0}/{1}.png", _recordingDie.Id, option), FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
+            //var imageStream = ImageSource.FromFile("white.png").
+            //imageStream.CopyTo(imageFile);
+
+            _recordingDie.Options[imageCount].Image = String.Format("white.png");
+
+            database.SaveDie(_recordingDie);
+
+            SetDie(_recordingDie.Id);
+
             EnableInteraction(ProfilePageGrid);
         }
 
@@ -427,6 +455,8 @@ namespace Lisa.Dobble
         private IAudioStream _microphone;
         private IPathService _pathService;
         private ILisaSoundService _soundService;
+        private Die _previousSelectedDie;
+        private Die _recordingDie;
         private Stream imageSourceStream;
     }
 }
