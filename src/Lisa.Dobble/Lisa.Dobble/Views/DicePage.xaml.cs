@@ -11,6 +11,7 @@ using Xamarin.Forms.Labs;
 using Xamarin.Forms.Labs.Services;
 using Xamarin.Forms.Labs.Services.IO;
 using Xamarin.Forms.Labs.Services.SoundService;
+using Xamarin.Forms.Labs.Mvvm;
 
 namespace Lisa.Dobble
 {
@@ -35,6 +36,7 @@ namespace Lisa.Dobble
             TimeTwo.IsVisible = false;
             TimeThree.IsVisible = false;
             enabled = true;
+
         }
 
         void Accelerometer_ReadingAvailable(object sender, EventArgs<Xamarin.Forms.Labs.Helpers.Vector3> e)
@@ -83,6 +85,15 @@ namespace Lisa.Dobble
 
             _timer = new Timer();
             _timer.Tick += OnTick;
+
+            _app = Resolver.Resolve<IXFormsApp>();
+            _app.Closing += PushSettingsPage;
+        }
+
+        private void PushSettingsPage(object sender, EventArgs e)
+        {
+            _app.Closing -= PushSettingsPage;
+            Navigation.PopAsync();
         }
 
         void OnTick(object sender, EventArgs e)
@@ -323,6 +334,7 @@ namespace Lisa.Dobble
         private IFileManager fileManager;
         private Timer _timer;
         private bool needsAnimation;
+        private IXFormsApp _app;
         private bool isAnimating;
         private bool firstDie;
         private Stream imageSourceStream;

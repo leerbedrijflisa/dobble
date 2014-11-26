@@ -73,6 +73,15 @@ namespace Lisa.Dobble
             _pathService = DependencyService.Get<IPathService>();
             DieName.Clicked += ChangeDieName;
             DieNameIcon.Clicked += ChangeDieName;
+
+            _app = Resolver.Resolve<IXFormsApp>();
+            _app.Resumed += PushSettingsPage;
+        }
+
+        private void PushSettingsPage(object sender, EventArgs e)
+        {
+            _app.Resumed -= PushSettingsPage;
+            Navigation.PopAsync();
         }
 
         private async void ChangeDieName(object sender, object args)
@@ -431,11 +440,6 @@ namespace Lisa.Dobble
             int.TryParse(_lastRecordSoundButton.ClassId, out imageCount);
 
             fileManager.CreateDirectory(_recordingDie.Id.ToString());
-
-            //var imageFile = fileManager.OpenFile(String.Format("{0}/{1}.png", _recordingDie.Id, option), FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
-            //var imageStream = ImageSource.FromFile("white.png").
-            //imageStream.CopyTo(imageFile);
-
             _recordingDie.Options[imageCount].Image = String.Format("white.png");
 
             database.SaveDie(_recordingDie);
@@ -450,6 +454,7 @@ namespace Lisa.Dobble
         private IFileManager _fileManager;
         private Stream _fileStream;
         private string _fullPath;
+        private IXFormsApp _app;
         private bool _isRecording;
         private Button _lastRecordSoundButton;
         private IAudioStream _microphone;

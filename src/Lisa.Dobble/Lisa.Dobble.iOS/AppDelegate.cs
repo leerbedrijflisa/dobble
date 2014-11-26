@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Labs.iOS;
 using Xamarin.Forms.Labs.Services;
 using Xamarin.Forms.Labs;
+using Xamarin.Forms.Labs.Mvvm;
 
 namespace Lisa.Dobble.iOS
 {
@@ -30,11 +31,12 @@ namespace Lisa.Dobble.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            this.SetIoc();
+            App.Init();
             Forms.Init();
             var container = new SimpleContainer();
-            container.Register<IDevice>(t => AppleDevice.CurrentDevice);
 
-            Resolver.SetResolver(container.GetResolver());
+
             window = new UIWindow(UIScreen.MainScreen.Bounds);
 
             window.RootViewController = App.GetMainPage().CreateViewController();
@@ -42,6 +44,17 @@ namespace Lisa.Dobble.iOS
             window.MakeKeyAndVisible();
 
             return true;
+        }
+
+        private void SetIoc()
+        {
+            var resolverContainer = new SimpleContainer();
+
+            var app = new XFormsAppiOS();
+            app.Init(this);
+            resolverContainer.Register<IDevice>(t => AppleDevice.CurrentDevice);
+            resolverContainer.Register<IXFormsApp>(app);
+            Resolver.SetResolver(resolverContainer.GetResolver());
         }
     }
 }
