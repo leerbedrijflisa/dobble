@@ -145,13 +145,13 @@ namespace Lisa.Dobble
                         die.Name = "Stippen (blauw/geel)";
                         break;
                     case 3:
-                        die.Name = "Instrumenten";
+                        die.Name = "Vormen (zwart/wit)";
                         break;
                     case 4:
-                        die.Name = "Kleuren";
+                        die.Name = "Vormen (blauw/geel)";
                         break;
                     case 5:
-                        die.Name = "Vormen (zwart/wit)";
+                        die.Name = "Kleuren";
                         break;
                 }
                 database.InsertDie(die);
