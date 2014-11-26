@@ -249,6 +249,12 @@ namespace Lisa.Dobble
                     {
                         isAnimating = true;
 
+                        var filePath = Device.OnPlatform(
+                            iOS: "snoozesound.mp3",
+                            Android: "snoozesound.mp3",
+                            WinPhone: "snoozesound.mp3");
+                        soundService.PlayAsync(filePath);
+
                         Rectangle rec = new Rectangle(xPosition + 10, yPosition, 367, 367);
 
                         Rectangle rec2 = new Rectangle(rec.X - 20, yPosition, 367, 367);
