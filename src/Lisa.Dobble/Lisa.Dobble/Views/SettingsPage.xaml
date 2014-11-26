@@ -29,7 +29,7 @@
                    Grid.Column="0"
                    Text="Soort dobbelsteen"/>
           <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-            <Image x:Name="DieNameImage" Source="Dice/1/1.png" Grid.Row="0" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start" HeightRequest="35" WidthRequest="35"/>
+            <Image x:Name="DieNameImage" Source="Dice/1/1.png" Grid.Row="0" Grid.Column="1" Aspect="Fill" VerticalOptions="Center" HorizontalOptions="Start" HeightRequest="35" WidthRequest="35"/>
             <Label Grid.Row="0"
                    VerticalOptions="Center" HorizontalOptions="Start"
                    Grid.Column="1"
