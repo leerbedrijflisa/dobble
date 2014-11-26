@@ -87,12 +87,12 @@ namespace Lisa.Dobble
             _timer.Tick += OnTick;
 
             _app = Resolver.Resolve<IXFormsApp>();
-            _app.Closing += PushSettingsPage;
+            _app.Resumed += PushSettingsPage;
         }
 
         private void PushSettingsPage(object sender, EventArgs e)
         {
-            _app.Closing -= PushSettingsPage;
+            _app.Resumed -= PushSettingsPage;
             Navigation.PopAsync();
         }
 

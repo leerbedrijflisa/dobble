@@ -32,7 +32,7 @@ namespace Lisa.Dobble.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             this.SetIoc();
-            App.Init();
+            app.Init();
             Forms.Init();
             var container = new SimpleContainer();
 
