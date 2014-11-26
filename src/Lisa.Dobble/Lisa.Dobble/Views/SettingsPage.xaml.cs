@@ -30,6 +30,12 @@ namespace Lisa.Dobble
 
             DobbleDelay.Keyboard = Keyboard.Numeric;
 
+            var emptyDice = database.GetDice().Where(die => die.Options.All(option => option.Image == "notset.png"));
+            foreach (Die die in emptyDice)
+            {
+                database.DeleteDie(die.Id);
+            }
+
             MessagingCenter.Subscribe<ProfileMenuPage, Die>(this, "SetDie", (sender, args) =>
             {
                 SelectedDie = args;
