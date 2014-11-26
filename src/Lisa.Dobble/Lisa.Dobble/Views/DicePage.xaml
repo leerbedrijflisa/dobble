@@ -5,7 +5,7 @@
                        x:Name="DiceView"
                        BackgroundColor="#BFBFBF">
     <Frame x:Name="MainGrid" BackgroundColor="#BFBFBF">
-      <Grid HorizontalOptions="Center">
+      <Grid HorizontalOptions="Center" x:Name="DieGrid">
         <Grid.RowDefinitions>
           <RowDefinition Height="*"/>
           <RowDefinition Height="20"/>
