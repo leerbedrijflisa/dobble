@@ -127,54 +127,21 @@ namespace Lisa.Dobble
                 soundService.PlayAsync(fullpath);
 
                 enabled = false;
-
-                await StartRollOutAnimation();
-                
                 int delay = DobbleDelay;
                 delay = delay * 1000;
                 if (!(delay <= 250))
                 {
-                    TimeOne.IsVisible = false;
-                    TimeTwo.IsVisible = false;
-                    TimeThree.IsVisible = false;
+                    //TimeOne.IsVisible = false;
+                    //TimeTwo.IsVisible = false;
+                    //TimeThree.IsVisible = false;
                 }
+                await StartRollOutAnimation();
+                
+               
 
-                Device.StartTimer(new TimeSpan(0, 0, 0, 0, (delay / 3) - 250), () =>
-                {
-                    TimeOne.FadeTo(0, 250);
-                    return false;
-                });
+ 
 
-                Device.StartTimer(new TimeSpan(0, 0, 0, 0, ((delay / 3) * 2) - 250), () =>
-                {
-                    TimeTwo.FadeTo(0, 250);
-                    return false;
-                });
-
-                Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay - 250), () =>
-                {
-                    TimeThree.FadeTo(0, 250);
-                    return false;
-                });
-
-                if (delay < 3)
-                {
-                    Device.StartTimer(new TimeSpan(0, 0, 0, 1 ), () =>
-                        {
-                            enabled = true;
-
-                            return false;
-                        });
-                }
-                else
-                {
-                    Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay), () =>
-                    {
-                        enabled = true;
-                        DieLayout.FadeTo(0.4, 200);
-                        return false;
-                    });
-                }
+               
             }
         }
 
@@ -290,6 +257,30 @@ namespace Lisa.Dobble
 
         private async void StartRollInAnimation()
         {
+            if (!firstDie)
+            {
+                if (DobbleDelay > 0)
+                {
+                    TimeOne.IsVisible = true;
+                    TimeTwo.IsVisible = true;
+                    TimeThree.IsVisible = true;
+                    TimeOne.Opacity = 0;
+                    TimeTwo.Opacity = 0;
+                    TimeThree.Opacity = 0;
+                    TimeOne.FadeTo(1, 250);
+                    TimeTwo.FadeTo(1, 250);
+                    TimeThree.FadeTo(1, 250);
+                }
+                else
+                {
+                    TimeOne.IsVisible = false;
+                    TimeTwo.IsVisible = false;
+                    TimeThree.IsVisible = false;
+                }
+                
+            }
+
+           
             if(DieMask.Source == null)
             {
                 DieMask.Source = Device.OnPlatform(
@@ -308,31 +299,53 @@ namespace Lisa.Dobble
             DieLayout.LayoutTo(rec2, 750, Easing.Linear);
             await DieLayout.RelRotateTo(200, 750);
             isAnimating = false;
+
             if (!firstDie)
             {
-                if (DobbleDelay > 0)
+                int delay = DobbleDelay;
+                delay = delay * 1000;
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, (delay / 3) - 250), () =>
                 {
-                    TimeOne.IsVisible = true;
-                    TimeTwo.IsVisible = true;
-                    TimeThree.IsVisible = true;
+                    TimeOne.FadeTo(0, 250);
+                    return false;
+                });
+
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, ((delay / 3) * 2) - 250), () =>
+                {
+                    TimeTwo.FadeTo(0, 250);
+                    return false;
+                });
+
+                Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay - 250), () =>
+                {
+                    TimeThree.FadeTo(0, 250);
+                    return false;
+                });
+                if (delay < 3)
+                {
+                    Device.StartTimer(new TimeSpan(0, 0, 0, 1), () =>
+                    {
+                        enabled = true;
+
+                        return false;
+                    });
                 }
                 else
                 {
-                    TimeOne.IsVisible = false;
-                    TimeTwo.IsVisible = false;
-                    TimeThree.IsVisible = false;
+                    Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay), () =>
+                    {
+                        enabled = true;
+                        DieLayout.FadeTo(0.4, 200);
+                        return false;
+                    });
                 }
-                TimeOne.Opacity = 1;
-                TimeTwo.Opacity = 1;
-                TimeThree.Opacity = 1;
                 _timer.Start(DobbleDelay * 1000 + 10000);
             }
             else
             {
                 firstDie = false;
             }
-           
-
+            
         }
 
         private Random random;
