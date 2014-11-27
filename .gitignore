@@ -258,3 +258,6 @@ src/Lisa.Dobble/Lisa.Dobble.iOS/Resources/edit.png
 src/Lisa.Dobble/Lisa.Dobble.iOS/Resources/dobblemask_small.png
 src/Lisa.Dobble/Lisa.Dobble.iOS/Resources/Dice/white.png
 src/Lisa.Dobble/Lisa.Dobble.iOS/Resources/snoozesound.mp3
+src/Lisa.Dobble/Lisa.Dobble.iOS/Resources/lisalogo.png
+src/.nuget/NuGet.Config
+src/.nuget/NuGet.targets

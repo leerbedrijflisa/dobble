@@ -54,6 +54,7 @@
     </StackLayout>
     <StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="0" HorizontalOptions="Center">
       <Image Source="buzzie.png" HeightRequest="200" WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Start" />
+      <Image Source="lisalogo.png" HeightRequest="200" WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Start" />
     </StackLayout>
   </Grid>
 </ContentPage>
