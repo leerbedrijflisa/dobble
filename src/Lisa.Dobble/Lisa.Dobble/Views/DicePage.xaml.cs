@@ -59,6 +59,7 @@ namespace Lisa.Dobble
         {
             _timer.Tick -= OnTick;
             _timer.Stop();
+            _app.Resumed -= PushSettingsPage;
             base.OnDisappearing();
             NavigationPage.SetHasNavigationBar(this, false);
         }
