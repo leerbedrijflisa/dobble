@@ -1,5 +1,6 @@
 ﻿using Acr.XamForms.UserDialogs;
 using Lisa.Dobble.Data;
+using Lisa.Dobble.Interfaces;
 using Lisa.Dobble.Models;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace Lisa.Dobble
             ProfileListView.ItemTapped += dieCell_Tapped;
             ProfileListView.ItemsSource = dice;
             ProfileListView.SelectedItem = 0;
-            
+
             _fileManager = DependencyService.Get<IFileManager>();
             SelectDieButton.Clicked += SelectDieButton_Clicked;
             DeleteDieButton.Clicked += DeleteDieButton_Clicked;
@@ -71,6 +72,7 @@ namespace Lisa.Dobble
             fileManager = DependencyService.Get<IFileManager>();
             _soundService = DependencyService.Get<ILisaSoundService>();
             _pathService = DependencyService.Get<IPathService>();
+            imageService = DependencyService.Get<IImageResizerService>();
             DieName.Clicked += ChangeDieName;
             DieNameIcon.Clicked += ChangeDieName;
 
@@ -160,16 +162,27 @@ namespace Lisa.Dobble
                 var mediaFile = await this.mediaPicker.SelectPhotoAsync(new CameraMediaStorageOptions
                 {
                     DefaultCamera = CameraDevice.Front,
-                    MaxPixelDimension = 400
+                    MaxPixelDimension = 400,
+                    PercentQuality = 20
                 });
 
                 imageSource = ImageSource.FromStream(() => mediaFile.Source);
 
                 var imageStream = mediaFile.Source;
+                byte[] imageData;
+                using(MemoryStream ms = new MemoryStream())
+                {
+                    imageStream.CopyTo(ms);
+                    imageData = ms.ToArray();
+                }
+
+                byte[] resizedImage = imageService.ResizeImage(imageData, 367, 367);
+
                 fileManager.CreateDirectory(selectedDie.Id.ToString());
 
                 var imageFile = fileManager.OpenFile(String.Format("{0}/{1}.png", selectedDie.Id, option), FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
-                imageStream.CopyTo(imageFile);
+                var tempStream = new MemoryStream(resizedImage);
+                tempStream.CopyTo(imageFile);
 
                 selectedDie.Options[option].Image = String.Format("{0}/{1}.png", selectedDie.Id, option);
 
@@ -462,6 +475,7 @@ namespace Lisa.Dobble
         private Button _lastRecordSoundButton;
         private IAudioStream _microphone;
         private IPathService _pathService;
+        private IImageResizerService imageService;
         private ILisaSoundService _soundService;
         private Die _previousSelectedDie;
         private Die _recordingDie;
