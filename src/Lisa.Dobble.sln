@@ -52,6 +52,7 @@ Global
 		{A6DF42DA-CE3C-491F-97A5-93D6E86E9EEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6DF42DA-CE3C-491F-97A5-93D6E86E9EEC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A6DF42DA-CE3C-491F-97A5-93D6E86E9EEC}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{A6DF42DA-CE3C-491F-97A5-93D6E86E9EEC}.Release|iPhone.Build.0 = Release|Any CPU
 		{A6DF42DA-CE3C-491F-97A5-93D6E86E9EEC}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{A6DF42DA-CE3C-491F-97A5-93D6E86E9EEC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A6DF42DA-CE3C-491F-97A5-93D6E86E9EEC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
