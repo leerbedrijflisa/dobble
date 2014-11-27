@@ -4,8 +4,7 @@
 					   x:Class="Lisa.Dobble.Views.CreditsPage">
   <Grid HorizontalOptions="FillAndExpand" Padding="10">
     <Grid.RowDefinitions>
-      <RowDefinition Height="3*"/>
-      <RowDefinition Height="1*"/>
+      <RowDefinition Height="2*"/>
       <RowDefinition Height="4*"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
@@ -13,12 +12,13 @@
       <ColumnDefinition Width="*"/>
     </Grid.ColumnDefinitions>
       <Image Source="Logo.png" HeightRequest="100" WidthRequest="300" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="0" Grid.Row="0"/>
-    <Label Grid.Row="1"
+    
+    <StackLayout Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+      <Label Grid.Row="1"
                    VerticalOptions="Start" HorizontalOptions="Center"
                    Grid.Column="0"
                   Font="32"
                    Text="Credits"/>
-    <StackLayout Orientation="Vertical" Grid.Row="2" Grid.Column="0">
             <Label Grid.Row="1"
                    VerticalOptions="Center" HorizontalOptions="Center"
                    Grid.Column="0"
@@ -52,7 +52,7 @@
                    Grid.Column="0"
                    Text="Stephan Stolk"/>
     </StackLayout>
-    <StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="0" HorizontalOptions="Center">
+    <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="0" HorizontalOptions="Center" Padding="20">
       <Image Source="buzzie.png" HeightRequest="200" WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Start" />
       <Image Source="lisalogo.png" HeightRequest="200" WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Start" />
     </StackLayout>
