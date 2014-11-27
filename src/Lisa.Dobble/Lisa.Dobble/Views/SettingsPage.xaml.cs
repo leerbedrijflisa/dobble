@@ -1,5 +1,6 @@
 ﻿using Lisa.Dobble.Data;
 using Lisa.Dobble.Models;
+using Lisa.Dobble.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace Lisa.Dobble
 
             StartButton.Clicked += StartButton_Clicked;
             ChooseProfileButton.Clicked += ChooseProfileButton_Clicked;
+            CreditsButton.Clicked += CreditsButton_Clicked;
 
             DobbleDelay.Keyboard = Keyboard.Numeric;
 
@@ -126,6 +128,12 @@ namespace Lisa.Dobble
             DicePage.SelectedDie = SelectedDie;
             DicePage.SelectedTouchMode = touchMode;
             Navigation.PushAsync(DicePage);
+        }
+
+        private void CreditsButton_Clicked(object sender, EventArgs e)
+        {
+            var CreditsPage = new CreditsPage();
+            Navigation.PushAsync(CreditsPage);
         }
         private void CreateDefaultDice()
         {

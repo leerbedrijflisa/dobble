@@ -41,6 +41,9 @@
     <Compile Include="Interfaces\IPathService.cs" />
     <Compile Include="Interfaces\ISQLite.cs" />
     <Compile Include="Timer.cs" />
+    <Compile Include="Views\CreditsPage.xaml.cs">
+      <DependentUpon>CreditsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DicePage.xaml.cs">
       <DependentUpon>DicePage.xaml</DependentUpon>
     </Compile>
@@ -109,6 +112,12 @@
     <EmbeddedResource Include="Views\ProfileMenuPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\CreditsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

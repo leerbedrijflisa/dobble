@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+					   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+					   x:Class="Lisa.Dobble.Views.CreditsPage">
+  <Grid HorizontalOptions="FillAndExpand" Padding="10">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="3*"/>
+      <RowDefinition Height="1*"/>
+      <RowDefinition Height="4*"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+      <Image Source="Logo.png" HeightRequest="100" WidthRequest="300" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="0" Grid.Row="0"/>
+    <Label Grid.Row="1"
+                   VerticalOptions="Start" HorizontalOptions="Center"
+                   Grid.Column="0"
+                  Font="32"
+                   Text="Credits"/>
+    <StackLayout Orientation="Vertical" Grid.Row="2" Grid.Column="0">
+            <Label Grid.Row="1"
+                   VerticalOptions="Center" HorizontalOptions="Center"
+                   Grid.Column="0"
+                   Text="Prithvi Bhoelan"/>
+      <Label Grid.Row="1"
+                       VerticalOptions="Center" HorizontalOptions="Center"
+                       Grid.Column="0"
+                       Text="Jurriaan Flikkema"/>
+      <Label Grid.Row="1"
+                       VerticalOptions="Center" HorizontalOptions="Center"
+                       Grid.Column="0"
+                       Text="Josja de Greef"/>
+      <Label Grid.Row="1"
+                       VerticalOptions="Center" HorizontalOptions="Center"
+                       Grid.Column="0"
+                       Text="Maikel de Hoog"/>
+      <Label Grid.Row="1"
+                   VerticalOptions="Center" HorizontalOptions="Center"
+                   Grid.Column="0"
+                   Text="Nicole Luitwieler"/>
+      <Label Grid.Row="1"
+                   VerticalOptions="Center" HorizontalOptions="Center"
+                   Grid.Column="0"
+                   Text="Joost Ronkes Agerbeek"/>
+      <Label Grid.Row="1"
+                       VerticalOptions="Center" HorizontalOptions="Center"
+                       Grid.Column="0"
+                       Text="Michael Schättgen"/>
+      <Label Grid.Row="1"
+                   VerticalOptions="Center" HorizontalOptions="Center"
+                   Grid.Column="0"
+                   Text="Stephan Stolk"/>
+    </StackLayout>
+    <StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="0" HorizontalOptions="Center">
+      <Image Source="buzzie.png" HeightRequest="200" WidthRequest="200" HorizontalOptions="Center" VerticalOptions="Start" />
+    </StackLayout>
+  </Grid>
+</ContentPage>

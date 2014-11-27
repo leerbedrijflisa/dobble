@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 					   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 					   x:Class="Lisa.Dobble.SettingsPage">
-    <Grid HorizontalOptions="FillAndExpand">
+    <Grid HorizontalOptions="FillAndExpand" Padding="0, 10, 0, 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="5*"/>
@@ -11,6 +11,12 @@
       <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
+      <Button x:Name="CreditsButton"
+            Grid.Row="0"
+            HorizontalOptions="End"
+            VerticalOptions="Start"
+            HeightRequest="50" WidthRequest="50"
+            Image="info_button.png"/>
       <Image Source="Logo.png" HeightRequest="100" WidthRequest="300" HorizontalOptions="Center" VerticalOptions="End"/>
         <Grid Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="FillAndExpand" x:Name="SettingsGrid" BackgroundColor="#E0E0E0" Padding="0, 0, 0, 20">
             <Grid.ColumnDefinitions>
@@ -75,6 +81,6 @@
                 VerticalOptions="Start"
                 Text="Beginnen met dobbelen"
                 Font="30"/>
+      
     </Grid>
-
 </ContentPage>
