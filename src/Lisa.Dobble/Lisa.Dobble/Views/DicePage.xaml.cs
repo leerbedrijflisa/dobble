@@ -57,7 +57,8 @@ namespace Lisa.Dobble
 
         protected override void OnDisappearing()
         {
-            DieLayout.IsVisible = false;
+            _timer.Tick -= OnTick;
+            _timer.Stop();
             base.OnDisappearing();
             NavigationPage.SetHasNavigationBar(this, false);
         }
@@ -301,7 +302,7 @@ namespace Lisa.Dobble
             await DieLayout.RelRotateTo(200, 750);
             DieLayout.VerticalOptions = LayoutOptions.Center;
             isAnimating = false;
-            Rectangle rec3 = new Rectangle(xPosition, (DieGrid.Height / 2) - (367 / 2) - 10, 367, 367);
+            Rectangle rec3 = new Rectangle(xPosition, (DieGrid.Height / 2) - (367 / 2) - 13, 367, 367);
             DieLayout.Layout(rec3);
             if (!firstDie)
             {
