@@ -232,7 +232,6 @@ namespace Lisa.Dobble
                         
                         await DieLayout.LayoutTo(rec, 35);
                         await DieLayout.LayoutTo(rec2, 35);
-                        DieLayout.FadeTo(0.4, 200);
                         await DieLayout.LayoutTo(rec3, 35);
                     }
                 }catch(Exception e)
