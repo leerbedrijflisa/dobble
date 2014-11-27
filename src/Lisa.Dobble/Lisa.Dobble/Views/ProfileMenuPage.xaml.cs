@@ -129,7 +129,7 @@ namespace Lisa.Dobble
         {
             StopRecording();
 
-
+            _app.Resumed -= PushSettingsPage;
             if (selectedDie.Options.All(option => option.Image == "notset.png"))
             {
                 database.DeleteDie(selectedDie.Id);

@@ -247,7 +247,6 @@ namespace Lisa.Dobble
         {
             enabled = false;
             isAnimating = true;
-            await DieLayout.FadeTo(1, 200);
             var xPosition = DieLayout.X;
             var yPosition = DieLayout.Y;
             Rectangle rec = new Rectangle(MainGrid.Width, yPosition, 367, 367);
@@ -340,7 +339,6 @@ namespace Lisa.Dobble
                     Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay), () =>
                     {
                         enabled = true;
-                        DieLayout.FadeTo(0.4, 200);
                         return false;
                     });
                 }

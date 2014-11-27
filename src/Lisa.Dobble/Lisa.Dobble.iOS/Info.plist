@@ -23,9 +23,9 @@
 	<key>MinimumOSVersion</key>
 	<string>6.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>Lisa.Dobble</string>
+	<string>Dobble</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.Lisa.Dobble</string>
+	<string>com.Lisa.Dobble</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleShortVersionString</key>
@@ -41,5 +41,7 @@
 		<string>Icon-Small-40.png</string>
 		<string>Icon-Small-40@2x.png</string>
 	</array>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>
