@@ -159,15 +159,28 @@ namespace Lisa.Dobble
             imageSource = null;
             try
             {
-                var mediaFile = await this.mediaPicker.SelectPhotoAsync(new CameraMediaStorageOptions
+                var action = await DisplayActionSheet("Foto selecteren", "Annuleren", null, "Camera", "Galerij");
+                MediaFile mediaFile = null;
+                switch (action)
                 {
-                    DefaultCamera = CameraDevice.Front,
-                    MaxPixelDimension = 400,
-                    PercentQuality = 20
-                });
+                    case "Annuleren":
+                        return;
+                    case "Camera":
+                        mediaFile = await this.mediaPicker.TakePhotoAsync(new CameraMediaStorageOptions());
+                        break;
+                    case "Galerij":
+                        mediaFile = await this.mediaPicker.SelectPhotoAsync(new CameraMediaStorageOptions
+                        {
+                            SaveMediaOnCapture = true,
+                            DefaultCamera = CameraDevice.Rear,
+                            MaxPixelDimension = 400,
+                        });
+                        break;
+                    default:
+                        break;
+                }
 
                 imageSource = ImageSource.FromStream(() => mediaFile.Source);
-
                 var imageStream = mediaFile.Source;
                 byte[] imageData;
                 using(MemoryStream ms = new MemoryStream())
