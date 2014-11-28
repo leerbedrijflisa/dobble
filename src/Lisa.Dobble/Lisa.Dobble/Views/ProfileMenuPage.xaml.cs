@@ -121,8 +121,11 @@ namespace Lisa.Dobble
             {
                 selectedDie = database.GetDice().FirstOrDefault();
             }
-            _previousSelectedDie = selectedDie;
-            SetDie(selectedDie.Id);
+            if (!_isCameraOpen)
+            {
+                _previousSelectedDie = selectedDie;
+                SetDie(selectedDie.Id);
+            }
 
             base.OnAppearing();
         }
@@ -131,25 +134,28 @@ namespace Lisa.Dobble
         {
             StopRecording();
 
-            _app.Resumed -= PushSettingsPage;
-            if (selectedDie.Options.All(option => option.Image == "notset.png"))
+            if (!_isCameraOpen)
             {
-                database.DeleteDie(selectedDie.Id);
-                selectedDie = _previousSelectedDie;
-            }
-            else
-            {
-                if (imageSourceStream != null)
-                    imageSourceStream.Dispose();
-                MessagingCenter.Send<ProfileMenuPage, Die>(this, "SetDie", selectedDie);
+                _app.Resumed -= PushSettingsPage;
+                if (selectedDie.Options.All(option => option.Image == "notset.png"))
+                {
+                    database.DeleteDie(selectedDie.Id);
+                    selectedDie = _previousSelectedDie;
+                }
+                else
+                {
+                    if (imageSourceStream != null)
+                        imageSourceStream.Dispose();
+                    MessagingCenter.Send<ProfileMenuPage, Die>(this, "SetDie", selectedDie);
 
-                base.OnDisappearing();
-            }
+                    base.OnDisappearing();
+                }
 
-            var dice = database.GetDice().Where(die => die.Options.All(option => option.Image == "notset.png"));
-            foreach(Die die in dice)
-            {
-                database.DeleteDie(die.Id);
+                var dice = database.GetDice().Where(die => die.Options.All(option => option.Image == "notset.png"));
+                foreach (Die die in dice)
+                {
+                    database.DeleteDie(die.Id);
+                }
             }
         }
 
@@ -161,6 +167,7 @@ namespace Lisa.Dobble
             {
                 var action = await DisplayActionSheet("Foto selecteren", "Annuleren", null, "Camera", "Galerij");
                 MediaFile mediaFile = null;
+                _isCameraOpen = true;
                 switch (action)
                 {
                     case "Annuleren":
@@ -196,6 +203,7 @@ namespace Lisa.Dobble
                 var imageFile = fileManager.OpenFile(String.Format("{0}/{1}.png", selectedDie.Id, option), FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
                 var tempStream = new MemoryStream(resizedImage);
                 tempStream.CopyTo(imageFile);
+                _isCameraOpen = false;
 
                 selectedDie.Options[option].Image = String.Format("{0}/{1}.png", selectedDie.Id, option);
 
@@ -485,6 +493,7 @@ namespace Lisa.Dobble
         private string _fullPath;
         private IXFormsApp _app;
         private bool _isRecording;
+        private bool _isCameraOpen;
         private Button _lastRecordSoundButton;
         private IAudioStream _microphone;
         private IPathService _pathService;
