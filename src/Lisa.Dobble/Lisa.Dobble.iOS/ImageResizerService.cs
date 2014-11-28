@@ -52,6 +52,23 @@ namespace Lisa.Dobble
                 (int)(4 * width), CGColorSpace.CreateDeviceRGB(),
                 CGImageAlphaInfo.PremultipliedFirst))
             {
+                switch (originalImage.Orientation)
+                {
+                    case UIImageOrientation.Left:
+                        context.RotateCTM((float)Math.PI / 2);
+                        context.TranslateCTM(0, -height);
+                        break;
+                    case UIImageOrientation.Right:
+                        context.RotateCTM(-((float)Math.PI / 2));
+                        context.TranslateCTM(-width, 0);
+                        break;
+                    case UIImageOrientation.Up:
+                        break;
+                    case UIImageOrientation.Down:
+                        context.TranslateCTM(width, height);
+                        context.RotateCTM(-(float)Math.PI);
+                        break;
+                }
 
                 RectangleF imageRect = new RectangleF(0, 0, width, height);
 
@@ -59,7 +76,7 @@ namespace Lisa.Dobble
                 context.DrawImage(imageRect, originalImage.CGImage);
 
                 MonoTouch.UIKit.UIImage resizedImage = MonoTouch.UIKit.UIImage.FromImage(context.ToImage());
-
+                
                 // save the image as a jpeg
                 return resizedImage.AsJPEG().ToArray();
             }
