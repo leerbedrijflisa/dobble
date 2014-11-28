@@ -232,6 +232,7 @@ namespace Lisa.Dobble
                         
                         await DieLayout.LayoutTo(rec, 35);
                         await DieLayout.LayoutTo(rec2, 35);
+                        DieLayout.FadeTo(0.4, 200);
                         await DieLayout.LayoutTo(rec3, 35);
                     }
                 }catch(Exception e)
@@ -248,6 +249,7 @@ namespace Lisa.Dobble
             isAnimating = true;
             var xPosition = DieLayout.X;
             var yPosition = DieLayout.Y;
+            await DieLayout.FadeTo(1, 200);
             Rectangle rec = new Rectangle(MainGrid.Width, yPosition, 367, 367);
             DieLayout.LayoutTo(rec, 1000, Easing.Linear);
             await DieLayout.RelRotateTo(220, 750);
@@ -338,6 +340,7 @@ namespace Lisa.Dobble
                     Device.StartTimer(new TimeSpan(0, 0, 0, 0, delay), () =>
                     {
                         enabled = true;
+                        DieLayout.FadeTo(0.4, 200);
                         return false;
                     });
                 }
