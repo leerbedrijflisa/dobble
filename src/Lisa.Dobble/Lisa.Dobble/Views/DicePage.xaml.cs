@@ -182,29 +182,18 @@ namespace Lisa.Dobble
             {
                 random = new Random();
             }
-            
-            int randomNumber = random.Next(0, SelectedDie.Options.Count());
-            var imageName = SelectedDie.Options[randomNumber].Image;
-            var soundName = SelectedDie.Options[randomNumber].Sound;
+
+            _randomNumber = random.Next(0, SelectedDie.Options.Count());
+            var imageName = SelectedDie.Options[_randomNumber].Image;
+            var soundName = SelectedDie.Options[_randomNumber].Sound;
 
             if (imageName == "notset.png")
             {
                 NextDie();
             }
             else
-            {
-                if (soundName != null && !firstDie  )
-                {
-                    var filePath = pathService.CreateDocumentsPath(soundName);
-                    if (SelectedDie.IsDefault)
-                    {
-                        filePath = "Dice/" + SelectedDie.Options[randomNumber].Sound;
-                    }
-                    soundService.PlayAsync(filePath);
-                }
-                
-                SetDieImage(imageName);
-                
+            {   
+                SetDieImage(imageName);   
             }
 
         }
@@ -307,6 +296,18 @@ namespace Lisa.Dobble
             isAnimating = false;
             Rectangle rec3 = new Rectangle(xPosition, (DieGrid.Height / 2) - (367 / 2) - 13, 367, 367);
             DieLayout.Layout(rec3);
+
+            var soundName = SelectedDie.Options[_randomNumber].Sound;
+            if (soundName != null && !firstDie)
+            {
+                var filePath = pathService.CreateDocumentsPath(soundName);
+                if (SelectedDie.IsDefault)
+                {
+                    filePath = "Dice/" + soundName;
+                }
+                soundService.PlayAsync(filePath);
+            }
+
             if (!firstDie)
             {
                 int delay = DobbleDelay;
@@ -356,6 +357,7 @@ namespace Lisa.Dobble
         }
 
         private Random random;
+        private int _randomNumber;
         private IFileManager fileManager;
         private Timer _timer;
         private bool needsAnimation;
