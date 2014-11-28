@@ -440,7 +440,10 @@ namespace Lisa.Dobble
             int.TryParse(_lastRecordSoundButton.ClassId, out imageCount);
 
             fileManager.CreateDirectory(_recordingDie.Id.ToString());
-            _recordingDie.Options[imageCount].Image = String.Format("white.png");
+            if (_recordingDie.Options[imageCount].Image == null || _recordingDie.Options[imageCount].Image == "notset.png")
+            {
+                _recordingDie.Options[imageCount].Image = String.Format("white.png");
+            }
 
             database.SaveDie(_recordingDie);
 
