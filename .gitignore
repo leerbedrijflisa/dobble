@@ -261,3 +261,7 @@ src/Lisa.Dobble/Lisa.Dobble.iOS/Resources/snoozesound.mp3
 src/Lisa.Dobble/Lisa.Dobble.iOS/Resources/lisalogo.png
 src/.nuget/NuGet.Config
 src/.nuget/NuGet.targets
+src/Lisa.Dobble/Lisa.Dobble.iOS/Resources/Default-Landscape.png
+src/Lisa.Dobble/Lisa.Dobble.iOS/Resources/Default-Landscape@2x.png
+src/Lisa.Dobble/Lisa.Dobble.iOS/Resources/Default-Portrait.png
+src/Lisa.Dobble/Lisa.Dobble.iOS/Resources/Default-Portrait@2x.png
