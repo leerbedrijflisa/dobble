@@ -75,12 +75,13 @@
                    VerticalOptions="Center" HorizontalOptions="Start" 
                    Text="Dobbelsteen"/>
         </Grid>
+      <StackLayout Grid.Row="2">
         <Button x:Name="StartButton"
-                Grid.Row="2"
                 HorizontalOptions="Center"
                 VerticalOptions="Start"
                 Text="Beginnen met dobbelen"
                 Font="30"/>
-      
+        <Image Source="banner.png"/>
+      </StackLayout>
     </Grid>
 </ContentPage>

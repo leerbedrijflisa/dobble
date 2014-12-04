@@ -137,7 +137,7 @@ namespace Lisa.Dobble
             if (!_isCameraOpen)
             {
                 _app.Resumed -= PushSettingsPage;
-                if (selectedDie.Options.All(option => option.Image == "notset.png") || selectedDie.Id == 1 || selectedDie.Id == 3 || selectedDie.Id == 4)
+                if (selectedDie.Options.All(option => option.Image == "notset.png") || selectedDie.Id == 2 || selectedDie.Id == 4 || selectedDie.Id == 5)
                 {
                     if (!selectedDie.IsDefault)
                     {
