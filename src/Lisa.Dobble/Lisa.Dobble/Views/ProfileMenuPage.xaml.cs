@@ -137,9 +137,12 @@ namespace Lisa.Dobble
             if (!_isCameraOpen)
             {
                 _app.Resumed -= PushSettingsPage;
-                if (selectedDie.Options.All(option => option.Image == "notset.png"))
+                if (selectedDie.Options.All(option => option.Image == "notset.png") || selectedDie.Id == 1 || selectedDie.Id == 3 || selectedDie.Id == 4)
                 {
-                    database.DeleteDie(selectedDie.Id);
+                    if (!selectedDie.IsDefault)
+                    {
+                        database.DeleteDie(selectedDie.Id);
+                    }
                     selectedDie = _previousSelectedDie;
                 }
                 else
@@ -163,7 +166,7 @@ namespace Lisa.Dobble
         {
             Setup();
             imageSource = null;
-            try
+             try
             {
                 var action = await DisplayActionSheet("Foto selecteren", "Annuleren", null, "Camera", "Galerij");
                 MediaFile mediaFile = null;
@@ -218,6 +221,40 @@ namespace Lisa.Dobble
             }
         }
 
+        private void FadeOutDieImages(Layout<View> layoutView)
+        {
+            foreach(var element in layoutView.Children)
+            {
+                if(element.GetType() == typeof(StackLayout))
+                {
+                    var dieimage = ((StackLayout)element).Children.FirstOrDefault();
+                    if (dieimage != null)
+                    {
+                        if (dieimage.GetType() == typeof(AbsoluteLayout))
+                            dieimage.FadeTo(0.4, 100);
+
+                    }
+                }
+            }
+        }
+        private void FadeInDieImages(Layout<View> layoutView)
+        {
+            foreach (var element in layoutView.Children)
+            {
+                if (element.GetType() == typeof(StackLayout))
+                {
+                    var dieimage = ((StackLayout)element).Children.FirstOrDefault();
+                    if (dieimage != null)
+                    {
+                        if (dieimage.GetType() == typeof(AbsoluteLayout))
+                            dieimage.FadeTo(1, 250);
+
+                    }
+                }
+            }
+        }
+
+
         private void DisableInteraction(Layout<View> layoutView)
         {
             foreach (var element in layoutView.Children)
@@ -264,6 +301,13 @@ namespace Lisa.Dobble
 
         private void CreateNewDie()
         {
+#if FREE
+            if(dice.Where(x => x.IsDefault == false).Count() >= 1)
+            {
+                DisplayAlert("Fout", "Je zult de app moeten kopen als je meer dan 1 profiel wilt aanmaken.", "OK");
+                return;
+            }
+#endif
             StopRecording();
             var firstDie = new Die();
             firstDie.Name = String.Format("Dobbelsteen ({0})", database.GetDice().Count());
@@ -304,6 +348,25 @@ namespace Lisa.Dobble
         {
             var tappedDieCell = args.Item as Die;
             SetDie(tappedDieCell.Id);
+        }
+
+        private void DisableDie()
+        {
+            FadeOutDieImages(ProfileGrid);
+            BuyAppLabel.IsVisible = true;
+            BuyAppLabel.Opacity = 1;
+            DisableInteraction(ProfileGrid);
+        }
+
+        private void EnableDie()
+        {
+            
+            
+            BuyAppLabel.IsVisible = false;
+            EnableInteraction(ProfileGrid);
+            ProfileGrid.IsVisible = true;
+            ProfileGrid.Opacity = 1;
+            FadeInDieImages(ProfileGrid);
         }
 
         private void SetDie(int dieId)
@@ -354,6 +417,7 @@ namespace Lisa.Dobble
             }
             DieName.Text = selectedDie.Name;
             SetImages(selectedDie);
+            
         }
 
         private void SetImages(Die die)
@@ -389,6 +453,17 @@ namespace Lisa.Dobble
                 }
                 count++;
             }
+
+#if FREE
+            if (selectedDie.Id == 2 || selectedDie.Id == 4 || selectedDie.Id == 5)
+            {
+                DisableDie();
+            }
+            else
+            {
+                EnableDie();
+            }
+#endif
         }
         private void DeleteDieButton_Clicked(object sender, EventArgs e)
         {

@@ -49,8 +49,8 @@
         <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
       <StackLayout Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalOptions="Center" Padding="0,10,0,0">
-      <Button Grid.ColumnSpan="3" HorizontalOptions="Center"  VerticalOptions="Start" Grid.Row="0" Font="24" x:Name="DieName" Text="Nieuwe dobbelsteen" />
-      <Button x:Name="DieNameIcon" Grid.ColumnSpan="1" HorizontalOptions="End"  VerticalOptions="Start" Grid.Column="1" Grid.Row="0" Font="24" Image="edit.png" HeightRequest="32" WidthRequest="32"/>
+        <Button Grid.ColumnSpan="3" HorizontalOptions="Center"  VerticalOptions="Start" Grid.Row="0" Font="24" x:Name="DieName" Text="Nieuwe dobbelsteen" />
+        <Button x:Name="DieNameIcon" Grid.ColumnSpan="1" HorizontalOptions="End"  VerticalOptions="Start" Grid.Column="1" Grid.Row="0" Font="24" Image="edit.png" HeightRequest="32" WidthRequest="32"/>
       </StackLayout>
       <StackLayout Grid.Column="0" Grid.Row="1">
         <AbsoluteLayout ClassId="1" HorizontalOptions="Center">
@@ -115,8 +115,8 @@
       <StackLayout Grid.Row="3" Grid.ColumnSpan="3" >
         <Button x:Name="SelectDieButton" Text="Opslaan"/>
         <Button x:Name="DeleteDieButton" Text="Verwijderen"/>
+        <Label x:Name="BuyAppLabel" Text="Dit profiel is alleen beschikbaar in de betaalde versie van deze app." IsVisible="false" HorizontalOptions="Center"/>
       </StackLayout>
-    </Grid> 
+    </Grid>
   </Grid>
-xara
 </ContentPage>
