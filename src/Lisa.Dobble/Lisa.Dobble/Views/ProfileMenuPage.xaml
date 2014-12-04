@@ -59,7 +59,7 @@
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
           <Button Image="play.png" Clicked="PlaySound" ClassId="0" HeightRequest="44" WidthRequest="44"/>
-          <Button Image="record.png" Clicked="RecordSound" ClassId="0" HeightRequest="44" WidthRequest="44"/>
+          <Button Image="record.png" Clicked="RecordSound" Text="Geluid opnemen" ClassId="0" HeightRequest="44" WidthRequest="44"/>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Column="1" Grid.Row="1">
@@ -69,7 +69,7 @@
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
           <Button Image="play.png" Clicked="PlaySound" ClassId="1" HeightRequest="44" WidthRequest="44"/>
-          <Button Image="record.png" Clicked="RecordSound" ClassId="1" HeightRequest="44" WidthRequest="44"/>
+          <Button Image="record.png" Clicked="RecordSound" Text="Geluid opnemen" ClassId="1" HeightRequest="44" WidthRequest="44"/>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Column="2" Grid.Row="1">
@@ -79,7 +79,7 @@
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
           <Button Image="play.png" Clicked="PlaySound" ClassId="2" HeightRequest="44" WidthRequest="44"/>
-          <Button Image="record.png" Clicked="RecordSound" ClassId="2" HeightRequest="44" WidthRequest="44"/>
+          <Button Image="record.png" Clicked="RecordSound" Text="Geluid opnemen" ClassId="2" HeightRequest="44" WidthRequest="44"/>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Column="0" Grid.Row="2">
@@ -89,7 +89,7 @@
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
           <Button Image="play.png" Clicked="PlaySound" ClassId="3" HeightRequest="44" WidthRequest="44"/>
-          <Button Image="record.png" Clicked="RecordSound" ClassId="3" HeightRequest="44" WidthRequest="44"/>
+          <Button Image="record.png" Clicked="RecordSound" Text="Geluid opnemen" ClassId="3" HeightRequest="44" WidthRequest="44"/>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Column="1" Grid.Row="2">
@@ -99,7 +99,7 @@
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
           <Button Image="play.png" Clicked="PlaySound" ClassId="4" HeightRequest="44" WidthRequest="44"/>
-          <Button Image="record.png" Clicked="RecordSound" ClassId="4" HeightRequest="44" WidthRequest="44"/>
+          <Button Image="record.png" Clicked="RecordSound" Text="Geluid opnemen" ClassId="4" HeightRequest="44" WidthRequest="44"/>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Column="2" Grid.Row="2">
@@ -109,7 +109,7 @@
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
           <Button Image="play.png" Clicked="PlaySound" ClassId="5" HeightRequest="44" WidthRequest="44"/>
-          <Button Image="record.png" Clicked="RecordSound" ClassId="5" HeightRequest="44" WidthRequest="44"/>
+          <Button Image="record.png" Clicked="RecordSound" Text="Geluid opnemen" ClassId="5" HeightRequest="44" WidthRequest="44"/>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Row="3" Grid.ColumnSpan="3" >

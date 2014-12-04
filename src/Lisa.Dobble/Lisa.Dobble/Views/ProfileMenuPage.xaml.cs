@@ -376,6 +376,18 @@ namespace Lisa.Dobble
             selectedDie = dice.Where(x => x.Id == dieId).FirstOrDefault();
             if(selectedDie.IsDefault)
             {
+
+#if FREE
+                if (selectedDie.Id == 2 || selectedDie.Id == 4 || selectedDie.Id == 5)
+                {
+                    DisableDie();
+                }
+                else
+                {
+                    EnableDie();
+                }
+#endif
+
                 DieNameIcon.IsVisible = false;
                 DeleteDieButton.IsVisible = false;
                 foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
@@ -397,6 +409,7 @@ namespace Lisa.Dobble
             }
             else
             {
+                EnableDie();
                 DieNameIcon.IsVisible = true;
                 DeleteDieButton.IsVisible = true;
                 foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
@@ -454,16 +467,7 @@ namespace Lisa.Dobble
                 count++;
             }
 
-#if FREE
-            if (selectedDie.Id == 2 || selectedDie.Id == 4 || selectedDie.Id == 5)
-            {
-                DisableDie();
-            }
-            else
-            {
-                EnableDie();
-            }
-#endif
+
         }
         private void DeleteDieButton_Clicked(object sender, EventArgs e)
         {
