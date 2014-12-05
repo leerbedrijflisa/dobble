@@ -26,6 +26,8 @@
     <AndroidUseLatestPlatformSdk>
     </AndroidUseLatestPlatformSdk>
     <NuGetPackageImportStamp>2b53657b</NuGetPackageImportStamp>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,6 +39,16 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidLinkSkip />
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <BundleAssemblies>False</BundleAssemblies>
+    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+    <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions />
+    <MandroidI18n />
+    <JavaMaximumHeapSize />
+    <JavaOptions />
+    <MonoDroidExtraArgs />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -70,12 +82,16 @@
       <HintPath>..\..\packages\SQLite.Net.Platform.XamarinAndroid.2.4.1\lib\MonoAndroid\SQLite.Net.Platform.XamarinAndroid.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
-    <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Xamarin.Android.Support.v13">
+      <HintPath>..\..\packages\Xamarin.Android.Support.v13.20.0.0.4\lib\MonoAndroid32\Xamarin.Android.Support.v13.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Xamarin.Android.Support.v4.19.1.0\lib\MonoAndroid10\Xamarin.Android.Support.v4.dll</HintPath>
+      <HintPath>..\..\packages\Xamarin.Android.Support.v4.20.0.0.4\lib\MonoAndroid32\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=1.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -105,21 +121,43 @@
     <Compile Include="SQLite_Android.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="info-48.png" />
     <Content Include="Properties\AndroidManifest.xml" />
-    <AndroidResource Include="Resources\Drawable\dice.png" />
-    <AndroidResource Include="Resources\Drawable\dice2.png" />
-    <AndroidResource Include="Resources\Drawable\dice3.png" />
-    <AndroidResource Include="Resources\Drawable\dice4.png" />
-    <AndroidResource Include="Resources\Drawable\dice5.png" />
-    <AndroidResource Include="Resources\Drawable\dice6.png" />
+    <Content Include="Resources\buzzie.png" />
+    <Content Include="Resources\dice.wav" />
+    <Content Include="Resources\dobblemask_small.png" />
+    <AndroidResource Include="Resources\Drawable\dobblemask_small.png" />
+    <AndroidResource Include="Resources\Drawable\edit.png" />
+    <AndroidResource Include="Resources\Drawable\dobblemask.png" />
+    <AndroidResource Include="Resources\Drawable\info.png" />
+    <AndroidResource Include="Resources\Drawable\lisalogo.png" />
+    <AndroidResource Include="Resources\Drawable\dice11.png" />
+    <AndroidResource Include="Resources\Drawable\dice12.png" />
+    <AndroidResource Include="Resources\Drawable\dice13.png" />
+    <AndroidResource Include="Resources\Drawable\dice14.png" />
+    <AndroidResource Include="Resources\Drawable\dice15.png" />
+    <AndroidResource Include="Resources\Drawable\dice16.png" />
+    <Content Include="Resources\Drawable\een.png" />
+    <AndroidResource Include="Resources\Drawable\logo.png" />
+    <AndroidResource Include="Resources\Drawable\tick.png" />
+    <AndroidResource Include="Resources\Drawable\white.png" />
+    <AndroidResource Include="Resources\Drawable\notset.png" />
+    <AndroidResource Include="Resources\Drawable\plus.png" />
+    <Content Include="Resources\edit.png" />
+    <Content Include="Resources\Logo.png" />
+    <Content Include="Resources\notset.png" />
+    <Content Include="Resources\play.png" />
+    <Content Include="Resources\plus.png" />
+    <Content Include="Resources\record.png" />
+    <Content Include="Resources\snoozesound.mp3" />
+    <Content Include="Resources\stop.png" />
+    <Content Include="Resources\tick.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lisa.Dobble\Lisa.Dobble.csproj">
@@ -133,7 +171,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Xamarin.Forms.1.2.3.6257\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Forms.1.2.3.6257\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
