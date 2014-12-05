@@ -44,7 +44,7 @@ namespace Lisa.Dobble
 
         private async void InitializeAdditionalComponent()
         {
-            ToolbarItems.Add(new ToolbarItem("Add", "plus.png", async () =>
+            ToolbarItems.Add(new ToolbarItem("Add", "Drawable/plus.png", async () =>
             {
                 CreateNewDie();
             }));
@@ -76,8 +76,7 @@ namespace Lisa.Dobble
             DieName.Clicked += ChangeDieName;
             DieNameIcon.Clicked += ChangeDieName;
 
-            _app = Resolver.Resolve<IXFormsApp>();
-            _app.Resumed += PushSettingsPage;
+
         }
 
         private void PushSettingsPage(object sender, EventArgs e)
@@ -380,7 +379,7 @@ namespace Lisa.Dobble
                 {
                     dieImage.Source = Device.OnPlatform(
                         iOS: ImageSource.FromFile("Dice/" + die.Options[count].Image),
-                        Android: ImageSource.FromFile("Drawable/dice/" + die.Options[count].Image),
+                        Android: ImageSource.FromFile("Drawable/dice" + die.Options[count].Image.Replace("/","")),
                         WinPhone: ImageSource.FromFile("dice/" + die.Options[count].Image));
                 }else
                 {

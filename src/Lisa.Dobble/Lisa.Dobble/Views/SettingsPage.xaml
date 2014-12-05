@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 					   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Xamarin.Forms.Labs.Controls;assembly=Xamarin.Forms.Labs"
+             xmlns:icons="clr-namespace:Xamarin.Forms.Labs.Helpers;assembly=Xamarin.Forms.Labs"
 					   x:Class="Lisa.Dobble.SettingsPage">
     <Grid HorizontalOptions="FillAndExpand" Padding="0, 20, 0, 0">
         <Grid.RowDefinitions>
@@ -11,13 +13,29 @@
       <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
-      <Button x:Name="CreditsButton"
-            Grid.Row="0"
-            HorizontalOptions="End"
-            VerticalOptions="Start"
-            HeightRequest="45" WidthRequest="55"
-            Image="info-48.png"/>
-      <Image Source="Logo.png" HeightRequest="100" WidthRequest="300" HorizontalOptions="Center" VerticalOptions="End"/>
+
+
+      <controls:ImageButton x:Name="CreditsButton" Grid.Row="0"
+HeightRequest="50" WidthRequest="50" VerticalOptions="Start" HorizontalOptions="End"
+             Orientation="ImageToLeft" BackgroundColor="#fff"                
+ImageHeightRequest="50" ImageWidthRequest="50" >
+        <controls:ImageButton.Source>
+          <OnPlatform x:TypeArguments="ImageSource">
+            <OnPlatform.iOS>
+              <FileImageSource File="info-48.png" />
+            </OnPlatform.iOS>
+            <OnPlatform.Android>
+              <FileImageSource File="Drawable/info.png" />
+            </OnPlatform.Android>
+            <OnPlatform.WinPhone>
+              <FileImageSource File="info-48.png" />
+            </OnPlatform.WinPhone>
+          </OnPlatform>
+        </controls:ImageButton.Source>
+      </controls:ImageButton>
+      
+      
+      <Image Source="Drawable/logo.png" HeightRequest="100" WidthRequest="300" HorizontalOptions="Center" VerticalOptions="Start"/>
         <Grid Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="FillAndExpand" x:Name="SettingsGrid" BackgroundColor="#E0E0E0" Padding="0, 0, 0, 20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -35,7 +53,7 @@
                    Grid.Column="0"
                    Text="Soort dobbelsteen"/>
           <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-            <Image x:Name="DieNameImage" Source="Dice/1/1.png" Grid.Row="0" Grid.Column="1" Aspect="Fill" VerticalOptions="Center" HorizontalOptions="Start" HeightRequest="35" WidthRequest="35"/>
+            <Image x:Name="DieNameImage"  Grid.Row="0" Grid.Column="1" Aspect="Fill" VerticalOptions="Center" HorizontalOptions="Start" HeightRequest="35" WidthRequest="35"/>
             <Label Grid.Row="0"
                    VerticalOptions="Center" HorizontalOptions="Start"
                    Grid.Column="1"

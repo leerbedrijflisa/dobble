@@ -13,7 +13,7 @@
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
     <StackLayout Grid.Column="0" Grid.Row="0" VerticalOptions="FillAndExpand">
-      <ListView HasUnevenRows="False" VerticalOptions="FillAndExpand" x:Name="ProfileListView">
+      <ListView  VerticalOptions="FillAndExpand" x:Name="ProfileListView">
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
@@ -27,7 +27,7 @@
                   <ColumnDefinition Width="40"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}" LineBreakMode="TailTruncation"></Label>
+                <Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}" ></Label>
                 <!--<Label Grid.Row="1" Grid.Column="0" Text="{Binding Location}" Font="Small" extColor="Gray" LineBreakMode="TailTruncation"></Label>
                 <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Source="{Binding Image}" Aspect="AspectFill"/>-->
               </Grid>
@@ -50,66 +50,66 @@
       </Grid.RowDefinitions>
       <StackLayout Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalOptions="Center" Padding="0,10,0,0">
       <Button Grid.ColumnSpan="3" HorizontalOptions="Center"  VerticalOptions="Start" Grid.Row="0" Font="24" x:Name="DieName" Text="Nieuwe dobbelsteen" />
-      <Button x:Name="DieNameIcon" Grid.ColumnSpan="1" HorizontalOptions="End"  VerticalOptions="Start" Grid.Column="1" Grid.Row="0" Font="24" Image="edit.png" HeightRequest="32" WidthRequest="32"/>
+      <Button x:Name="DieNameIcon" Grid.ColumnSpan="1" HorizontalOptions="End"  VerticalOptions="Start" Grid.Column="1" Grid.Row="0"  HeightRequest="32" WidthRequest="32"/>
       </StackLayout>
       <StackLayout Grid.Column="0" Grid.Row="1">
         <AbsoluteLayout ClassId="1" HorizontalOptions="Center">
           <Image ClassId="1" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
-          <Image HeightRequest="100" Source="dobblemask_small.png"/>
+          <Image HeightRequest="100" />
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
-          <Button Image="play.png" Clicked="PlaySound" ClassId="0" HeightRequest="44" WidthRequest="44"/>
-          <Button Image="record.png" Clicked="RecordSound" ClassId="0" HeightRequest="44" WidthRequest="44"/>
+          <Button   ClassId="0" HeightRequest="44" WidthRequest="44"/>
+          <Button   ClassId="0" HeightRequest="44" WidthRequest="44"/>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Column="1" Grid.Row="1">
         <AbsoluteLayout ClassId="2" HorizontalOptions="Center">
           <Image ClassId="2" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
-          <Image HeightRequest="100" Source="dobblemask_small.png"/>
+          <Image HeightRequest="100" />
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
-          <Button Image="play.png" Clicked="PlaySound" ClassId="1" HeightRequest="44" WidthRequest="44"/>
-          <Button Image="record.png" Clicked="RecordSound" ClassId="1" HeightRequest="44" WidthRequest="44"/>
+          <Button   ClassId="1" HeightRequest="44" WidthRequest="44"/>
+          <Button   ClassId="1" HeightRequest="44" WidthRequest="44"/>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Column="2" Grid.Row="1">
         <AbsoluteLayout  ClassId="3" HorizontalOptions="Center">
           <Image ClassId="3" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
-          <Image HeightRequest="100" Source="dobblemask_small.png"/>
+          <Image HeightRequest="100" />
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
-          <Button Image="play.png" Clicked="PlaySound" ClassId="2" HeightRequest="44" WidthRequest="44"/>
-          <Button Image="record.png" Clicked="RecordSound" ClassId="2" HeightRequest="44" WidthRequest="44"/>
+          <Button   ClassId="2" HeightRequest="44" WidthRequest="44"/>
+          <Button   ClassId="2" HeightRequest="44" WidthRequest="44"/>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Column="0" Grid.Row="2">
         <AbsoluteLayout ClassId="4" HorizontalOptions="Center">
           <Image ClassId="4" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
-          <Image HeightRequest="100" Source="dobblemask_small.png"/>
+          <Image HeightRequest="100" />
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
-          <Button Image="play.png" Clicked="PlaySound" ClassId="3" HeightRequest="44" WidthRequest="44"/>
-          <Button Image="record.png" Clicked="RecordSound" ClassId="3" HeightRequest="44" WidthRequest="44"/>
+          <Button   ClassId="3" HeightRequest="44" WidthRequest="44"/>
+          <Button   ClassId="3" HeightRequest="44" WidthRequest="44"/>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Column="1" Grid.Row="2">
         <AbsoluteLayout ClassId="5" HorizontalOptions="Center">
           <Image ClassId="5" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
-          <Image HeightRequest="100" Source="dobblemask_small.png"/>
+          <Image HeightRequest="100" />
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
-          <Button Image="play.png" Clicked="PlaySound" ClassId="4" HeightRequest="44" WidthRequest="44"/>
-          <Button Image="record.png" Clicked="RecordSound" ClassId="4" HeightRequest="44" WidthRequest="44"/>
+          <Button  ClassId="4" HeightRequest="44" WidthRequest="44"/>
+          <Button   ClassId="4" HeightRequest="44" WidthRequest="44"/>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Column="2" Grid.Row="2">
         <AbsoluteLayout ClassId="6" HorizontalOptions="Center">
           <Image ClassId="6" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
-          <Image HeightRequest="100" Source="dobblemask_small.png"/>
+          <Image HeightRequest="100" />
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
-          <Button Image="play.png" Clicked="PlaySound" ClassId="5" HeightRequest="44" WidthRequest="44"/>
-          <Button Image="record.png" Clicked="RecordSound" ClassId="5" HeightRequest="44" WidthRequest="44"/>
+          <Button   ClassId="5" HeightRequest="44" WidthRequest="44"/>
+          <Button  ClassId="5" HeightRequest="44" WidthRequest="44"/>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Row="3" Grid.ColumnSpan="3" >
@@ -118,5 +118,5 @@
       </StackLayout>
     </Grid> 
   </Grid>
-xara
+
 </ContentPage>

@@ -64,7 +64,7 @@ namespace Lisa.Dobble
                 {
                     DieNameImage.Source = Device.OnPlatform(
                         iOS: ImageSource.FromFile("Dice/" + SelectedDie.Options[0].Image),
-                        Android: ImageSource.FromFile("Drawable/dice/" + SelectedDie.Options[0].Image),
+                        Android: ImageSource.FromFile("Drawable/dice" + SelectedDie.Options[0].Image.Replace("/", "")),
                         WinPhone: ImageSource.FromFile("dice/" + SelectedDie.Options[0].Image));
                 }else
                 {

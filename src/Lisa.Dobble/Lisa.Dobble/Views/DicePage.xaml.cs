@@ -91,8 +91,7 @@ namespace Lisa.Dobble
             _timer = new Timer();
             _timer.Tick += OnTick;
 
-            _app = Resolver.Resolve<IXFormsApp>();
-            _app.Resumed += PushSettingsPage;
+
         }
 
         private void PushSettingsPage(object sender, EventArgs e)
@@ -118,7 +117,7 @@ namespace Lisa.Dobble
                     needsAnimation = true;
                     return false;
                 });
-                soundService.Stop();
+               // soundService.Stop();
                 if(imageSourceStream != null)
                 {
                     imageSourceStream.Dispose();
@@ -129,7 +128,7 @@ namespace Lisa.Dobble
                     iOS: "dice.wav",
                     Android: "dice.wav",
                     WinPhone: "dice.wav");
-                soundService.PlayAsync(fullpath);
+                //soundService.PlayAsync(fullpath);
 
                 enabled = false;
                 int delay = DobbleDelay;
@@ -156,14 +155,14 @@ namespace Lisa.Dobble
             {
                 DieView.Source = Device.OnPlatform(
                 iOS: ImageSource.FromFile("Dice/white.png"),
-                Android: ImageSource.FromFile("Drawable/dice/white.png"),
+                Android: ImageSource.FromFile("Drawable/white.png"),
                 WinPhone: ImageSource.FromFile("dice/white.png"));
             }
             else if (SelectedDie.IsDefault)
             {
                 DieView.Source = Device.OnPlatform(
                     iOS: ImageSource.FromFile("Dice/" + image),
-                    Android: ImageSource.FromFile("Drawable/dice/" + image),
+                    Android: ImageSource.FromFile("Drawable/dice" + image.Replace("/", "")),
                     WinPhone: ImageSource.FromFile("dice/" + image));
             }
             else
@@ -208,7 +207,6 @@ namespace Lisa.Dobble
                     iOS: "snoozesound.mp3",
                     Android: "snoozesound.mp3",
                     WinPhone: "snoozesound.mp3");
-                soundService.PlayAsync(filePath);
                 try
                 {
                     for (var i = 0; i < 5; i++)
@@ -300,12 +298,7 @@ namespace Lisa.Dobble
             var soundName = SelectedDie.Options[_randomNumber].Sound;
             if (soundName != null && !firstDie)
             {
-                var filePath = pathService.CreateDocumentsPath(soundName);
-                if (SelectedDie.IsDefault)
-                {
-                    filePath = "Dice/" + soundName;
-                }
-                soundService.PlayAsync(filePath);
+
             }
 
             if (!firstDie)
