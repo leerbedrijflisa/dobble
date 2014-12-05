@@ -378,7 +378,7 @@ namespace Lisa.Dobble
             {
 
 #if FREE
-                if (selectedDie.Id == 2 || selectedDie.Id == 4 || selectedDie.Id == 5)
+                if (selectedDie.IsPremium)
                 {
                     DisableDie();
                 }
@@ -481,6 +481,10 @@ namespace Lisa.Dobble
 
         private void PlaySound(object sender, EventArgs e)
         {
+            if (selectedDie.IsPremium)
+            {
+                return;
+            }
             var playSoundButton = (Button)sender;
 
             var dieCount = 0;
@@ -501,6 +505,10 @@ namespace Lisa.Dobble
 
         private void RecordSound(object sender, EventArgs e)
         {
+            if (selectedDie.IsPremium)
+            {
+                return;
+            }
             _isRecording = true;
             DisableInteraction(ProfilePageGrid);
             _lastRecordSoundButton = (Button)sender;

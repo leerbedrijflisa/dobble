@@ -157,15 +157,18 @@ namespace Lisa.Dobble
                         break;
                     case 2:
                         die.Name = "Stippen (blauw/geel)";
+                        die.IsPremium = true;
                         break;
                     case 3:
                         die.Name = "Vormen (zwart/wit)";
                         break;
                     case 4:
                         die.Name = "Vormen (blauw/geel)";
+                        die.IsPremium = true;
                         break;
                     case 5:
                         die.Name = "Kleuren";
+                        die.IsPremium = true;
                         break;
                 }
                 database.InsertDie(die);
