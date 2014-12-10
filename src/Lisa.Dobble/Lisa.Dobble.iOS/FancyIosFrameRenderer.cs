@@ -42,23 +42,12 @@ namespace Lisa.Dobble.iOS
             swipeGestureRecognizer6.Direction = UISwipeGestureRecognizerDirection.Left | UISwipeGestureRecognizerDirection.Right;
             swipeGestureRecognizer6.NumberOfTouchesRequired = 3;
 
-            var swipeGestureRecognizer7 = new UISwipeGestureRecognizer(HandleSwipe);
-            swipeGestureRecognizer7.Direction = UISwipeGestureRecognizerDirection.Down | UISwipeGestureRecognizerDirection.Up;
-            swipeGestureRecognizer7.NumberOfTouchesRequired = 4;
-
-            var swipeGestureRecognizer8 = new UISwipeGestureRecognizer(HandleSwipe);
-            swipeGestureRecognizer8.Direction = UISwipeGestureRecognizerDirection.Left | UISwipeGestureRecognizerDirection.Right;
-            swipeGestureRecognizer8.NumberOfTouchesRequired = 42;
-
-
             this.AddGestureRecognizer(swipeGestureRecognizer);
             this.AddGestureRecognizer(swipeGestureRecognizer2);
             this.AddGestureRecognizer(swipeGestureRecognizer3);
             this.AddGestureRecognizer(swipeGestureRecognizer4);
             this.AddGestureRecognizer(swipeGestureRecognizer5);
             this.AddGestureRecognizer(swipeGestureRecognizer6);
-            this.AddGestureRecognizer(swipeGestureRecognizer7);
-            this.AddGestureRecognizer(swipeGestureRecognizer8);
         }
 
         private void HandleSwipe()
