@@ -88,11 +88,17 @@ namespace Lisa.Dobble
             device.Accelerometer.Interval = AccelerometerInterval.Normal;
             device.Accelerometer.ReadingAvailable += Accelerometer_ReadingAvailable;
 
+            MainGrid.OnSwipe += MainGrid_OnSwipe;
             _timer = new Timer();
             _timer.Tick += OnTick;
 
             _app = Resolver.Resolve<IXFormsApp>();
             _app.Resumed += PushSettingsPage;
+        }
+
+        void MainGrid_OnSwipe(object sender, EventArgs e)
+        {
+            RollDice();
         }
 
         private void PushSettingsPage(object sender, EventArgs e)

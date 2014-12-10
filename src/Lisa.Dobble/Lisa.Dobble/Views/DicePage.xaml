@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 					   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Lisa.Dobble;assembly=Lisa.Dobble"
 					   x:Class="Lisa.Dobble.DicePage"
                        x:Name="DiceView"
                        BackgroundColor="#BFBFBF">
-    <Frame x:Name="MainGrid" BackgroundColor="#BFBFBF">
+    <controls:FancyFrame x:Name="MainGrid" BackgroundColor="#BFBFBF">
       <Grid HorizontalOptions="Center" x:Name="DieGrid">
         <Grid.RowDefinitions>
           <RowDefinition Height="*"/>
@@ -22,5 +23,5 @@
           <Image x:Name="TimeThree" Source="tick.png" />
         </StackLayout>
       </Grid>
-    </Frame>
+    </controls:FancyFrame>
 </ContentPage>
