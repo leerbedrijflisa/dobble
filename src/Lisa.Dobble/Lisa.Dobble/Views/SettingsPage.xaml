@@ -81,7 +81,7 @@
                 VerticalOptions="Start"
                 Text="Beginnen met dobbelen"
                 Font="30"/>
-        <Image Source="banner.png"/>
+        <Image x:Name="DieBanner" IsVisible="false" Source="banner.png"/>
       </StackLayout>
     </Grid>
 </ContentPage>

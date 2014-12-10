@@ -30,6 +30,10 @@ namespace Lisa.Dobble
             ChooseProfileButton.Clicked += ChooseProfileButton_Clicked;
             CreditsButton.Clicked += CreditsButton_Clicked;
 
+#if FREE
+            DieBanner.IsVisible = true;
+#endif
+
             DobbleDelay.Keyboard = Keyboard.Numeric;
 
             var emptyDice = database.GetDice().Where(die => die.Options.All(option => option.Image == "notset.png"));
