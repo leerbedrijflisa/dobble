@@ -112,11 +112,11 @@
           <Button Image="record.png" Clicked="RecordSound" ClassId="5" HeightRequest="44" WidthRequest="44"/>
         </StackLayout>
       </StackLayout>
-      <StackLayout Grid.Row="3" Grid.ColumnSpan="3" >
-        <Button x:Name="SelectDieButton" Text="Opslaan"/>
-        <Button x:Name="DeleteDieButton" Text="Verwijderen"/>
-        <Label x:Name="BuyAppLabel" Text="Dit profiel is alleen beschikbaar in de betaalde versie van deze app." IsVisible="false" HorizontalOptions="Center"/>
+      <StackLayout Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal" Spacing="50" HorizontalOptions="Center">
+        <Button x:Name="SelectDieButton" HorizontalOptions="Center" Text="Opslaan"/>
+        <Button x:Name="DeleteDieButton" HorizontalOptions="Center" Text="Verwijderen"/>
       </StackLayout>
+      <Label x:Name="BuyAppLabel" Grid.Row="3" Grid.ColumnSpan="3" Text="Dit profiel is alleen beschikbaar in de betaalde versie van deze app." IsVisible="false" HorizontalOptions="Center"/>
     </Grid>
   </Grid>
 </ContentPage>

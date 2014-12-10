@@ -360,8 +360,6 @@ namespace Lisa.Dobble
 
         private void EnableDie()
         {
-            
-            
             BuyAppLabel.IsVisible = false;
             EnableInteraction(ProfileGrid);
             ProfileGrid.IsVisible = true;
@@ -377,16 +375,6 @@ namespace Lisa.Dobble
             if(selectedDie.IsDefault)
             {
 
-#if FREE
-                if (selectedDie.IsPremium)
-                {
-                    DisableDie();
-                }
-                else
-                {
-                    EnableDie();
-                }
-#endif
 
                 DieNameIcon.IsVisible = false;
                 DeleteDieButton.IsVisible = false;
@@ -406,6 +394,17 @@ namespace Lisa.Dobble
                     }
                     
                 }
+
+#if FREE
+                if (selectedDie.IsPremium)
+                {
+                    DisableDie();
+                }
+                else
+                {
+                    EnableDie();
+                }
+#endif
             }
             else
             {
@@ -481,10 +480,13 @@ namespace Lisa.Dobble
 
         private void PlaySound(object sender, EventArgs e)
         {
+#if FREE
             if (selectedDie.IsPremium)
             {
                 return;
             }
+
+#endif
             var playSoundButton = (Button)sender;
 
             var dieCount = 0;
@@ -505,10 +507,12 @@ namespace Lisa.Dobble
 
         private void RecordSound(object sender, EventArgs e)
         {
+#if FREE
             if (selectedDie.IsPremium)
             {
                 return;
             }
+#endif
             _isRecording = true;
             DisableInteraction(ProfilePageGrid);
             _lastRecordSoundButton = (Button)sender;
