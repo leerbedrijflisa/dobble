@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Data\DieDatabase.cs" />
+    <Compile Include="FancyFrame.cs" />
     <Compile Include="Interfaces\IImageResizerService.cs" />
     <Compile Include="Interfaces\ILisaSoundService.cs" />
     <Compile Include="Interfaces\IMicrophoneService.cs" />
