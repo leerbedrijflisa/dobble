@@ -18,7 +18,7 @@
         </AbsoluteLayout>
         
         <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" >
-          <Label x:Name="Instructions" Text="Draai de iPad naar u toe om terug te keren naar het menu"></Label>
+          <Label x:Name="Instructions" Text="Draai de iPad naar u toe om terug te keren naar het menu" TextColor="#000"></Label>
           <Image x:Name="TimeOne">
             <Image.Source>
               <OnPlatform x:TypeArguments="ImageSource"
