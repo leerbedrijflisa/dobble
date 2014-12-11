@@ -44,7 +44,12 @@ namespace Lisa.Dobble
 
         private async void InitializeAdditionalComponent()
         {
-            ToolbarItems.Add(new ToolbarItem("Add", "Drawable/plus.png", async () =>
+            ToolbarItems.Add(new ToolbarItem("Add", 
+                Device.OnPlatform(
+                    iOS: "plus.png",
+                    Android: "Drawable/plus.png",
+                    WinPhone: "plus.png"), 
+                async () =>
             {
                 CreateNewDie();
             }));

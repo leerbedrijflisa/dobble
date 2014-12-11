@@ -17,7 +17,7 @@
 
       <controls:ImageButton x:Name="CreditsButton" Grid.Row="0"
 HeightRequest="50" WidthRequest="50" VerticalOptions="Start" HorizontalOptions="End"
-             Orientation="ImageOnTop" BackgroundColor="#ccc"              
+             Orientation="ImageToLeft" BackgroundColor="#fff"              
 ImageHeightRequest="40" ImageWidthRequest="40" >
         <controls:ImageButton.Source>
           <OnPlatform x:TypeArguments="ImageSource">
@@ -33,9 +33,16 @@ ImageHeightRequest="40" ImageWidthRequest="40" >
           </OnPlatform>
         </controls:ImageButton.Source>
       </controls:ImageButton>
-      
-      
-      <Image Source="Logo.png" HeightRequest="100" WidthRequest="300" HorizontalOptions="Center" VerticalOptions="Start"/>
+
+
+      <Image HeightRequest="100" WidthRequest="300" HorizontalOptions="Center" VerticalOptions="Start">
+        <Image.Source>
+          <OnPlatform x:TypeArguments="ImageSource"
+              iOS="Logo.png"
+              Android="Drawable/logo.png"
+              WinPhone="Logo.png" />
+        </Image.Source>
+      </Image>
         <Grid Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="FillAndExpand" x:Name="SettingsGrid" BackgroundColor="#E0E0E0" Padding="0, 0, 0, 20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -51,6 +58,7 @@ ImageHeightRequest="40" ImageWidthRequest="40" >
             <Label Grid.Row="0"
                    VerticalOptions="Center" HorizontalOptions="End" 
                    Grid.Column="0"
+                   TextColor="#000"
                    Text="Soort dobbelsteen"/>
           <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
             <Image x:Name="DieNameImage"  Grid.Row="0" Grid.Column="1" Aspect="Fill" VerticalOptions="Center" HorizontalOptions="Start" HeightRequest="35" WidthRequest="35"/>
@@ -81,10 +89,12 @@ ImageHeightRequest="40" ImageWidthRequest="40" >
             <Label Grid.Row="1"
                    VerticalOptions="Center" HorizontalOptions="Start" 
                    Grid.Column="2"
+                   TextColor="#000"
                    Text="Wachttijd in seconden"/>   
             
             <Label Grid.Row="3"
                    VerticalOptions="Center" HorizontalOptions="End" 
+                   TextColor="#000"
                    Text="Raakvlak"/>
             <Label Grid.Row="3"
                    Grid.Column="1"
@@ -92,7 +102,8 @@ ImageHeightRequest="40" ImageWidthRequest="40" >
                    Text="Geheel Scherm"/>
             <Label Grid.Row="3"
                    Grid.Column="1"
-                   VerticalOptions="Center" HorizontalOptions="Start" 
+                   VerticalOptions="Center" HorizontalOptions="Start"
+                   TextColor="#000"
                    Text="Dobbelsteen"/>
         </Grid>
       <Button x:Name="StartButton"

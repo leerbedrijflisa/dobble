@@ -19,9 +19,30 @@
         
         <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" >
           <Label x:Name="Instructions" Text="Draai de iPad naar u toe om terug te keren naar het menu"></Label>
-          <Image x:Name="TimeOne" Source="Drawable/tick.png"/>
-          <Image x:Name="TimeTwo" Source="Drawable/tick.png"/>
-          <Image x:Name="TimeThree" Source="Drawable/tick.png"/>
+          <Image x:Name="TimeOne">
+            <Image.Source>
+              <OnPlatform x:TypeArguments="ImageSource"
+                  iOS="tick.png"
+                  Android="Drawable/tick.png"
+                  WinPhone="tick.png" />
+            </Image.Source>
+          </Image>
+          <Image x:Name="TimeTwo">
+            <Image.Source>
+              <OnPlatform x:TypeArguments="ImageSource"
+                  iOS="tick.png"
+                  Android="Drawable/tick.png"
+                  WinPhone="tick.png" />
+            </Image.Source>
+          </Image>
+          <Image x:Name="TimeThree">
+            <Image.Source>
+              <OnPlatform x:TypeArguments="ImageSource"
+                  iOS="tick.png"
+                  Android="Drawable/tick.png"
+                  WinPhone="tick.png" />
+            </Image.Source>
+          </Image>
         </StackLayout>
       </Grid>
     </Frame>
