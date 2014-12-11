@@ -59,7 +59,7 @@ namespace Lisa.Dobble
         {
             _timer.Tick -= OnTick;
             _timer.Stop();
-            _app.Resumed -= PushSettingsPage;
+            //_app.Resumed -= PushSettingsPage;
             var device = Resolver.Resolve<IDevice>();
             device.Accelerometer.ReadingAvailable -= Accelerometer_ReadingAvailable;
             base.OnDisappearing();

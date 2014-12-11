@@ -135,7 +135,7 @@ namespace Lisa.Dobble
 
             if (!_isCameraOpen)
             {
-                _app.Resumed -= PushSettingsPage;
+                //_app.Resumed -= PushSettingsPage;
                 if (selectedDie.Options.All(option => option.Image == "notset.png"))
                 {
                     database.DeleteDie(selectedDie.Id);
@@ -435,7 +435,10 @@ namespace Lisa.Dobble
             _microphone = microphoneService.GetMicrophone();
             _microphone.Start(22050);
             _recorder.StartRecorder(_microphone, _fileStream, 22050);
-            _lastRecordSoundButton.Image = "stop.png";
+            _lastRecordSoundButton.Image = Device.OnPlatform(
+                        iOS: "stop.png",
+                        Android: "Drawable/stop.png",
+                        WinPhone: "stop.png" );
 
             selectedDie.Options[imageCount].Sound = String.Format("{0}/{1}.wav", selectedDie.Id, imageCount);
             database.SaveDie(selectedDie);
@@ -451,7 +454,10 @@ namespace Lisa.Dobble
             {
                 _microphone.Stop();
                 _recorder.StopRecorder();
-                _lastRecordSoundButton.Image = "record.png";
+                _lastRecordSoundButton.Image = Device.OnPlatform(
+                        iOS: "record.png",
+                        Android: "Drawable/record.png",
+                        WinPhone: "record.png");
                 _lastRecordSoundButton.Clicked -= StopRecordingButtonClicked;
                 _lastRecordSoundButton.Clicked += RecordSound;
                 _isRecording = false;

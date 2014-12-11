@@ -132,7 +132,7 @@
     <Content Include="Resources\buzzie.png" />
     <Content Include="Resources\dice.wav" />
     <Content Include="Resources\dobblemask_small.png" />
-    <AndroidResource Include="Resources\Drawable\dobblemask_small.png" />
+    <AndroidResource Include="Resources\Drawable\dobblemasksmall.png" />
     <AndroidResource Include="Resources\Drawable\edit.png" />
     <AndroidResource Include="Resources\Drawable\dobblemask.png" />
     <AndroidResource Include="Resources\Drawable\info.png" />
@@ -149,6 +149,9 @@
     <AndroidResource Include="Resources\Drawable\white.png" />
     <AndroidResource Include="Resources\Drawable\notset.png" />
     <AndroidResource Include="Resources\Drawable\plus.png" />
+    <AndroidResource Include="Resources\Drawable\stop.png" />
+    <AndroidResource Include="Resources\Drawable\record.png" />
+    <AndroidResource Include="Resources\Drawable\play.png" />
     <Content Include="Resources\edit.png" />
     <Content Include="Resources\Logo.png" />
     <Content Include="Resources\notset.png" />

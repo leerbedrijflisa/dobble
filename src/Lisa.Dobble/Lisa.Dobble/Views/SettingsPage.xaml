@@ -4,7 +4,7 @@
              xmlns:controls="clr-namespace:Xamarin.Forms.Labs.Controls;assembly=Xamarin.Forms.Labs"
              xmlns:icons="clr-namespace:Xamarin.Forms.Labs.Helpers;assembly=Xamarin.Forms.Labs"
 					   x:Class="Lisa.Dobble.SettingsPage">
-    <Grid HorizontalOptions="FillAndExpand" Padding="0, 20, 0, 0">
+    <Grid HorizontalOptions="FillAndExpand" Padding="0, 20, 0, 0" BackgroundColor="#fff">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="5*"/>
@@ -17,8 +17,8 @@
 
       <controls:ImageButton x:Name="CreditsButton" Grid.Row="0"
 HeightRequest="50" WidthRequest="50" VerticalOptions="Start" HorizontalOptions="End"
-             Orientation="ImageToLeft" BackgroundColor="#fff"                
-ImageHeightRequest="50" ImageWidthRequest="50" >
+             Orientation="ImageOnTop" BackgroundColor="#ccc"              
+ImageHeightRequest="40" ImageWidthRequest="40" >
         <controls:ImageButton.Source>
           <OnPlatform x:TypeArguments="ImageSource">
             <OnPlatform.iOS>
@@ -35,7 +35,7 @@ ImageHeightRequest="50" ImageWidthRequest="50" >
       </controls:ImageButton>
       
       
-      <Image Source="Drawable/logo.png" HeightRequest="100" WidthRequest="300" HorizontalOptions="Center" VerticalOptions="Start"/>
+      <Image Source="Logo.png" HeightRequest="100" WidthRequest="300" HorizontalOptions="Center" VerticalOptions="Start"/>
         <Grid Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="FillAndExpand" x:Name="SettingsGrid" BackgroundColor="#E0E0E0" Padding="0, 0, 0, 20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -65,12 +65,14 @@ ImageHeightRequest="50" ImageWidthRequest="50" >
                     x:Name="ChooseProfileButton"
                     VerticalOptions="Center" HorizontalOptions="Start" 
                    Grid.Column="2"
+                    
                    Text="Kies profiel"/>
             
 
             <Label Grid.Row="1"
                    VerticalOptions="Center" HorizontalOptions="End" 
-                   Text="Wachttijd na dobbelen"/>
+                   Text="Wachttijd na dobbelen"
+                   TextColor="#000"/>
             <Entry Grid.Row="1"
                    x:Name="DobbleDelay"
                    VerticalOptions="Center" HorizontalOptions="FillAndExpand" 
@@ -93,12 +95,15 @@ ImageHeightRequest="50" ImageWidthRequest="50" >
                    VerticalOptions="Center" HorizontalOptions="Start" 
                    Text="Dobbelsteen"/>
         </Grid>
-        <Button x:Name="StartButton"
-                Grid.Row="2"
-                HorizontalOptions="Center"
-                VerticalOptions="Start"
-                Text="Beginnen met dobbelen"
-                Font="30"/>
+      <Button x:Name="StartButton"
+              Grid.Row="2"
+              HorizontalOptions="Center"
+              VerticalOptions="Start"
+              Text="Beginnen met dobbelen"
+              BackgroundColor="#fff"
+              Font="30"
+              TextColor="Blue"
+      />
       
     </Grid>
 </ContentPage>

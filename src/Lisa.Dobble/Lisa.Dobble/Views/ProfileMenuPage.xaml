@@ -36,7 +36,7 @@
         </ListView.ItemTemplate>
       </ListView>
     </StackLayout>
-    <Grid Grid.Column="1" VerticalOptions="FillAndExpand" Grid.Row="0" Padding="0,80,0,0" x:Name="ProfileGrid">
+    <Grid Grid.Column="1" VerticalOptions="FillAndExpand" Grid.Row="0" Padding="0,0,0,0" x:Name="ProfileGrid">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>
         <ColumnDefinition Width="*"/>
@@ -44,72 +44,330 @@
       </Grid.ColumnDefinitions>
       <Grid.RowDefinitions>
         <RowDefinition Height="70"/>
-        <RowDefinition Height="*"/>
+        <RowDefinition Height="2*"/>
         <RowDefinition Height="*"/>
         <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
-      <StackLayout Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalOptions="Center" Padding="0,10,0,0">
+      <StackLayout Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start" Padding="0,10,0,0">
       <Button Grid.ColumnSpan="3" HorizontalOptions="Center"  VerticalOptions="Start" Grid.Row="0" Font="24" x:Name="DieName" Text="Nieuwe dobbelsteen" />
       <Button x:Name="DieNameIcon" Grid.ColumnSpan="1" HorizontalOptions="End"  VerticalOptions="Start" Grid.Column="1" Grid.Row="0"  HeightRequest="32" WidthRequest="32"/>
       </StackLayout>
       <StackLayout Grid.Column="0" Grid.Row="1">
         <AbsoluteLayout ClassId="1" HorizontalOptions="Center">
           <Image ClassId="1" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
-          <Image HeightRequest="100" />
+          <Image HeightRequest="100">
+            <Image.Source>
+            <OnPlatform x:TypeArguments="ImageSource"
+                iOS="dobblemask_small.png"
+                Android="Drawable/dobblemasksmall.png"
+                WinPhone="dobblemasksmall.png" />
+            </Image.Source>
+          </Image>
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
-          <Button   ClassId="0" HeightRequest="44" WidthRequest="44"/>
-          <Button   ClassId="0" HeightRequest="44" WidthRequest="44"/>
+          <controls:ImageButton ClassId="0"
+              Clicked="PlaySound"
+              HeightRequest="44" WidthRequest="44" 
+              Orientation="ImageToLeft" BackgroundColor="#fff"
+              ImageHeightRequest="35" ImageWidthRequest="35" >
+            <controls:ImageButton.Source>
+              <OnPlatform x:TypeArguments="ImageSource">
+                <OnPlatform.iOS>
+                  <FileImageSource File="play.png" />
+                </OnPlatform.iOS>
+                <OnPlatform.Android>
+                  <FileImageSource File="Drawable/play.png" />
+                </OnPlatform.Android>
+                <OnPlatform.WinPhone>
+                  <FileImageSource File="play.png" />
+                </OnPlatform.WinPhone>
+              </OnPlatform>
+            </controls:ImageButton.Source>
+          </controls:ImageButton>
+          <controls:ImageButton ClassId="0"
+              Clicked="RecordSound"
+              HeightRequest="44" WidthRequest="44"
+              Orientation="ImageToLeft" BackgroundColor="#fff"
+              ImageHeightRequest="35" ImageWidthRequest="35" >
+            <controls:ImageButton.Source>
+              <OnPlatform x:TypeArguments="ImageSource">
+                <OnPlatform.iOS>
+                  <FileImageSource File="record.png" />
+                </OnPlatform.iOS>
+                <OnPlatform.Android>
+                  <FileImageSource File="Drawable/record.png" />
+                </OnPlatform.Android>
+                <OnPlatform.WinPhone>
+                  <FileImageSource File="record.png" />
+                </OnPlatform.WinPhone>
+              </OnPlatform>
+            </controls:ImageButton.Source>
+          </controls:ImageButton>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Column="1" Grid.Row="1">
         <AbsoluteLayout ClassId="2" HorizontalOptions="Center">
           <Image ClassId="2" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
-          <Image HeightRequest="100" />
+          <Image HeightRequest="100">
+            <Image.Source>
+              <OnPlatform x:TypeArguments="ImageSource"
+                  iOS="dobblemask_small.png"
+                  Android="Drawable/dobblemasksmall.png"
+                  WinPhone="dobblemasksmall.png" />
+            </Image.Source>
+          </Image>
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
-          <Button   ClassId="1" HeightRequest="44" WidthRequest="44"/>
-          <Button   ClassId="1" HeightRequest="44" WidthRequest="44"/>
+          <controls:ImageButton ClassId="1"
+              Clicked="PlaySound"
+              HeightRequest="44" WidthRequest="44"
+              Orientation="ImageToLeft" BackgroundColor="#fff"
+              ImageHeightRequest="35" ImageWidthRequest="35" >
+            <controls:ImageButton.Source>
+              <OnPlatform x:TypeArguments="ImageSource">
+                <OnPlatform.iOS>
+                  <FileImageSource File="play.png" />
+                </OnPlatform.iOS>
+                <OnPlatform.Android>
+                  <FileImageSource File="Drawable/play.png" />
+                </OnPlatform.Android>
+                <OnPlatform.WinPhone>
+                  <FileImageSource File="play.png" />
+                </OnPlatform.WinPhone>
+              </OnPlatform>
+            </controls:ImageButton.Source>
+          </controls:ImageButton>
+          <controls:ImageButton ClassId="1"
+              Clicked="RecordSound"
+              HeightRequest="44" WidthRequest="44"
+              Orientation="ImageToLeft" BackgroundColor="#fff"
+              ImageHeightRequest="35" ImageWidthRequest="35" >
+            <controls:ImageButton.Source>
+              <OnPlatform x:TypeArguments="ImageSource">
+                <OnPlatform.iOS>
+                  <FileImageSource File="record.png" />
+                </OnPlatform.iOS>
+                <OnPlatform.Android>
+                  <FileImageSource File="Drawable/record.png" />
+                </OnPlatform.Android>
+                <OnPlatform.WinPhone>
+                  <FileImageSource File="record.png" />
+                </OnPlatform.WinPhone>
+              </OnPlatform>
+            </controls:ImageButton.Source>
+          </controls:ImageButton>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Column="2" Grid.Row="1">
         <AbsoluteLayout  ClassId="3" HorizontalOptions="Center">
           <Image ClassId="3" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
-          <Image HeightRequest="100" />
+          <Image HeightRequest="100">
+            <Image.Source>
+              <OnPlatform x:TypeArguments="ImageSource"
+                  iOS="dobblemask_small.png"
+                  Android="Drawable/dobblemasksmall.png"
+                  WinPhone="dobblemasksmall.png" />
+            </Image.Source>
+          </Image>
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
-          <Button   ClassId="2" HeightRequest="44" WidthRequest="44"/>
-          <Button   ClassId="2" HeightRequest="44" WidthRequest="44"/>
+          <controls:ImageButton ClassId="2"
+              Clicked="PlaySound"
+              HeightRequest="44" WidthRequest="44"
+              Orientation="ImageToLeft" BackgroundColor="#fff"
+              ImageHeightRequest="35" ImageWidthRequest="35" >
+            <controls:ImageButton.Source>
+              <OnPlatform x:TypeArguments="ImageSource">
+                <OnPlatform.iOS>
+                  <FileImageSource File="play.png" />
+                </OnPlatform.iOS>
+                <OnPlatform.Android>
+                  <FileImageSource File="Drawable/play.png" />
+                </OnPlatform.Android>
+                <OnPlatform.WinPhone>
+                  <FileImageSource File="play.png" />
+                </OnPlatform.WinPhone>
+              </OnPlatform>
+            </controls:ImageButton.Source>
+          </controls:ImageButton>
+          <controls:ImageButton ClassId="2"
+              Clicked="RecordSound"
+              HeightRequest="44" WidthRequest="44"
+              Orientation="ImageToLeft" BackgroundColor="#fff"
+              ImageHeightRequest="35" ImageWidthRequest="35" >
+            <controls:ImageButton.Source>
+              <OnPlatform x:TypeArguments="ImageSource">
+                <OnPlatform.iOS>
+                  <FileImageSource File="record.png" />
+                </OnPlatform.iOS>
+                <OnPlatform.Android>
+                  <FileImageSource File="Drawable/record.png" />
+                </OnPlatform.Android>
+                <OnPlatform.WinPhone>
+                  <FileImageSource File="record.png" />
+                </OnPlatform.WinPhone>
+              </OnPlatform>
+            </controls:ImageButton.Source>
+          </controls:ImageButton>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Column="0" Grid.Row="2">
         <AbsoluteLayout ClassId="4" HorizontalOptions="Center">
           <Image ClassId="4" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
-          <Image HeightRequest="100" />
+          <Image HeightRequest="100">
+            <Image.Source>
+              <OnPlatform x:TypeArguments="ImageSource"
+                  iOS="dobblemask_small.png"
+                  Android="Drawable/dobblemasksmall.png"
+                  WinPhone="dobblemasksmall.png" />
+            </Image.Source>
+          </Image>
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
-          <Button   ClassId="3" HeightRequest="44" WidthRequest="44"/>
-          <Button   ClassId="3" HeightRequest="44" WidthRequest="44"/>
+          <controls:ImageButton ClassId="3"
+              Clicked="PlaySound"
+              HeightRequest="44" WidthRequest="44"
+              Orientation="ImageToLeft" BackgroundColor="#fff"
+              ImageHeightRequest="35" ImageWidthRequest="35" >
+            <controls:ImageButton.Source>
+              <OnPlatform x:TypeArguments="ImageSource">
+                <OnPlatform.iOS>
+                  <FileImageSource File="play.png" />
+                </OnPlatform.iOS>
+                <OnPlatform.Android>
+                  <FileImageSource File="Drawable/play.png" />
+                </OnPlatform.Android>
+                <OnPlatform.WinPhone>
+                  <FileImageSource File="play.png" />
+                </OnPlatform.WinPhone>
+              </OnPlatform>
+            </controls:ImageButton.Source>
+          </controls:ImageButton>
+          <controls:ImageButton ClassId="3"
+              Clicked="RecordSound"
+              HeightRequest="44" WidthRequest="44"
+              Orientation="ImageToLeft" BackgroundColor="#fff"
+              ImageHeightRequest="35" ImageWidthRequest="35" >
+            <controls:ImageButton.Source>
+              <OnPlatform x:TypeArguments="ImageSource">
+                <OnPlatform.iOS>
+                  <FileImageSource File="record.png" />
+                </OnPlatform.iOS>
+                <OnPlatform.Android>
+                  <FileImageSource File="Drawable/record.png" />
+                </OnPlatform.Android>
+                <OnPlatform.WinPhone>
+                  <FileImageSource File="record.png" />
+                </OnPlatform.WinPhone>
+              </OnPlatform>
+            </controls:ImageButton.Source>
+          </controls:ImageButton>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Column="1" Grid.Row="2">
         <AbsoluteLayout ClassId="5" HorizontalOptions="Center">
           <Image ClassId="5" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
-          <Image HeightRequest="100" />
+          <Image HeightRequest="100">
+            <Image.Source>
+              <OnPlatform x:TypeArguments="ImageSource"
+                  iOS="dobblemask_small.png"
+                  Android="Drawable/dobblemasksmall.png"
+                  WinPhone="dobblemasksmall.png" />
+            </Image.Source>
+          </Image>
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
-          <Button  ClassId="4" HeightRequest="44" WidthRequest="44"/>
-          <Button   ClassId="4" HeightRequest="44" WidthRequest="44"/>
+          <controls:ImageButton ClassId="4"
+              Clicked="PlaySound"
+              HeightRequest="44" WidthRequest="44"
+              Orientation="ImageToLeft" BackgroundColor="#fff"
+              ImageHeightRequest="35" ImageWidthRequest="35" >
+            <controls:ImageButton.Source>
+              <OnPlatform x:TypeArguments="ImageSource">
+                <OnPlatform.iOS>
+                  <FileImageSource File="play.png" />
+                </OnPlatform.iOS>
+                <OnPlatform.Android>
+                  <FileImageSource File="Drawable/play.png" />
+                </OnPlatform.Android>
+                <OnPlatform.WinPhone>
+                  <FileImageSource File="play.png" />
+                </OnPlatform.WinPhone>
+              </OnPlatform>
+            </controls:ImageButton.Source>
+          </controls:ImageButton>
+          <controls:ImageButton ClassId="4"
+              Clicked="RecordSound"
+              HeightRequest="44" WidthRequest="44"
+              Orientation="ImageToLeft" BackgroundColor="#fff"
+              ImageHeightRequest="35" ImageWidthRequest="35" >
+            <controls:ImageButton.Source>
+              <OnPlatform x:TypeArguments="ImageSource">
+                <OnPlatform.iOS>
+                  <FileImageSource File="record.png" />
+                </OnPlatform.iOS>
+                <OnPlatform.Android>
+                  <FileImageSource File="Drawable/record.png" />
+                </OnPlatform.Android>
+                <OnPlatform.WinPhone>
+                  <FileImageSource File="record.png" />
+                </OnPlatform.WinPhone>
+              </OnPlatform>
+            </controls:ImageButton.Source>
+          </controls:ImageButton>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Column="2" Grid.Row="2">
         <AbsoluteLayout ClassId="6" HorizontalOptions="Center">
           <Image ClassId="6" HeightRequest="100" WidthRequest="100" Aspect="Fill"/>
-          <Image HeightRequest="100" />
+          <Image HeightRequest="100">
+            <Image.Source>
+              <OnPlatform x:TypeArguments="ImageSource"
+                  iOS="dobblemask_small.png"
+                  Android="Drawable/dobblemasksmall.png"
+                  WinPhone="dobblemasksmall.png" />
+            </Image.Source>
+          </Image>
         </AbsoluteLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="13,0,0,0">
-          <Button   ClassId="5" HeightRequest="44" WidthRequest="44"/>
-          <Button  ClassId="5" HeightRequest="44" WidthRequest="44"/>
+          <controls:ImageButton ClassId="5"
+              Clicked="PlaySound"
+              HeightRequest="44" WidthRequest="44"
+              Orientation="ImageToLeft" BackgroundColor="#fff"
+              ImageHeightRequest="35" ImageWidthRequest="35" >
+            <controls:ImageButton.Source>
+              <OnPlatform x:TypeArguments="ImageSource">
+                <OnPlatform.iOS>
+                  <FileImageSource File="play.png" />
+                </OnPlatform.iOS>
+                <OnPlatform.Android>
+                  <FileImageSource File="Drawable/play.png" />
+                </OnPlatform.Android>
+                <OnPlatform.WinPhone>
+                  <FileImageSource File="play.png" />
+                </OnPlatform.WinPhone>
+              </OnPlatform>
+            </controls:ImageButton.Source>
+          </controls:ImageButton>
+          <controls:ImageButton ClassId="5"
+              Clicked="RecordSound"
+              HeightRequest="44" WidthRequest="44"
+              Orientation="ImageToLeft" BackgroundColor="#fff"
+              ImageHeightRequest="35" ImageWidthRequest="35" >
+            <controls:ImageButton.Source>
+              <OnPlatform x:TypeArguments="ImageSource">
+                <OnPlatform.iOS>
+                  <FileImageSource File="record.png" />
+                </OnPlatform.iOS>
+                <OnPlatform.Android>
+                  <FileImageSource File="Drawable/record.png" />
+                </OnPlatform.Android>
+                <OnPlatform.WinPhone>
+                  <FileImageSource File="record.png" />
+                </OnPlatform.WinPhone>
+              </OnPlatform>
+            </controls:ImageButton.Source>
+          </controls:ImageButton>
         </StackLayout>
       </StackLayout>
       <StackLayout Grid.Row="3" Grid.ColumnSpan="3" >
