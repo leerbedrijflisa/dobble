@@ -47,7 +47,7 @@
                     x:Name="ChooseProfileButton"
                     VerticalOptions="Center" HorizontalOptions="Start" 
                    Grid.Column="2"
-                   Text="Kies profiel"/>
+                   Text="Kies dobbelsteen"/>
             
 
             <Label Grid.Row="1"
@@ -61,7 +61,7 @@
             <Label Grid.Row="1"
                    VerticalOptions="Center" HorizontalOptions="Start" 
                    Grid.Column="2"
-                   Text="Wachttijd in seconden"/>   
+                   Text="In seconden"/>   
             
             <Label Grid.Row="3"
                    VerticalOptions="Center" HorizontalOptions="End" 
