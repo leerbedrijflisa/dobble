@@ -41,6 +41,7 @@
     <Compile Include="Interfaces\IMicrophoneService.cs" />
     <Compile Include="Interfaces\IPathService.cs" />
     <Compile Include="Interfaces\ISQLite.cs" />
+    <Compile Include="Theme.cs" />
     <Compile Include="Timer.cs" />
     <Compile Include="Views\CreditsPage.xaml.cs">
       <DependentUpon>CreditsPage.xaml</DependentUpon>

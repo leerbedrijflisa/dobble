@@ -2,17 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 					   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Xamarin.Forms.Labs.Controls;assembly=Xamarin.Forms.Labs"
+             xmlns:v="clr-namespace:Lisa.Dobble;assembly=Lisa.Dobble"
              xmlns:icons="clr-namespace:Xamarin.Forms.Labs.Helpers;assembly=Xamarin.Forms.Labs"
 					   x:Class="Lisa.Dobble.SettingsPage">
-  <ContentPage.Resources>
-    <ResourceDictionary>
-      <OnPlatform x:Key="image"
-                  x:TypeArguments="FileImageSource"
-                  iOS="info-48.png"
-                  Android="Drawable/info.png"
-                  WinPhone="info.png" />
-    </ResourceDictionary>
-  </ContentPage.Resources>
+
     <Grid HorizontalOptions="FillAndExpand" Padding="0, 20, 0, 0" BackgroundColor="#fff">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
@@ -23,7 +16,7 @@
             <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
 
-      <Button Image="{StaticResource image}" WidthRequest="50" HeightRequest="50" HorizontalOptions="Start" BackgroundColor="#ccc"/>
+      <Button Image="{x:Static v:Theme.ButtonImage}" WidthRequest="50" HeightRequest="50" HorizontalOptions="Start" BackgroundColor="#ccc"/>
 
       <controls:ImageButton x:Name="CreditsButton" Grid.Row="0"
 HeightRequest="50" WidthRequest="50" VerticalOptions="Start" HorizontalOptions="End"
