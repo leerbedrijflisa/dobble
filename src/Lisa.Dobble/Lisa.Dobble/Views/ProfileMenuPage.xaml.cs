@@ -377,14 +377,13 @@ namespace Lisa.Dobble
 
 
                 DieNameIcon.IsVisible = false;
-                DeleteDieButton.IsVisible = false;
+                DeleteDieButton.IsEnabled = false;
                 foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
                 {
                     var recordSoundButton = ((StackLayout)dieOptionLayout).Children.OfType<Button>().Where(X => X.Text == "Geluid opnemen").FirstOrDefault();
                     if(recordSoundButton != null)
                         recordSoundButton.IsVisible = false;
-                    
-                    SelectDieButton.IsVisible = false;
+                   
                     
                     var interactionButtons = ((StackLayout)dieOptionLayout).Children.OfType<StackLayout>().FirstOrDefault();
                     if (interactionButtons != null)
@@ -410,14 +409,12 @@ namespace Lisa.Dobble
             {
                 EnableDie();
                 DieNameIcon.IsVisible = true;
-                DeleteDieButton.IsVisible = true;
+                DeleteDieButton.IsEnabled = true;
                 foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
                 {
                     var recordSoundButton = ((StackLayout)dieOptionLayout).Children.OfType<Button>().Where(X => X.Text == "Geluid opnemen").FirstOrDefault();
                     if(recordSoundButton != null)
                         recordSoundButton.IsVisible = true;
-
-                    SelectDieButton.IsVisible = true;
 
                     var interactionButtons = ((StackLayout)dieOptionLayout).Children.OfType<StackLayout>().FirstOrDefault();
                     if (interactionButtons != null)
