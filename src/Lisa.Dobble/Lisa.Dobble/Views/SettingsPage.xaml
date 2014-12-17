@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 					   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:Xamarin.Forms.Labs.Controls;assembly=Xamarin.Forms.Labs"
              xmlns:v="clr-namespace:Lisa.Dobble;assembly=Lisa.Dobble"
-             xmlns:icons="clr-namespace:Xamarin.Forms.Labs.Helpers;assembly=Xamarin.Forms.Labs"
 					   x:Class="Lisa.Dobble.SettingsPage">
 
     <Grid HorizontalOptions="FillAndExpand" Padding="0, 20, 0, 0" BackgroundColor="#fff">
@@ -17,35 +15,13 @@
       </Grid.ColumnDefinitions>
 
       <Button Image="{x:Static v:Theme.ButtonImage}" WidthRequest="50" HeightRequest="50" HorizontalOptions="Start" BackgroundColor="#ccc"/>
+      
+      <Button Image="{x:Static v:Theme.CreditsButton}" x:Name="CreditsButton" Grid.Row="0"
+              HeightRequest="50" WidthRequest="50" VerticalOptions="Start" HorizontalOptions="End"
+              BackgroundColor="#fff"/>
 
-      <controls:ImageButton x:Name="CreditsButton" Grid.Row="0"
-HeightRequest="50" WidthRequest="50" VerticalOptions="Start" HorizontalOptions="End"
-             Orientation="ImageToLeft" BackgroundColor="#fff"              
-ImageHeightRequest="40" ImageWidthRequest="40" >
-        <controls:ImageButton.Source>
-          <OnPlatform x:TypeArguments="ImageSource">
-            <OnPlatform.iOS>
-              <FileImageSource File="info-48.png" />
-            </OnPlatform.iOS>
-            <OnPlatform.Android>
-              <FileImageSource File="Drawable/info.png" />
-            </OnPlatform.Android>
-            <OnPlatform.WinPhone>
-              <FileImageSource File="info-48.png" />
-            </OnPlatform.WinPhone>
-          </OnPlatform>
-        </controls:ImageButton.Source>
-      </controls:ImageButton>
+      <Image HeightRequest="100" WidthRequest="300" HorizontalOptions="Center" VerticalOptions="Start" Source="{x:Static v:Theme.Logo}"/>
 
-
-      <Image HeightRequest="100" WidthRequest="300" HorizontalOptions="Center" VerticalOptions="Start">
-        <Image.Source>
-          <OnPlatform x:TypeArguments="ImageSource"
-              iOS="Logo.png"
-              Android="Drawable/logo.png"
-              WinPhone="Logo.png" />
-        </Image.Source>
-      </Image>
         <Grid Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="FillAndExpand" x:Name="SettingsGrid" BackgroundColor="#E0E0E0" Padding="0, 0, 0, 20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -76,9 +52,7 @@ ImageHeightRequest="40" ImageWidthRequest="40" >
                     x:Name="ChooseProfileButton"
                     VerticalOptions="Center" HorizontalOptions="Start" 
                    Grid.Column="2"
-                    
                    Text="Kies profiel"/>
-            
 
             <Label Grid.Row="1"
                    VerticalOptions="Center" HorizontalOptions="End" 
@@ -101,7 +75,7 @@ ImageHeightRequest="40" ImageWidthRequest="40" >
                    Text="Raakvlak"/>
             <Label Grid.Row="3"
                    Grid.Column="1"
-          VerticalOptions="Center" HorizontalOptions="Start" 
+                   VerticalOptions="Center" HorizontalOptions="Start" 
                    Text="Geheel Scherm"/>
             <Label Grid.Row="3"
                    Grid.Column="1"
@@ -116,8 +90,7 @@ ImageHeightRequest="40" ImageWidthRequest="40" >
               Text="Beginnen met dobbelen"
               BackgroundColor="#fff"
               Font="30"
-              TextColor="Blue"
-      />
+              TextColor="Blue"/>
       
     </Grid>
 </ContentPage>

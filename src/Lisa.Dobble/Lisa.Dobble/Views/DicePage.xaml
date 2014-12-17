@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 					   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:Xamarin.Forms.Labs.Controls;assembly=Xamarin.Forms.Labs"
+             xmlns:v="clr-namespace:Lisa.Dobble;assembly=Lisa.Dobble"
              xmlns:icons="clr-namespace:Xamarin.Forms.Labs.Helpers;assembly=Xamarin.Forms.Labs"
 					   x:Class="Lisa.Dobble.DicePage"
                        x:Name="DiceView"
@@ -19,30 +19,9 @@
         
         <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" >
           <Label x:Name="Instructions" Text="Draai de iPad naar u toe om terug te keren naar het menu" TextColor="#000"></Label>
-          <Image x:Name="TimeOne">
-            <Image.Source>
-              <OnPlatform x:TypeArguments="ImageSource"
-                  iOS="tick.png"
-                  Android="Drawable/tick.png"
-                  WinPhone="tick.png" />
-            </Image.Source>
-          </Image>
-          <Image x:Name="TimeTwo">
-            <Image.Source>
-              <OnPlatform x:TypeArguments="ImageSource"
-                  iOS="tick.png"
-                  Android="Drawable/tick.png"
-                  WinPhone="tick.png" />
-            </Image.Source>
-          </Image>
-          <Image x:Name="TimeThree">
-            <Image.Source>
-              <OnPlatform x:TypeArguments="ImageSource"
-                  iOS="tick.png"
-                  Android="Drawable/tick.png"
-                  WinPhone="tick.png" />
-            </Image.Source>
-          </Image>
+          <Image x:Name="TimeOne" Source="{x:Static v:Theme.Timer}"/>
+          <Image x:Name="TimeTwo" Source="{x:Static v:Theme.Timer}"/>
+          <Image x:Name="TimeThree" Source="{x:Static v:Theme.Timer}"/>
         </StackLayout>
       </Grid>
     </Frame>
