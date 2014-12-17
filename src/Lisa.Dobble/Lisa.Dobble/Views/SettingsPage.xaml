@@ -13,8 +13,6 @@
       <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
-
-      <Button Image="{x:Static v:Theme.ButtonImage}" WidthRequest="50" HeightRequest="50" HorizontalOptions="Start" BackgroundColor="#ccc"/>
       
       <Button Image="{x:Static v:Theme.CreditsButton}" x:Name="CreditsButton" Grid.Row="0"
               HeightRequest="50" WidthRequest="50" VerticalOptions="Start" HorizontalOptions="End"

@@ -9,10 +9,6 @@ namespace Lisa.Dobble
 {
     public static class Theme
     {
-        public static FileImageSource ButtonImage = Device.OnPlatform(
-                        iOS: "info-48.png",
-                        Android: "Drawable/info.png",
-                        WinPhone: "info.png");
         public static FileImageSource CreditsButton = Device.OnPlatform(
                         iOS: "info-48.png",
                         Android: "Drawable/info.png",
