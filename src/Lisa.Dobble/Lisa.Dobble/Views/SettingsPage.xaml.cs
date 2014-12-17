@@ -86,7 +86,7 @@ namespace Lisa.Dobble
             var dobbleTypeSegmentControl = new SegmentControl();
             dobbleTypeSegmentControl.TintColor = Color.Red;
             dobbleTypeSegmentControl.AddSegment("Geheel scherm");
-            dobbleTypeSegmentControl.HeightRequest = 30;
+            dobbleTypeSegmentControl.HeightRequest = 38;
             dobbleTypeSegmentControl.AddSegment("Dobbelsteen");
             dobbleTypeSegmentControl.SelectedSegmentChanged += (object sender, int segmentIndex) =>
             {
