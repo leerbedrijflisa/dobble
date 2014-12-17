@@ -116,7 +116,7 @@
         <Button x:Name="SelectDieButton" HorizontalOptions="Center" Text="Kiezen"/>
         <Button x:Name="DeleteDieButton" HorizontalOptions="Center" Text="Verwijderen"/>
       </StackLayout>
-      <Label x:Name="BuyAppLabel" Grid.Row="3" Grid.ColumnSpan="3" Text="Dit profiel is alleen beschikbaar in de betaalde versie van deze app." IsVisible="false" HorizontalOptions="Center"/>
+      <Image x:Name="BuyAppLabel" Grid.Row="3" Grid.ColumnSpan="3" Source="banner.png" IsVisible="false" HorizontalOptions="Center"/>
     </Grid>
   </Grid>
 </ContentPage>

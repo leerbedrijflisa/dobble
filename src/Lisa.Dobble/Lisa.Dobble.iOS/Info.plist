@@ -23,9 +23,9 @@
 	<key>MinimumOSVersion</key>
 	<string>6.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>Dobble</string>
+	<string>Dobble Free</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.Lisa.Dobble</string>
+	<string>com.Lisa.DobbleFree</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleShortVersionString</key>

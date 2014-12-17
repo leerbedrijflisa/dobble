@@ -365,6 +365,10 @@ namespace Lisa.Dobble
             ProfileGrid.IsVisible = true;
             ProfileGrid.Opacity = 1;
             FadeInDieImages(ProfileGrid);
+
+            if(selectedDie.IsDefault)
+                DeleteDieButton.IsEnabled = false;
+
         }
 
         private void SetDie(int dieId)
@@ -374,10 +378,9 @@ namespace Lisa.Dobble
             selectedDie = dice.Where(x => x.Id == dieId).FirstOrDefault();
             if(selectedDie.IsDefault)
             {
-
-
+                
                 DieNameIcon.IsVisible = false;
-                DeleteDieButton.IsEnabled = false;
+               
                 foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
                 {
                     var recordSoundButton = ((StackLayout)dieOptionLayout).Children.OfType<Button>().Where(X => X.Text == "Geluid opnemen").FirstOrDefault();
