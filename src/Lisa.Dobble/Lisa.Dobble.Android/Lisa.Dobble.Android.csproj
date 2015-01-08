@@ -130,7 +130,7 @@
     <Content Include="info-48.png" />
     <Content Include="Properties\AndroidManifest.xml" />
     <Content Include="Resources\buzzie.png" />
-    <Content Include="Resources\dice.wav" />
+    <Content Include="Assets\dice.wav" />
     <Content Include="Resources\dobblemask_small.png" />
     <AndroidResource Include="Resources\Drawable\dobblemasksmall.png" />
     <AndroidResource Include="Resources\Drawable\edit.png" />
