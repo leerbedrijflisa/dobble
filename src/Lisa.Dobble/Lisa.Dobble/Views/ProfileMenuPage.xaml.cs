@@ -176,15 +176,15 @@ namespace Lisa.Dobble
                     case "Annuleren":
                         return;
                     case "Camera":
-                        mediaFile = await this.mediaPicker.TakePhotoAsync(new CameraMediaStorageOptions());
-                        break;
-                    case "Galerij":
-                        mediaFile = await this.mediaPicker.SelectPhotoAsync(new CameraMediaStorageOptions
+                        mediaFile = await this.mediaPicker.TakePhotoAsync(new CameraMediaStorageOptions
                         {
                             SaveMediaOnCapture = true,
                             DefaultCamera = CameraDevice.Rear,
                             MaxPixelDimension = 400,
                         });
+                        break;
+                    case "Galerij":
+                        mediaFile = await this.mediaPicker.SelectPhotoAsync(new CameraMediaStorageOptions());
                         break;
                     default:
                         break;

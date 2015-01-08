@@ -7,6 +7,7 @@ using System.Drawing;
 using MonoTouch.CoreGraphics;
 using MonoTouch.UIKit;
 using Xamarin.Forms;
+using MonoTouch.CoreImage;
 #endif
 
 #if __ANDROID__
@@ -45,41 +46,67 @@ namespace Lisa.Dobble
         public byte[] ResizeImageIOS(byte[] imageData, float width, float height)
         {
             UIImage originalImage = ImageFromByteArray(imageData);
-
+            var tempWidth = originalImage.CGImage.Width;
+            var tempHeight = originalImage.CGImage.Height;
+            var rect = new System.Drawing.Rectangle(tempWidth / 4, tempHeight / 4, tempWidth / 2, tempHeight / 2);
+            originalImage = ScaleAndCropImage(originalImage, new SizeF(367, 367));
             //create a 24bit RGB image
             using (CGBitmapContext context = new CGBitmapContext(IntPtr.Zero,
                 (int)width, (int)height, 8,
                 (int)(4 * width), CGColorSpace.CreateDeviceRGB(),
                 CGImageAlphaInfo.PremultipliedFirst))
             {
+                
                 switch (originalImage.Orientation)
                 {
                     case UIImageOrientation.Left:
                         context.RotateCTM((float)Math.PI / 2);
                         context.TranslateCTM(0, -height);
+                        //originalImage.Scale(new SizeF(originalImage.CGImage.Width, originalImage.CGImage.Height), 100f);
                         break;
                     case UIImageOrientation.Right:
                         context.RotateCTM(-((float)Math.PI / 2));
                         context.TranslateCTM(-width, 0);
+                        //originalImage.Scale(new SizeF(originalImage.CGImage.Width, originalImage.CGImage.Height), 100f);
                         break;
                     case UIImageOrientation.Up:
+                        //originalImage.Scale(new SizeF(originalImage.CGImage.Width, originalImage.CGImage.Height), 100f);
                         break;
                     case UIImageOrientation.Down:
                         context.TranslateCTM(width, height);
                         context.RotateCTM(-(float)Math.PI);
+                        //originalImage.Scale(new SizeF(originalImage.CGImage.Width, originalImage.CGImage.Height), 100f);
                         break;
                 }
 
-                RectangleF imageRect = new RectangleF(0, 0, width, height);
-
-                // draw the image
-                context.DrawImage(imageRect, originalImage.CGImage);
-
-                MonoTouch.UIKit.UIImage resizedImage = MonoTouch.UIKit.UIImage.FromImage(context.ToImage());
+                
                 
                 // save the image as a jpeg
-                return resizedImage.AsJPEG().ToArray();
+                return originalImage.AsJPEG().ToArray();
             }
+
+        }
+
+        UIImage cropImage(UIImage srcImage, RectangleF rect)
+        {
+            using (CGImage cr = srcImage.CGImage.WithImageInRect(rect))
+            {
+                UIImage cropped = UIImage.FromImage(cr);
+                return cropped;
+            }
+        }
+
+        UIImage squareImage(UIImage srcImage)
+        {
+            var width = srcImage.CGImage.Width;
+            var height = srcImage.CGImage.Height;
+
+            var rect = new System.Drawing.Rectangle(width / 4, height / 4, width / 2, height / 2);
+
+            var newImage = new UIImage(srcImage.CGImage);
+            newImage = new UIImage(newImage.CGImage.WithImageInRect(rect));
+            newImage = newImage.Scale(new SizeF(367, 367), 5);
+            return newImage;
         }
 
         public MonoTouch.UIKit.UIImage ImageFromByteArray(byte[] data)
@@ -96,10 +123,59 @@ namespace Lisa.Dobble
             }
             catch (Exception e)
             {
-                Console.WriteLine("Image load failed: " + e.Message);
                 return null;
             }
             return image;
+        }
+
+        public static UIImage ScaleAndCropImage(UIImage sourceImage, SizeF targetSize)
+        {
+            var imageSize = sourceImage.Size;
+            UIImage newImage = null;
+            var width = imageSize.Width;
+            var height = imageSize.Height;
+            var targetWidth = targetSize.Width;
+            var targetHeight = targetSize.Height;
+            var scaleFactor = 0.0f;
+            var scaledWidth = targetWidth;
+            var scaledHeight = targetHeight;
+            var thumbnailPoint = PointF.Empty;
+            if (imageSize != targetSize)
+            {
+                var widthFactor = targetWidth / width;
+                var heightFactor = targetHeight / height;
+                if (widthFactor > heightFactor)
+                {
+                    scaleFactor = widthFactor;
+                }
+                else
+                {
+                    scaleFactor = heightFactor;
+                }
+                scaledWidth = width * scaleFactor;
+                scaledHeight = height * scaleFactor;
+
+                // center the image
+                if (widthFactor > heightFactor)
+                {
+                    thumbnailPoint.Y = (targetHeight - scaledHeight) * 0.5f;
+                }
+                else
+                {
+                    if (widthFactor < heightFactor)
+                    {
+                        thumbnailPoint.X = (targetWidth - scaledWidth) * 0.5f;
+                    }
+                }
+            }
+            UIGraphics.BeginImageContextWithOptions(targetSize, false, 0.0f);
+            var thumbnailRect = new RectangleF(thumbnailPoint, new SizeF(scaledWidth, scaledHeight));
+            sourceImage.Draw(thumbnailRect);
+            newImage = UIGraphics.GetImageFromCurrentImageContext();
+
+            UIGraphics.EndImageContext();
+
+            return newImage;
         }
 #endif
 
