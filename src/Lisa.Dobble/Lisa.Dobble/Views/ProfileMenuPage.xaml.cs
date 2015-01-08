@@ -356,6 +356,9 @@ namespace Lisa.Dobble
             BuyAppLabel.IsVisible = true;
             BuyAppLabel.Opacity = 1;
             DisableInteraction(ProfileGrid);
+
+            if (selectedDie.IsDefault)
+                DeleteDieButton.IsEnabled = false;
         }
 
         private void EnableDie()
@@ -380,7 +383,7 @@ namespace Lisa.Dobble
             {
                 
                 DieNameIcon.IsVisible = false;
-               
+                DeleteDieButton.IsEnabled = false;
                 foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
                 {
                     var recordSoundButton = ((StackLayout)dieOptionLayout).Children.OfType<Button>().Where(X => X.Text == "Geluid opnemen").FirstOrDefault();

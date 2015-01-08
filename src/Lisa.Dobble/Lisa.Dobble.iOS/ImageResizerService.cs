@@ -41,7 +41,6 @@ namespace Lisa.Dobble
 #endif
         }
 
-
 #if __IOS__
         public byte[] ResizeImageIOS(byte[] imageData, float width, float height)
         {
@@ -50,64 +49,35 @@ namespace Lisa.Dobble
             var tempHeight = originalImage.CGImage.Height;
             var rect = new System.Drawing.Rectangle(tempWidth / 4, tempHeight / 4, tempWidth / 2, tempHeight / 2);
             originalImage = ScaleAndCropImage(originalImage, new SizeF(367, 367));
-            //create a 24bit RGB image
+
             using (CGBitmapContext context = new CGBitmapContext(IntPtr.Zero,
                 (int)width, (int)height, 8,
                 (int)(4 * width), CGColorSpace.CreateDeviceRGB(),
                 CGImageAlphaInfo.PremultipliedFirst))
-            {
-                
+            {          
                 switch (originalImage.Orientation)
                 {
                     case UIImageOrientation.Left:
                         context.RotateCTM((float)Math.PI / 2);
                         context.TranslateCTM(0, -height);
-                        //originalImage.Scale(new SizeF(originalImage.CGImage.Width, originalImage.CGImage.Height), 100f);
                         break;
                     case UIImageOrientation.Right:
                         context.RotateCTM(-((float)Math.PI / 2));
                         context.TranslateCTM(-width, 0);
-                        //originalImage.Scale(new SizeF(originalImage.CGImage.Width, originalImage.CGImage.Height), 100f);
                         break;
                     case UIImageOrientation.Up:
-                        //originalImage.Scale(new SizeF(originalImage.CGImage.Width, originalImage.CGImage.Height), 100f);
                         break;
                     case UIImageOrientation.Down:
                         context.TranslateCTM(width, height);
                         context.RotateCTM(-(float)Math.PI);
-                        //originalImage.Scale(new SizeF(originalImage.CGImage.Width, originalImage.CGImage.Height), 100f);
                         break;
                 }
 
-                
-                
-                // save the image as a jpeg
                 return originalImage.AsJPEG().ToArray();
             }
 
         }
 
-        UIImage cropImage(UIImage srcImage, RectangleF rect)
-        {
-            using (CGImage cr = srcImage.CGImage.WithImageInRect(rect))
-            {
-                UIImage cropped = UIImage.FromImage(cr);
-                return cropped;
-            }
-        }
-
-        UIImage squareImage(UIImage srcImage)
-        {
-            var width = srcImage.CGImage.Width;
-            var height = srcImage.CGImage.Height;
-
-            var rect = new System.Drawing.Rectangle(width / 4, height / 4, width / 2, height / 2);
-
-            var newImage = new UIImage(srcImage.CGImage);
-            newImage = new UIImage(newImage.CGImage.WithImageInRect(rect));
-            newImage = newImage.Scale(new SizeF(367, 367), 5);
-            return newImage;
-        }
 
         public MonoTouch.UIKit.UIImage ImageFromByteArray(byte[] data)
         {
