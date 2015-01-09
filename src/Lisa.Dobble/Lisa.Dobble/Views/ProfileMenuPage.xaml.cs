@@ -386,6 +386,17 @@ namespace Lisa.Dobble
                 DeleteDieButton.IsEnabled = false;
                 foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
                 {
+
+#if FREE
+                if (selectedDie.IsPremium)
+                {
+                    DisableDie();
+                }
+                else
+                {
+                    EnableDie();
+                }
+#endif
                     var recordSoundButton = ((StackLayout)dieOptionLayout).Children.OfType<Button>().Where(X => X.Text == "Geluid opnemen").FirstOrDefault();
                     if(recordSoundButton != null)
                         recordSoundButton.IsVisible = false;
@@ -400,16 +411,6 @@ namespace Lisa.Dobble
                     
                 }
 
-#if FREE
-                if (selectedDie.IsPremium)
-                {
-                    DisableDie();
-                }
-                else
-                {
-                    EnableDie();
-                }
-#endif
             }
             else
             {
