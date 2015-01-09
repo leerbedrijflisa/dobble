@@ -87,13 +87,23 @@ namespace Lisa.Dobble
             var device = Resolver.Resolve<IDevice>();
             device.Accelerometer.Interval = AccelerometerInterval.Normal;
             device.Accelerometer.ReadingAvailable += Accelerometer_ReadingAvailable;
-
-            MainGrid.OnSwipe += MainGrid_OnSwipe;
+            if (SelectedTouchMode == TouchMode.Die){
+                DieMask.OnSwipe += DieLayout_OnSwipe;
+            }
+            else
+            {
+                MainGrid.OnSwipe += MainGrid_OnSwipe;
+            }
             _timer = new Timer();
             _timer.Tick += OnTick;
 
             _app = Resolver.Resolve<IXFormsApp>();
             _app.Resumed += PushSettingsPage;
+        }
+
+        void DieLayout_OnSwipe(object sender, EventArgs e)
+        {
+            RollDice();
         }
 
         void MainGrid_OnSwipe(object sender, EventArgs e)

@@ -160,6 +160,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bootstrap\UserDialogsBootstrap.cs" />
+    <Compile Include="FancyIosImageRenderer.cs" />
     <Compile Include="FancyIosFrameRenderer.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="ImageResizerService.cs" />
