@@ -127,7 +127,6 @@
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="info-48.png" />
     <Content Include="Properties\AndroidManifest.xml" />
     <Content Include="Resources\buzzie.png" />
     <Content Include="Assets\dice.wav" />
@@ -167,7 +166,6 @@
     <AndroidResource Include="Resources\Drawable\dice54.png" />
     <AndroidResource Include="Resources\Drawable\dice55.png" />
     <AndroidResource Include="Resources\Drawable\dice56.png" />
-    <Content Include="Resources\Drawable\een.png" />
     <AndroidResource Include="Resources\Drawable\logo.png" />
     <AndroidResource Include="Resources\Drawable\tick.png" />
     <AndroidResource Include="Resources\Drawable\white.png" />
@@ -182,7 +180,6 @@
     <Content Include="Resources\play.png" />
     <Content Include="Resources\plus.png" />
     <Content Include="Resources\record.png" />
-    <Content Include="Resources\snoozesound.mp3" />
     <Content Include="Resources\stop.png" />
     <Content Include="Resources\tick.png" />
   </ItemGroup>
