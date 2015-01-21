@@ -41,7 +41,13 @@ namespace Lisa.Dobble
 
         void Accelerometer_ReadingAvailable(object sender, EventArgs<Xamarin.Forms.Labs.Helpers.Vector3> e)
         {
-            if (!IsPopped && e.Value.Z > 0.890)
+            if (!IsPopped && e.Value.Z < -1 && Device.OS.Equals(TargetPlatform.Android))
+            {
+                Navigation.PopAsync();
+                IsPopped = true;
+                
+            }
+            if (!IsPopped && e.Value.Z > 0.890 && Device.OS.Equals(TargetPlatform.iOS))
             {
                 Navigation.PopAsync();
                 IsPopped = true;
