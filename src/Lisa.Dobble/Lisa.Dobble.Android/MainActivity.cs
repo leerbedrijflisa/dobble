@@ -13,7 +13,7 @@ using Xamarin.Forms.Labs.Services;
 
 namespace Lisa.Dobble.Droid
 {
-    [Activity(Label = "Lisa.Dobble", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Lisa.Dobble", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, Theme = "@android:style/Theme.Holo.Light")]
     public class MainActivity : XFormsApplicationDroid
     {
         protected override void OnCreate(Bundle bundle)
@@ -22,6 +22,17 @@ namespace Lisa.Dobble.Droid
 
             var container = new SimpleContainer();
             container.Register<IDevice>(t => AndroidDevice.CurrentDevice);
+
+            Window.AddFlags(WindowManagerFlags.Fullscreen);
+            Window.ClearFlags(WindowManagerFlags.ForceNotFullscreen);
+
+            View decorView = this.Window.DecorView;
+            var uiOptions = (int)decorView.SystemUiVisibility;
+            var newUiOptions = (int)uiOptions;
+            newUiOptions |= (int)SystemUiFlags.Fullscreen;
+            newUiOptions |= (int)SystemUiFlags.HideNavigation;
+            newUiOptions |= (int)SystemUiFlags.ImmersiveSticky;
+            decorView.SystemUiVisibility = (StatusBarVisibility)newUiOptions;
 
             Resolver.SetResolver(container.GetResolver());
 
