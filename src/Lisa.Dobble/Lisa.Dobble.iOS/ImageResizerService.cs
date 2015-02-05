@@ -1,13 +1,13 @@
-﻿using System;
+using System;
 using System.IO;
 
 #if __IOS__
 using Lisa.Dobble.Interfaces;
 using System.Drawing;
-using MonoTouch.CoreGraphics;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using UIKit;
 using Xamarin.Forms;
-using MonoTouch.CoreImage;
+using CoreImage;
 #endif
 
 #if __ANDROID__
@@ -47,7 +47,7 @@ namespace Lisa.Dobble
             UIImage originalImage = ImageFromByteArray(imageData);
             var tempWidth = originalImage.CGImage.Width;
             var tempHeight = originalImage.CGImage.Height;
-            var rect = new System.Drawing.Rectangle(tempWidth / 4, tempHeight / 4, tempWidth / 2, tempHeight / 2);
+			var rect = new System.Drawing.Rectangle((int)(tempWidth / 4), (int)(tempHeight / 4), (int)(tempWidth / 2), (int)(tempHeight / 2));
             originalImage = ScaleAndCropImage(originalImage, new SizeF(367, 367));
 
             using (CGBitmapContext context = new CGBitmapContext(IntPtr.Zero,
@@ -79,17 +79,17 @@ namespace Lisa.Dobble
         }
 
 
-        public MonoTouch.UIKit.UIImage ImageFromByteArray(byte[] data)
+        public UIKit.UIImage ImageFromByteArray(byte[] data)
         {
             if (data == null)
             {
                 return null;
             }
 
-            MonoTouch.UIKit.UIImage image;
+            UIKit.UIImage image;
             try
             {
-                image = new MonoTouch.UIKit.UIImage(MonoTouch.Foundation.NSData.FromArray(data));
+                image = new UIKit.UIImage(Foundation.NSData.FromArray(data));
             }
             catch (Exception e)
             {
@@ -116,14 +116,14 @@ namespace Lisa.Dobble
                 var heightFactor = targetHeight / height;
                 if (widthFactor > heightFactor)
                 {
-                    scaleFactor = widthFactor;
+					scaleFactor = (float)widthFactor;
                 }
                 else
                 {
-                    scaleFactor = heightFactor;
+					scaleFactor = (float)heightFactor;
                 }
-                scaledWidth = width * scaleFactor;
-                scaledHeight = height * scaleFactor;
+				scaledWidth = (float)(width * scaleFactor);
+				scaledHeight = (float)(height * scaleFactor);
 
                 // center the image
                 if (widthFactor > heightFactor)

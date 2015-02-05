@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using Xamarin.Forms.Labs.Services.SoundService;
-using MonoTouch.AVFoundation;
+using AVFoundation;
 using System.Threading.Tasks;
-using MonoTouch.Foundation;
+using Foundation;
 using Xamarin.Forms;
 
 

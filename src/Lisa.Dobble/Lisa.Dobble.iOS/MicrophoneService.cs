@@ -1,4 +1,4 @@
-﻿using Lisa.Dobble;
+using Lisa.Dobble;
 using System;
 using System.Collections.Generic;
 using System.Text;

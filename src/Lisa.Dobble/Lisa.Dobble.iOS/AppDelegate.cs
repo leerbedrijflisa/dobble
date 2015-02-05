@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Labs.iOS;
@@ -17,7 +17,7 @@ namespace Lisa.Dobble.iOS
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.
     [Register("AppDelegate")]
-    public partial class AppDelegate : XFormsApplicationDelegate
+	public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
         // class-level declarations
         UIWindow window;
@@ -50,10 +50,10 @@ namespace Lisa.Dobble.iOS
         {
             var resolverContainer = new SimpleContainer();
 
-            var app = new XFormsAppiOS();
-            app.Init(this);
+            //var app = new XFormsAppiOS();
+            //app.Init(this);
             resolverContainer.Register<IDevice>(t => AppleDevice.CurrentDevice);
-            resolverContainer.Register<IXFormsApp>(app);
+            //resolverContainer.Register<IXFormsApp>(app);
             Resolver.SetResolver(resolverContainer.GetResolver());
         }
     }
