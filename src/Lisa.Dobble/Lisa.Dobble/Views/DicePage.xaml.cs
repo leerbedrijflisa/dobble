@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Labs;
-using Xamarin.Forms.Labs.Services;
-using Xamarin.Forms.Labs.Services.IO;
-using Xamarin.Forms.Labs.Services.SoundService;
-using Xamarin.Forms.Labs.Mvvm;
+using XLabs.Platform.Services.IO;
+using XLabs;
+using XLabs.Platform.Mvvm;
+using XLabs.Ioc;
+using XLabs.Platform.Device;
 
 namespace Lisa.Dobble
 {
@@ -39,7 +39,7 @@ namespace Lisa.Dobble
 
         }
 
-        void Accelerometer_ReadingAvailable(object sender, EventArgs<Xamarin.Forms.Labs.Helpers.Vector3> e)
+        void Accelerometer_ReadingAvailable(object sender, EventArgs<Vector3> e)
         {
             if (!IsPopped && e.Value.Z > 0.890)
             {

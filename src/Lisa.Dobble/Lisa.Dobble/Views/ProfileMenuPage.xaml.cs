@@ -9,12 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Labs;
-using Xamarin.Forms.Labs.Mvvm;
-using Xamarin.Forms.Labs.Services;
-using Xamarin.Forms.Labs.Services.IO;
-using Xamarin.Forms.Labs.Services.Media;
-using Xamarin.Forms.Labs.Services.SoundService;
+using XLabs.Platform.Services.Media;
+using XLabs.Platform.Services.IO;
+using XLabs.Platform.Mvvm;
+using XLabs.Ioc;
+using XLabs.Platform.Device;
 
 namespace Lisa.Dobble
 {

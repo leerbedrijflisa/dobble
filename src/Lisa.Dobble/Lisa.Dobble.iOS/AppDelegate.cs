@@ -6,10 +6,9 @@ using Foundation;
 using UIKit;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Labs.iOS;
-using Xamarin.Forms.Labs.Services;
-using Xamarin.Forms.Labs;
-using Xamarin.Forms.Labs.Mvvm;
+using XLabs.Ioc;
+using XLabs.Platform.Device;
+
 
 namespace Lisa.Dobble.iOS
 {

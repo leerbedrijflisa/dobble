@@ -1,10 +1,10 @@
 using System;
 using Lisa.Dobble;
-using Xamarin.Forms.Labs.Services.SoundService;
 using AVFoundation;
 using System.Threading.Tasks;
 using Foundation;
 using Xamarin.Forms;
+using XLabs.Platform.Services.Media;
 
 
 [assembly: Dependency(typeof(Lisa.Dobble.LisaSoundService))]

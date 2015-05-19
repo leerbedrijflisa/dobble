@@ -1,12 +1,12 @@
 using System;
-using Xamarin.Forms.Labs.Services.SoundService;
 using AVFoundation;
 using System.Threading.Tasks;
 using Foundation;
 using Xamarin.Forms;
+using XLabs.Platform.Services.Media;
 
 
-[assembly: Dependency(typeof(Xamarin.Forms.Labs.iOS.Services.SoundService))]
+[assembly: Dependency(typeof(SoundService))]
 namespace Xamarin.Forms.Labs.iOS.Services
 {
     public class SoundService : ISoundService

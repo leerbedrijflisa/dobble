@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Xamarin.Forms.Labs.Services.SoundService;
+using XLabs.Platform.Services.Media;
 
 namespace Lisa.Dobble
 {
