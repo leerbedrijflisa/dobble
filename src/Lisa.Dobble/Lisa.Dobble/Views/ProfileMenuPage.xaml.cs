@@ -23,7 +23,6 @@ namespace Lisa.Dobble
         List<Die> dice;
         public Die selectedDie;
         IMediaPicker mediaPicker;
-        ImageSource imageSource;
         IFileManager fileManager;
 
         public ProfileMenuPage()
@@ -41,21 +40,21 @@ namespace Lisa.Dobble
             DeleteDieButton.Clicked += DeleteDieButton_Clicked;
         }
 
-        private async void InitializeAdditionalComponent()
+        private void InitializeAdditionalComponent()
         {
-            ToolbarItems.Add(new ToolbarItem("Add", "plus.png", async () =>
+			ToolbarItems.Add(new ToolbarItem("Add", "plus.png", () =>
             {
                 CreateNewDie();
             }));
 
             var tapGestureRecognizer = new TapGestureRecognizer();
-            tapGestureRecognizer.TappedCallback += (s, e) =>
+            tapGestureRecognizer.TappedCallback += async (s, e) =>
             {
                 if (!selectedDie.IsDefault)
                 {
                     var imageCount = 0;
                     int.TryParse(s.ClassId, out imageCount);
-                    SelectPicture(imageCount - 1);
+                    await SelectPicture(imageCount - 1);
                 }
             };
 
@@ -89,7 +88,7 @@ namespace Lisa.Dobble
         {
             if(selectedDie.IsDefault)
             {
-                DisplayAlert("Fout", "Je kunt de naam van een deze dobbelsteen niet veranderen", "OK");
+                await DisplayAlert("Fout", "Je kunt de naam van een deze dobbelsteen niet veranderen", "OK");
                 return;
             }
             var _userDialogService = DependencyService.Get<IUserDialogService>();
@@ -97,7 +96,7 @@ namespace Lisa.Dobble
             if(r.Ok)
             {
                 if (r.Text.Length < 1){
-                    DisplayAlert("Fout", "Naam van de dobbelsteen moet minimaal 1 karakter lang zijn", "OK");
+                    await DisplayAlert("Fout", "Naam van de dobbelsteen moet minimaal 1 karakter lang zijn", "OK");
                 }
                 else{
                     DieName.Text = r.Text;
@@ -164,8 +163,7 @@ namespace Lisa.Dobble
         private async Task SelectPicture(int option = 1)
         {
             Setup();
-            imageSource = null;
-             try
+            try
             {
                 var action = await DisplayActionSheet("Foto selecteren", "Annuleren", null, "Camera", "Galerij");
                 MediaFile mediaFile = null;
@@ -189,7 +187,6 @@ namespace Lisa.Dobble
                         break;
                 }
 
-                imageSource = ImageSource.FromStream(() => mediaFile.Source);
                 var imageStream = mediaFile.Source;
                 byte[] imageData;
                 using(MemoryStream ms = new MemoryStream())
@@ -214,9 +211,12 @@ namespace Lisa.Dobble
 
                 SetDie(selectedDie.Id);
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 //this.Status = ex.Message;
+
+				// What is this catch doing here? Will things break if we remove it?
+				// TODO: Find out.
             }
         }
 
@@ -581,10 +581,8 @@ namespace Lisa.Dobble
         }
 
         private WaveRecorder _recorder = new WaveRecorder();
-        private IUserDialogService _userDialogService;
         private IFileManager _fileManager;
         private Stream _fileStream;
-        private string _fullPath;
         private IXFormsApp _app;
         private bool _isRecording;
         private bool _isCameraOpen;

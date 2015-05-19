@@ -28,7 +28,6 @@ namespace Lisa.Dobble
         public DicePage()
         {
             InitializeComponent();
-            fileManager = DependencyService.Get<IFileManager>();
             soundService = DependencyService.Get<ILisaSoundService>();
             pathService = DependencyService.Get<IPathService>();
             NavigationPage.SetHasNavigationBar(this, false);
@@ -128,10 +127,8 @@ namespace Lisa.Dobble
             if (enabled && !isAnimating)
             {   
                 _timer.Stop();
-                needsAnimation = false;
                 Device.StartTimer(new TimeSpan(0, 0, 0, 9), () =>
                 {
-                    needsAnimation = true;
                     return false;
                 });
                 soundService.Stop();
@@ -242,9 +239,12 @@ namespace Lisa.Dobble
                         DieLayout.FadeTo(0.4, 200);
                         await DieLayout.LayoutTo(rec3, 35);
                     }
-                }catch(Exception e)
+                }
+				catch (Exception)
                 {
-
+					// What is this catch doing here? Will things go wrong if we
+					// remove it?
+					// TODO: Find out.
                 }
                 isAnimating = false;
             }
@@ -374,9 +374,7 @@ namespace Lisa.Dobble
 
         private Random random;
         private int _randomNumber;
-        private IFileManager fileManager;
         private Timer _timer;
-        private bool needsAnimation;
         private IXFormsApp _app;
         private bool isAnimating;
         private bool firstDie;
