@@ -11,10 +11,7 @@ namespace Lisa.Dobble
     {
         public static Page GetMainPage()
         {
-            var settingsPage = new NavigationPage(new SettingsPage());
-           
-
-            return settingsPage;
+            return new NavigationPage(new SettingsPage());
         }
     }
 }

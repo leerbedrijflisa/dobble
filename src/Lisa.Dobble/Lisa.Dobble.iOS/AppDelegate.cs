@@ -8,6 +8,11 @@ using UIKit;
 using Xamarin.Forms;
 using XLabs.Ioc;
 using XLabs.Platform.Device;
+using XLabs.Platform.Services.Media;
+using XLabs.Platform.Mvvm;
+using XLabs.Forms;
+using XLabs.Platform.Services.IO;
+using Acr.UserDialogs;
 
 
 namespace Lisa.Dobble.iOS
@@ -30,12 +35,10 @@ namespace Lisa.Dobble.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            this.SetIoc();
+			RegisterServices();
             app.Init();
             Forms.Init();
-            var container = new SimpleContainer();
-
-
+            
             window = new UIWindow(UIScreen.MainScreen.Bounds);
 
             window.RootViewController = App.GetMainPage().CreateViewController();
@@ -45,14 +48,22 @@ namespace Lisa.Dobble.iOS
             return true;
         }
 
-        private void SetIoc()
+        private void RegisterServices()
         {
             var resolverContainer = new SimpleContainer();
+			var app = new XFormsAppiOS();
+			UserDialogs.Init();
 
-            //var app = new XFormsAppiOS();
-            //app.Init(this);
-            resolverContainer.Register<IDevice>(t => AppleDevice.CurrentDevice);
-            //resolverContainer.Register<IXFormsApp>(app);
+			resolverContainer
+				.Register<IXFormsApp>(app)
+				.Register<IDevice>(t => AppleDevice.CurrentDevice)
+				.Register<IMediaPicker, MediaPicker>()
+				.Register<ISoundService, Lisa.Dobble.iOS.SoundService>()
+				.Register<IMicrophoneService, Lisa.Dobble.iOS.MicrophoneService>()
+				.Register<IFileManager, Lisa.Dobble.iOS.FileManager>()
+				.Register<IPathService, Lisa.Dobble.iOS.PathService>()
+				.Register<IUserDialogs>(UserDialogs.Instance);
+			
             Resolver.SetResolver(resolverContainer.GetResolver());
         }
     }

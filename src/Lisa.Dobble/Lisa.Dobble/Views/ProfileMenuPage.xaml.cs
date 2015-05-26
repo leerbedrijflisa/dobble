@@ -1,5 +1,4 @@
-﻿using Acr.XamForms.UserDialogs;
-using Lisa.Dobble.Data;
+﻿using Lisa.Dobble.Data;
 using Lisa.Dobble.Interfaces;
 using Lisa.Dobble.Models;
 using System;
@@ -14,6 +13,7 @@ using XLabs.Platform.Services.IO;
 using XLabs.Platform.Mvvm;
 using XLabs.Ioc;
 using XLabs.Platform.Device;
+using Acr.UserDialogs;
 
 namespace Lisa.Dobble
 {
@@ -23,19 +23,19 @@ namespace Lisa.Dobble
         List<Die> dice;
         public Die selectedDie;
         IMediaPicker mediaPicker;
-        IFileManager fileManager;
 
         public ProfileMenuPage()
         {
             InitializeComponent();
             InitializeAdditionalComponent();
+			InitializeServices();
+
             database = new DieDatabase();
             dice = database.GetDice();
             ProfileListView.ItemTapped += dieCell_Tapped;
             ProfileListView.ItemsSource = dice;
             ProfileListView.SelectedItem = 0;
 
-            _fileManager = DependencyService.Get<IFileManager>();
             SelectDieButton.Clicked += SelectDieButton_Clicked;
             DeleteDieButton.Clicked += DeleteDieButton_Clicked;
         }
@@ -66,17 +66,21 @@ namespace Lisa.Dobble
                     layoutObject.GestureRecognizers.Add(tapGestureRecognizer);
                 }
             }
-
-            fileManager = DependencyService.Get<IFileManager>();
-            _soundService = DependencyService.Get<ILisaSoundService>();
-            _pathService = DependencyService.Get<IPathService>();
-            imageService = DependencyService.Get<IImageResizerService>();
+				
             DieName.Clicked += ChangeDieName;
             DieNameIcon.Clicked += ChangeDieName;
 
             _app = Resolver.Resolve<IXFormsApp>();
             _app.Resumed += PushSettingsPage;
         }
+
+		private void InitializeServices()
+		{
+			_app = Resolver.Resolve<IXFormsApp>();
+			_fileManager = Resolver.Resolve<IFileManager>();
+			_pathService = Resolver.Resolve<IPathService>();
+			_soundService = Resolver.Resolve<ISoundService>();
+		}
 
         private void PushSettingsPage(object sender, EventArgs e)
         {
@@ -91,8 +95,8 @@ namespace Lisa.Dobble
                 await DisplayAlert("Fout", "Je kunt de naam van een deze dobbelsteen niet veranderen", "OK");
                 return;
             }
-            var _userDialogService = DependencyService.Get<IUserDialogService>();
-            var r = await _userDialogService.PromptAsync("Vul de naam in van deze dobbelsteen.", "Opslaan");
+			var userDialogs = Resolver.Resolve<IUserDialogs>();
+            var r = await userDialogs.PromptAsync("Vul de naam in van deze dobbelsteen.", "Opslaan");
             if(r.Ok)
             {
                 if (r.Text.Length < 1){
@@ -195,11 +199,11 @@ namespace Lisa.Dobble
                     imageData = ms.ToArray();
                 }
 
-                byte[] resizedImage = imageService.ResizeImage(imageData, 367, 367);
+                byte[] resizedImage = _imageService.ResizeImage(imageData, 367, 367);
 
-                fileManager.CreateDirectory(selectedDie.Id.ToString());
+                _fileManager.CreateDirectory(selectedDie.Id.ToString());
 
-                var imageFile = fileManager.OpenFile(String.Format("{0}/{1}.png", selectedDie.Id, option), FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
+                var imageFile = _fileManager.OpenFile(String.Format("{0}/{1}.png", selectedDie.Id, option), FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
                 var tempStream = new MemoryStream(resizedImage);
                 tempStream.CopyTo(imageFile);
                 _isCameraOpen = false;
@@ -289,11 +293,12 @@ namespace Lisa.Dobble
                 return;
             }
 
-            var device = Resolver.Resolve<IDevice>();
-            mediaPicker = DependencyService.Get<IMediaPicker>();
-            ////RM: hack for working on windows phone? 
+			mediaPicker = Resolver.Resolve<IMediaPicker>();
+
+			////RM: hack for working on windows phone? 
             if (mediaPicker == null)
             {
+				var device = Resolver.Resolve<IDevice>();
                 mediaPicker = device.MediaPicker;
             }
         }
@@ -526,7 +531,7 @@ namespace Lisa.Dobble
             _recordingDie = selectedDie;
             _fileStream = _fileManager.OpenFile(String.Format("{0}/{1}.wav", selectedDie.Id, imageCount), FileMode.Create, FileAccess.ReadWrite, FileShare.Write);
 
-            var microphoneService = DependencyService.Get<IMicrophoneService>();
+			var microphoneService = Resolver.Resolve<IMicrophoneService>();
             _microphone = microphoneService.GetMicrophone();
             _microphone.Start(22050);
             _recorder.StartRecorder(_microphone, _fileStream, 22050);
@@ -567,7 +572,7 @@ namespace Lisa.Dobble
             var imageCount = 0;
             int.TryParse(_lastRecordSoundButton.ClassId, out imageCount);
 
-            fileManager.CreateDirectory(_recordingDie.Id.ToString());
+            _fileManager.CreateDirectory(_recordingDie.Id.ToString());
             if (_recordingDie.Options[imageCount].Image == null || _recordingDie.Options[imageCount].Image == "notset.png")
             {
                 _recordingDie.Options[imageCount].Image = String.Format("white.png");
@@ -589,8 +594,8 @@ namespace Lisa.Dobble
         private Button _lastRecordSoundButton;
         private IAudioStream _microphone;
         private IPathService _pathService;
-        private IImageResizerService imageService;
-        private ILisaSoundService _soundService;
+        private IImageResizerService _imageService;
+        private ISoundService _soundService;
         private Die _previousSelectedDie;
         private Die _recordingDie;
         private Stream imageSourceStream;

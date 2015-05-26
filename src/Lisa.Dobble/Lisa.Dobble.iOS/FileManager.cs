@@ -4,8 +4,7 @@ using System.IO;
 using Xamarin.Forms;
 using XLabs.Platform.Services.IO;
 
-[assembly: Dependency(typeof(FileManager))]
-namespace Xamarin.Forms.Labs.Services.IO
+namespace Lisa.Dobble.iOS
 {
     public class FileManager : IFileManager
     {

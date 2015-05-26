@@ -1,4 +1,5 @@
 using System;
+using Lisa.Dobble;
 using AVFoundation;
 using System.Threading.Tasks;
 using Foundation;
@@ -6,8 +7,7 @@ using Xamarin.Forms;
 using XLabs.Platform.Services.Media;
 
 
-[assembly: Dependency(typeof(SoundService))]
-namespace Xamarin.Forms.Labs.iOS.Services
+namespace Lisa.Dobble.iOS
 {
     public class SoundService : ISoundService
     {
@@ -53,10 +53,8 @@ namespace Xamarin.Forms.Labs.iOS.Services
         {
             return Task.Run<SoundFile>(async () =>
             {
-                if (player == null || filename != _currentFile.Filename)
-                {
+                if(player == null || filename != _currentFile.Filename)
                     await SetMediaAsync(filename);
-                }
                 player.Play();
                 _isPlaying = true;
                 return _currentFile;

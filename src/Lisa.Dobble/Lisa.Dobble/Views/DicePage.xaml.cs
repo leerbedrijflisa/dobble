@@ -12,6 +12,7 @@ using XLabs;
 using XLabs.Platform.Mvvm;
 using XLabs.Ioc;
 using XLabs.Platform.Device;
+using XLabs.Platform.Services.Media;
 
 namespace Lisa.Dobble
 {
@@ -22,14 +23,14 @@ namespace Lisa.Dobble
         public bool enabled;
         public int DobbleDelay;
         private bool IsPopped = false;
-        private ILisaSoundService soundService;
-        private IPathService pathService;
+        private ISoundService _soundService;
+        private IPathService _pathService;
         
         public DicePage()
         {
             InitializeComponent();
-            soundService = DependencyService.Get<ILisaSoundService>();
-            pathService = DependencyService.Get<IPathService>();
+			InitializeServices();
+            
             NavigationPage.SetHasNavigationBar(this, false);
             TimeOne.IsVisible = false;
             TimeTwo.IsVisible = false;
@@ -37,6 +38,12 @@ namespace Lisa.Dobble
             enabled = true;
 
         }
+
+		private void InitializeServices()
+		{
+			_soundService = Resolver.Resolve<ISoundService>();
+			_pathService = Resolver.Resolve<IPathService>();
+		}
 
         void Accelerometer_ReadingAvailable(object sender, EventArgs<Vector3> e)
         {
@@ -131,18 +138,17 @@ namespace Lisa.Dobble
                 {
                     return false;
                 });
-                soundService.Stop();
+                _soundService.Stop();
                 if(imageSourceStream != null)
                 {
                     imageSourceStream.Dispose();
                 }
                 Instructions.IsVisible = false;
-                soundService = DependencyService.Get<ILisaSoundService>();
                 var fullpath = Device.OnPlatform(
                     iOS: "dice.wav",
                     Android: "dice.wav",
                     WinPhone: "dice.wav");
-                soundService.PlayAsync(fullpath);
+                _soundService.PlayAsync(fullpath);
 
                 enabled = false;
                 int delay = DobbleDelay;
@@ -154,12 +160,6 @@ namespace Lisa.Dobble
                     //TimeThree.IsVisible = false;
                 }
                 await StartRollOutAnimation();
-                
-               
-
- 
-
-               
             }
         }
 
@@ -181,7 +181,7 @@ namespace Lisa.Dobble
             }
             else
             {
-                var fullPath = pathService.CreateDocumentsPath(image);
+                var fullPath = _pathService.CreateDocumentsPath(image);
                 DieView.Source = ImageSource.FromFile(fullPath);
             }
             StartRollInAnimation();
@@ -221,7 +221,7 @@ namespace Lisa.Dobble
                     iOS: "snoozesound.mp3",
                     Android: "snoozesound.mp3",
                     WinPhone: "snoozesound.mp3");
-                soundService.PlayAsync(filePath);
+                _soundService.PlayAsync(filePath);
                 try
                 {
                     for (var i = 0; i < 5; i++)
@@ -316,12 +316,12 @@ namespace Lisa.Dobble
             var soundName = SelectedDie.Options[_randomNumber].Sound;
             if (soundName != null && !firstDie)
             {
-                var filePath = pathService.CreateDocumentsPath(soundName);
+                var filePath = _pathService.CreateDocumentsPath(soundName);
                 if (SelectedDie.IsDefault)
                 {
                     filePath = "Dice/" + soundName;
                 }
-                soundService.PlayAsync(filePath);
+                _soundService.PlayAsync(filePath);
             }
 
             if (!firstDie)

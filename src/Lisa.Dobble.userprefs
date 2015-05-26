@@ -1,8 +1,43 @@
 ﻿<Properties StartupItem="Lisa.Dobble/Lisa.Dobble.iOS/Lisa.Dobble.iOS.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPad2.7.1" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Lisa.Dobble/Lisa.Dobble/Views/ProfileMenuPage.xaml.cs">
+    <Files>
+      <File FileName="Lisa.Dobble/Lisa.Dobble/Views/DicePage.xaml.cs" Line="372" Column="13" />
+      <File FileName="Lisa.Dobble/Lisa.Dobble/Views/ProfileMenuPage.xaml.cs" Line="99" Column="1" />
+      <File FileName="Lisa.Dobble/Lisa.Dobble.iOS/AppDelegate.cs" Line="55" Column="23" />
+      <File FileName="Lisa.Dobble/Lisa.Dobble.iOS/FileManager.cs" Line="9" Column="18" />
+      <File FileName="Lisa.Dobble/Lisa.Dobble.iOS/SoundService.cs" Line="12" Column="18" />
+      <File FileName="Lisa.Dobble/Lisa.Dobble.iOS/PathService.cs" Line="10" Column="18" />
+      <File FileName="Lisa.Dobble/Lisa.Dobble.iOS/Main.cs" Line="4" Column="1" />
+      <File FileName="Lisa.Dobble/Lisa.Dobble/Views/CreditsPage.xaml" Line="6" Column="16" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Lisa.Dobble" expanded="True">
+            <Node name="Lisa.Dobble" expanded="True">
+              <Node name="Packages" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="DicePage.xaml" expanded="True" />
+                <Node name="ProfileMenuPage.xaml" expanded="True">
+                  <Node name="ProfileMenuPage.xaml.cs" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+            <Node name="Lisa.Dobble.iOS" expanded="True">
+              <Node name="Packages" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint enabled="false" file="/Users/gebruiker/dobble/src/Lisa.Dobble/Lisa.Dobble/Views/DicePage.xaml.cs" line="134" column="1" />
+      <Breakpoint enabled="false" file="/Users/gebruiker/dobble/src/Lisa.Dobble/Lisa.Dobble/Views/DicePage.xaml.cs" line="216" column="1" />
+      <Breakpoint file="/Users/gebruiker/dobble/src/Lisa.Dobble/Lisa.Dobble/Views/ProfileMenuPage.xaml.cs" line="98" column="35" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
