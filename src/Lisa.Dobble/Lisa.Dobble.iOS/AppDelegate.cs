@@ -13,6 +13,7 @@ using XLabs.Platform.Mvvm;
 using XLabs.Forms;
 using XLabs.Platform.Services.IO;
 using Acr.UserDialogs;
+using Lisa.Dobble.Interfaces;
 
 
 namespace Lisa.Dobble.iOS
@@ -62,6 +63,7 @@ namespace Lisa.Dobble.iOS
 				.Register<IMicrophoneService, Lisa.Dobble.iOS.MicrophoneService>()
 				.Register<IFileManager, Lisa.Dobble.iOS.FileManager>()
 				.Register<IPathService, Lisa.Dobble.iOS.PathService>()
+				.Register<IImageResizerService, Lisa.Dobble.iOS.ImageResizerService>()
 				.Register<IUserDialogs>(UserDialogs.Instance);
 			
             Resolver.SetResolver(resolverContainer.GetResolver());

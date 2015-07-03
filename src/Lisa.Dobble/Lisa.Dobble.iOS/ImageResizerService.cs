@@ -19,8 +19,8 @@ using Microsoft.Phone;
 using System.Windows.Media.Imaging;
 #endif
 
-[assembly: Dependency(typeof(Lisa.Dobble.ImageResizerService))]
-namespace Lisa.Dobble
+[assembly: Dependency(typeof(Lisa.Dobble.iOS.ImageResizerService))]
+namespace Lisa.Dobble.iOS
 {
     public class ImageResizerService : IImageResizerService
     {

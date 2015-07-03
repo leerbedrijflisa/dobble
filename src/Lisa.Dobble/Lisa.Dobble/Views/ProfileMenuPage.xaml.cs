@@ -14,6 +14,7 @@ using XLabs.Platform.Mvvm;
 using XLabs.Ioc;
 using XLabs.Platform.Device;
 using Acr.UserDialogs;
+using System.Diagnostics;
 
 namespace Lisa.Dobble
 {
@@ -36,6 +37,7 @@ namespace Lisa.Dobble
             ProfileListView.ItemsSource = dice;
             ProfileListView.SelectedItem = 0;
 
+			_soundService.SoundFileFinished += (object sender, EventArgs e) => _soundService.Stop();
             SelectDieButton.Clicked += SelectDieButton_Clicked;
             DeleteDieButton.Clicked += DeleteDieButton_Clicked;
         }
@@ -80,6 +82,7 @@ namespace Lisa.Dobble
 			_fileManager = Resolver.Resolve<IFileManager>();
 			_pathService = Resolver.Resolve<IPathService>();
 			_soundService = Resolver.Resolve<ISoundService>();
+			_imageService = Resolver.Resolve<IImageResizerService>();
 		}
 
         private void PushSettingsPage(object sender, EventArgs e)
@@ -215,9 +218,9 @@ namespace Lisa.Dobble
 
                 SetDie(selectedDie.Id);
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-                //this.Status = ex.Message;
+				string flubbelknor = ex.Message;
 
 				// What is this catch doing here? Will things break if we remove it?
 				// TODO: Find out.
@@ -452,6 +455,7 @@ namespace Lisa.Dobble
                 var imageObject = absoluteLayoutObject.Children.OfType<Image>().FirstOrDefault();
                 if (imageObject == null)
                     continue;
+				
                 var dieImage = (Image)imageObject;
                 if (die.Options[count].Image == "notset.png")
                 {
@@ -466,7 +470,8 @@ namespace Lisa.Dobble
                         iOS: ImageSource.FromFile("Dice/" + die.Options[count].Image),
                         Android: ImageSource.FromFile("Drawable/dice/" + die.Options[count].Image),
                         WinPhone: ImageSource.FromFile("dice/" + die.Options[count].Image));
-                }else
+                }
+				else
                 {
                     var fullPath = _pathService.CreateDocumentsPath(die.Options[count].Image);
                     dieImage.Source = ImageSource.FromFile(fullPath);
@@ -485,8 +490,8 @@ namespace Lisa.Dobble
                 SetDie(dice.LastOrDefault().Id);
             }
         }
-
-        private void PlaySound(object sender, EventArgs e)
+			
+		private async void PlaySound(object sender, EventArgs e)
         {
 #if FREE
             if (selectedDie.IsPremium)
@@ -494,24 +499,36 @@ namespace Lisa.Dobble
                 return;
             }
 
-#endif
-            var playSoundButton = (Button)sender;
+#endif		
+			try{
+	            var playSoundButton = (Button)sender;
 
-            var dieCount = 0;
-            int.TryParse(playSoundButton.ClassId, out dieCount);
-            var fullpath = "";
+	            var dieCount = 0;
+	            int.TryParse(playSoundButton.ClassId, out dieCount);
+	            var fullpath = "";
 
-            if(!String.IsNullOrEmpty(selectedDie.Options[dieCount].Sound))
-                fullpath = _pathService.CreateDocumentsPath(selectedDie.Options[dieCount].Sound);
+	            if(!String.IsNullOrEmpty(selectedDie.Options[dieCount].Sound))
+	                fullpath = _pathService.CreateDocumentsPath(selectedDie.Options[dieCount].Sound);
 
-            if (selectedDie.IsDefault)
-            {
-                fullpath = "Dice/" + selectedDie.Options[dieCount].Sound;
-            }
+	            if (selectedDie.IsDefault)
+	            {
+	                fullpath = "Dice/" + selectedDie.Options[dieCount].Sound;
+	            }
 
-            if(!String.IsNullOrEmpty(fullpath))
-                _soundService.PlayAsync(fullpath);
-        }
+
+
+				if(!String.IsNullOrEmpty(fullpath)){
+					if(!_soundService.IsPlaying){
+						await _soundService.PlayAsync(fullpath);
+
+					}
+				}
+					
+			}
+			catch(Exception ex){
+				
+			}
+		}
 
         private void RecordSound(object sender, EventArgs e)
         {
@@ -521,6 +538,7 @@ namespace Lisa.Dobble
                 return;
             }
 #endif
+
             _isRecording = true;
             DisableInteraction(ProfilePageGrid);
             _lastRecordSoundButton = (Button)sender;
@@ -542,7 +560,7 @@ namespace Lisa.Dobble
 
             _lastRecordSoundButton.Clicked -= RecordSound;
             _lastRecordSoundButton.Clicked += StopRecordingButtonClicked;
-            
+
         }
         
         private void StopRecording()
@@ -594,7 +612,7 @@ namespace Lisa.Dobble
         private Button _lastRecordSoundButton;
         private IAudioStream _microphone;
         private IPathService _pathService;
-        private IImageResizerService _imageService;
+		private IImageResizerService _imageService;
         private ISoundService _soundService;
         private Die _previousSelectedDie;
         private Die _recordingDie;
