@@ -26,7 +26,7 @@
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string></string>
+	<string>1</string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Icon-72@2x.png</string>

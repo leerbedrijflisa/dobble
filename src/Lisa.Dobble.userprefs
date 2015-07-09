@@ -1,21 +1,11 @@
 ﻿<Properties StartupItem="Lisa.Dobble/Lisa.Dobble.iOS/Lisa.Dobble.iOS.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="iOS Free Version Release|iPhone" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.iPad van Joost" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Lisa.Dobble/Lisa.Dobble.iOS/Properties/AssemblyInfo.cs">
-    <Files>
-      <File FileName="Lisa.Dobble/Lisa.Dobble/Views/SettingsPage.xaml.cs" Line="186" Column="1" />
-      <File FileName="Lisa.Dobble/Lisa.Dobble.iOS/FileManager.cs" Line="63" Column="26" />
-      <File FileName="Lisa.Dobble/Lisa.Dobble/Views/ProfileMenuPage.xaml.cs" Line="394" Column="9" />
-      <File FileName="Lisa.Dobble/Lisa.Dobble/Interfaces/IImageResizerService.cs" Line="1" Column="1" />
-      <File FileName="Lisa.Dobble/Lisa.Dobble.iOS/Properties/AssemblyInfo.cs" Line="1" Column="1" />
-    </Files>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhone" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.iPad van Joost" />
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Lisa.Dobble" expanded="True">
-            <Node name="Lisa.Dobble" expanded="True" />
-            <Node name="Lisa.Dobble.iOS" expanded="True" selected="True">
-              <Node name="Properties" expanded="True" />
-            </Node>
+            <Node name="Lisa.Dobble.iOS" selected="True" />
           </Node>
         </State>
       </Pad>
@@ -23,7 +13,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/gebruiker/dobble/src/Lisa.Dobble/Lisa.Dobble/Views/ProfileMenuPage.xaml.cs" line="20" column="1" />
+      <Breakpoint file="/Users/gebruiker/dobble/src/Lisa.Dobble/Lisa.Dobble/Views/ProfileMenuPage.xaml.cs" line="223" column="17" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
