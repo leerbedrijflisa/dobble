@@ -220,8 +220,6 @@ namespace Lisa.Dobble
             }
             catch (System.Exception ex)
             {
-				string flubbelknor = ex.Message;
-
 				// What is this catch doing here? Will things break if we remove it?
 				// TODO: Find out.
             }
@@ -238,7 +236,6 @@ namespace Lisa.Dobble
                     {
                         if (dieimage.GetType() == typeof(AbsoluteLayout))
                             dieimage.FadeTo(0.4, 100);
-
                     }
                 }
             }
@@ -252,15 +249,15 @@ namespace Lisa.Dobble
                     var dieimage = ((StackLayout)element).Children.FirstOrDefault();
                     if (dieimage != null)
                     {
-                        if (dieimage.GetType() == typeof(AbsoluteLayout))
-                            dieimage.FadeTo(1, 250);
-
+						if (dieimage.GetType() == typeof(AbsoluteLayout))
+						{
+							dieimage.FadeTo(1, 250);
+						}
                     }
                 }
             }
         }
-
-
+			
         private void DisableInteraction(Layout<View> layoutView)
         {
             foreach (var element in layoutView.Children)
@@ -391,6 +388,8 @@ namespace Lisa.Dobble
                 
                 DieNameIcon.IsVisible = false;
                 DeleteDieButton.IsEnabled = false;
+				DisableRecordButtons();
+
                 foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
                 {
 
@@ -404,44 +403,53 @@ namespace Lisa.Dobble
                     EnableDie();
                 }
 #endif
-                    var recordSoundButton = ((StackLayout)dieOptionLayout).Children.OfType<Button>().Where(X => X.Text == "Geluid opnemen").FirstOrDefault();
-                    if(recordSoundButton != null)
-                        recordSoundButton.IsVisible = false;
-                   
-                    
-                    var interactionButtons = ((StackLayout)dieOptionLayout).Children.OfType<StackLayout>().FirstOrDefault();
-                    if (interactionButtons != null)
-                    {
-                        var recordButton = (Button)interactionButtons.Children.OfType<Button>().LastOrDefault();
-                        recordButton.IsEnabled = false;
-                    }
-                    
                 }
-
             }
             else
             {
                 EnableDie();
                 DieNameIcon.IsVisible = true;
                 DeleteDieButton.IsEnabled = true;
-                foreach (var dieOptionLayout in ProfileGrid.Children.OfType<StackLayout>())
-                {
-                    var recordSoundButton = ((StackLayout)dieOptionLayout).Children.OfType<Button>().Where(X => X.Text == "Geluid opnemen").FirstOrDefault();
-                    if(recordSoundButton != null)
-                        recordSoundButton.IsVisible = true;
-
-                    var interactionButtons = ((StackLayout)dieOptionLayout).Children.OfType<StackLayout>().FirstOrDefault();
-                    if (interactionButtons != null)
-                    {
-                        var recordButton = (Button)interactionButtons.Children.OfType<Button>().LastOrDefault();
-                        recordButton.IsEnabled = true;
-                    }
-                }
+				EnableRecordButtons();
             }
             DieName.Text = selectedDie.Name;
             SetImages(selectedDie);
             
         }
+
+		private void DisableRecordButtons()
+		{
+			foreach (var button in RecordButtons)
+			{
+				button.IsEnabled = false;
+				button.Opacity = 0.3;
+			}
+		}
+
+		private void EnableRecordButtons()
+		{
+			foreach (var button in RecordButtons)
+			{
+				button.IsEnabled = true;
+				button.Opacity = 1;
+			}
+		}
+
+		private IEnumerable<Button> RecordButtons
+		{
+			get
+			{
+				// This LINQ query assumes the following.
+				// The profile grid contains a number of StackLayouts. The first StackLayout contains
+				// the name of the die and we don't care about that. Then there are six StackLayouts,
+				// one for each side of the die. These are the ones we want.
+				// Within each StackLayout there is another StackLayout that contains two buttons: the
+				// play button and the record button, in that order.
+				return ProfileGrid.Children.OfType<StackLayout>().Skip(1).Take(6)
+					.Select(die => die.Children.OfType<StackLayout>().First())
+					.Select(buttonContainer => buttonContainer.Children.OfType<Button>().Last());
+			}
+		}
 
         private void SetImages(Die die)
         {
