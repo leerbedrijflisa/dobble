@@ -95,7 +95,7 @@ namespace Lisa.Dobble
         {
             if(selectedDie.IsDefault)
             {
-                await DisplayAlert("Fout", "Je kunt de naam van een deze dobbelsteen niet veranderen", "OK");
+                await DisplayAlert("Fout", "Je kunt de naam van deze dobbelsteen niet veranderen", "OK");
                 return;
             }
 			var userDialogs = Resolver.Resolve<IUserDialogs>();
@@ -262,11 +262,11 @@ namespace Lisa.Dobble
         {
             foreach (var element in layoutView.Children)
             {
-                if(element is Layout<View>)
+				if(element is Layout<View>)
                 {
                     DisableInteraction((Layout<View>)element);
                 }else{
-                    ((View)element).IsEnabled = false;                        
+                    ((View)element).IsEnabled = false;
                 }
             }
         }
@@ -417,6 +417,24 @@ namespace Lisa.Dobble
             
         }
 
+		private void DisablePlayButtons()
+		{
+			foreach (var button in PlayButtons)
+			{
+				button.IsEnabled = false;
+				button.Opacity = 0.3;
+			}
+		}
+
+		private void EnablePlayButtons()
+		{
+			foreach (var button in PlayButtons)
+			{
+				button.IsEnabled = true;
+				button.Opacity = 1;
+			}
+		}
+
 		private void DisableRecordButtons()
 		{
 			foreach (var button in RecordButtons)
@@ -432,6 +450,22 @@ namespace Lisa.Dobble
 			{
 				button.IsEnabled = true;
 				button.Opacity = 1;
+			}
+		}
+
+		private IEnumerable<Button> PlayButtons
+		{
+			get
+			{
+				// This LINQ query assumes the following.
+				// The profile grid contains a number of StackLayouts. The first StackLayout contains
+				// the name of the die and we don't care about that. Then there are six StackLayouts,
+				// one for each side of the die. These are the ones we want.
+				// Within each StackLayout there is another StackLayout that contains two buttons: the
+				// play button and the record button, in that order.
+				return ProfileGrid.Children.OfType<StackLayout>().Skip(1).Take(6)
+					.Select(die => die.Children.OfType<StackLayout>().First())
+					.Select(buttonContainer => buttonContainer.Children.OfType<Button>().First());
 			}
 		}
 
@@ -507,7 +541,10 @@ namespace Lisa.Dobble
                 return;
             }
 
-#endif		
+#endif
+			DisableRecordButtons();
+			DisablePlayButtons();
+
 			try{
 	            var playSoundButton = (Button)sender;
 
@@ -529,12 +566,21 @@ namespace Lisa.Dobble
 					if(!_soundService.IsPlaying){
 						await _soundService.PlayAsync(fullpath);
 
+
 					}
 				}
 					
 			}
-			catch(Exception ex){
-				
+			catch(Exception ex)
+			{
+				// What is this catch doing here? Will things break if we remove it?
+				// TODO: Find out.
+			}
+			finally
+			{
+				// NOTE: this doesn't work because of the bug in PlayAsync().
+				EnablePlayButtons();
+				EnableRecordButtons();
 			}
 		}
 

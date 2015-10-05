@@ -88,8 +88,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
-    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignKey>iPhone Developer: Joost Willem Ronkes Agerbeek (646LWDR7B3)</CodesignKey>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <CodesignProvision>ce506462-d81e-4af4-950e-cf7477c6bd0a</CodesignProvision>
+    <MtouchUseRefCounting>true</MtouchUseRefCounting>
+    <IpaPackageName>
+    </IpaPackageName>
+    <MtouchI18n>
+    </MtouchI18n>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'iOS Free Version|iPhoneSimulator'">
     <DebugSymbols>true</DebugSymbols>

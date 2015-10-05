@@ -55,6 +55,11 @@ namespace Lisa.Dobble.iOS
             {
                 if(player == null || filename != _currentFile.Filename)
                     await SetMediaAsync(filename);
+
+				// BUG: AVAudioPlayer.Play() plays the sound asynchronously, so PlayAsync (this method)
+				// returns _currentFile before the sound is done playing, even if you await PlayAsync.
+				// This isn't intuitive and it's probably not what you want. We can't solve the problem
+				// by awaiting AVAudioPlayer.Play(), because it isn't an async method.
                 player.Play();
                 _isPlaying = true;
                 return _currentFile;
